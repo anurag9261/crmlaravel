@@ -72,7 +72,7 @@
                                         style="color:black"><i class="fas fa-eye"></i></a></button>
                                 <button type="button" class="btn btn-outline-warning"><a href="editrole{{$data->id}}"
                                         style="color:black"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-outline-danger"><a href="delete{{$data->id}}"
+                                <button type="button" class="btn btn-outline-danger"><a href="deleterole{{$data->id}}"
                                         style="color:black"><i class="fas fa-trash-alt"></i></a></button>
                             </td>
                         </tr>
