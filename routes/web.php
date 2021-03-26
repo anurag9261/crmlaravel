@@ -82,5 +82,5 @@ Route::get('addinvoice', 'InvoiceController@create')->name('admin.addinvoice');
 
 
 // Route::get('dropdownlist','DropdownController@index');
-Route::get('get-username-list','InvoiceController@getUsernameList');
+Route::get('api/get-state-list','InvoiceController@getStateList');
 // Route::get('get-city-list','DropdownController@getCityList');
