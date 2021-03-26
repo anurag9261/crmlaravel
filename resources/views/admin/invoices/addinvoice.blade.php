@@ -21,7 +21,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                 <ol class="breadcrumb float-sm-right">
-                    <button class="btn btn-outline-info" style="float:right"><a href="{{route('admin.invoices')}}" style="color:black"><i class="fas fa-arrow-left"></i>Back</a></button>
+                    <button class="btn btn-outline-info" style="float:right"><a href="{{route('admin.invoices')}}" style="color:black"><i class="fas fa-arrow-left">Back</i></a></button>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -33,48 +33,49 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('admin.rolesubmit')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.customersubmit')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <?php //echo"<pre>"; print_r($roles); die; ?>
                         <div class="row">
-                            <div class="col-md-8">
-                                <label for="role">Role</label>
-                                <select class="form-control  @error('role') is-invalid @enderror" name="role">         
-                                {!! Form::select('country', ['' => 'Select'] +$countries,'',array('class'=>'form-control','id'=>'country','style'=>'width:350px;'));!!}
-                                </select>                      
-                                @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="col-md-5">
+                                <label for="role">Select Role</label>
+                                <select class="form-control">
+                                    <option>Admin</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="role">  Employee Name</label>
+                                <select class="form-control">
+                                    <option>Admin</option>
+                                    <option>Admin</option>
+                                </select>
                             </div>
                         </div>
-                        {{--<div class="row">
-                            <div class="col-md-8">
-                                <label for="role">Username</label>
-                                <select id="role" class="form-control  @error('username') is-invalid @enderror" name="role">         
-                                        @foreach($fname as $profile)
-                                            <option>{{$profile->fname}}</option> 
-                                        @endforeach
-                                </select>                      
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>--}}
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label for="username">Username</label>
-                                <select id="username" class="form-control @error('username') is-invalid @enderror" name="username">
-                                    
+                        <br>
+                       <div class="row">
+                            <div class="col-md-5">
+                                <label for="role">Customer Name</label>
+                                <select class="form-control">
+                                    <option>Admin</option>
                                 </select>
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="role">Title</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="title" placeholder="Enter Title Here">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="role">Tasks</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="title" placeholder="Enter Title Here">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="role">Hour</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="title" placeholder="Enter Title Here">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="role">Price</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="title" placeholder="Enter Title Here">
                             </div>
                         </div>
                         <br>
@@ -86,31 +87,3 @@
     </div>
 </div>
 @endsection
-@push('js')
-<script type="text/javascript">
-    $('#country').change(function(){
-    var countryID = $(this).val();    
-    if(countryID){
-        $.ajax({
-           type:"GET",
-           url:"{{url('api/get-state-list')}}?country_id="+countryID,
-           success:function(res){               
-            if(res){
-                $("#state").empty();
-                $("#state").append('<option>Select</option>');
-                $.each(res,function(key,value){
-                    $("#state").append('<option value="'+key+'">'+value+'</option>');
-                });
-           
-            }else{
-               $("#state").empty();
-            }
-           }
-        });
-    }else{
-        $("#state").empty();
-        $("#city").empty();
-    }      
-   });
-</script>
-@endpush
