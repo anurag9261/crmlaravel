@@ -210,14 +210,14 @@ button{
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <input id="email" type="text" class="@error('email') is-invalid @enderror" name="email"
-                    value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Here">
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
                 <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password"
-                    required autocomplete="current-password">
+                    required autocomplete="current-password" placeholder="Enter Password Here">
                 @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
