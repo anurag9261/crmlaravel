@@ -40,9 +40,7 @@
                             <div class="col-md-8">
                                 <label for="role">Role</label>
                                 <select class="form-control  @error('role') is-invalid @enderror" name="role">         
-                                        @foreach($admin as $key => $profile)
-                                            <option value="{{$key}}">{{$profile->title}}</option> 
-                                        @endforeach
+                                {!! Form::select('country', ['' => 'Select'] +$countries,'',array('class'=>'form-control','id'=>'country','style'=>'width:350px;'));!!}
                                 </select>                      
                                 @error('role')
                                     <span class="invalid-feedback" role="alert">
@@ -89,29 +87,30 @@
 </div>
 @endsection
 @push('js')
-<script type=text/javascript>
-  $('#role').change(function(){
-  var role = $(this).val();  
-  if(role){
-    $.ajax({
-      type:"GET",
-      url:"{{url('get-username-list')}}?fname="+fname,
-      success:function(res){        
-      if(res){
-        $("#username").empty();
-        $("#username").append('<option>Select</option>');
-        $.each(res,function(key,value){
-          $("#username").append('<option value="'+key+'">'+value+'</option>');
+<script type="text/javascript">
+    $('#country').change(function(){
+    var countryID = $(this).val();    
+    if(countryID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('api/get-state-list')}}?country_id="+countryID,
+           success:function(res){               
+            if(res){
+                $("#state").empty();
+                $("#state").append('<option>Select</option>');
+                $.each(res,function(key,value){
+                    $("#state").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#state").empty();
+            }
+           }
         });
-      
-      }else{
-        $("#username").empty();
-      }
-      }
-    });
-  }else{
-    $("#username").empty();
-  }   
-  });
+    }else{
+        $("#state").empty();
+        $("#city").empty();
+    }      
+   });
 </script>
 @endpush

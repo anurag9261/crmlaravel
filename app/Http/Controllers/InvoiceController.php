@@ -32,12 +32,12 @@ class InvoiceController extends Controller
         return view('admin.invoices.addinvoice', compact('admin','fname'));
     }
 
-    public function getUsernameList(Request $request)
+    public function getStateList(Request $request)
     {
-        $fname = DB::table("admins")
-        ->where("fname",$request->fname)
-        ->pluck("fname");
-        return response()->json($fname);
+        $states = DB::table("admins")
+                    ->where("fname",$request->fname)
+                    ->lists("fname");
+        return response()->json($states);
     }
 
     /**
