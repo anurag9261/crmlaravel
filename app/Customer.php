@@ -16,6 +16,7 @@ class Customer extends Model
     protected $fillable = [
         'fname','lname','mobno','email','address','password',
     ];
+    public $sortable = ['fname', 'lname'];
 
     /**
      * The attributes that should be hidden for arrays.

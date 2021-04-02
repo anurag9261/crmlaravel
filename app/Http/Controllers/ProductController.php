@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Task;
+use App\Product;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,16 +35,23 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->invoice_id = $request->get('invoice_no');
+        $product->product = $request->get('product');
+        $product->qty = $request->get('qty');
+        $product->price = $request->get('price');
+        $product->total = $request->get('total');
+        $product->save();
+        return redirect('invoices')->with('message', 'Record added successfully!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show(Product $product)
     {
         //
     }
@@ -52,10 +59,10 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit(Product $product)
     {
         //
     }
@@ -64,10 +71,10 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -75,10 +82,10 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Product $product)
     {
         //
     }

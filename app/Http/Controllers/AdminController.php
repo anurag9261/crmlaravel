@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Customer;
-
+use App\Invoice;
 class AdminController extends Controller
 {
     /**
@@ -19,7 +19,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $profile['profile'] = Admin::paginate(5);
+        $profile['profile'] = DB::table('admins')->orderBy('created_at','desc')->paginate(5);
         return view('admin.users.index',$profile);
     }
 
@@ -81,7 +81,7 @@ class AdminController extends Controller
             $profile->role = $request->get('role');
             $profile->password = Hash::make($request->get('password'));     
             $profile->save();
-            return redirect('users')->with('message', 'Records Added Successfully!');
+            return redirect('users')->with('message', 'Record added successfully!');
 
     }
 
@@ -140,7 +140,7 @@ class AdminController extends Controller
         $profile->image = $imageName;
         $profile->role = $request->get('role');
         $profile->save();
-        return redirect('users')->with('message', 'Recorded Updated Successfully!');
+        return redirect('users')->with('message', 'Record updated successfully!');
     }
 
     public function editpassword(){
@@ -150,17 +150,21 @@ class AdminController extends Controller
 
     public function updatepassword(Request $request,$id){
  
+        $profile=Admin::find($id);
         if(!(Hash::check($request->get('currentpassword'),Auth::user()->password))){
-            return back()->with('error','Your Current Password Does not match');
+            return back()->with('error','Your current password does not match with what you provide');
         }
 
         if(strcmp($request->get('currentpassword'),$request->get('newpassword')) == 0){
-            return back()->with('error','Your New Password Does not same with new Password');
+            return back()->with('error','Your current password can not be same with new password');
         }
-        $profile=Admin::find($id);
+        $request->validate([
+            'currentpassword'=>'required',
+            'confirmpassword'=>'required|confirmed'
+        ]);
         $profile->password = bcrypt($request->get('newpassword'));
         $profile->save();
-        return redirect('admin')->with('message', 'Password is Updated!');
+        return redirect('admin')->with('message', 'Password is updated!');
     }
 
     /**
@@ -172,7 +176,7 @@ class AdminController extends Controller
     public function destroy(Admin $admin,$id)
     {
         Admin::destroy(array('id',$id));
-        return redirect('users')->with('error', 'Record Deleted Successfully!');
+        return redirect('users')->with('error', 'Record deleted successfully!');
     }
 
     // public function search(Request $request){
@@ -192,11 +196,16 @@ class AdminController extends Controller
 
     public function adminHome()
     {
-        $user = DB::table('admins')->count();
-        $profile = Admin::orderBy('id', 'desc')->take(3)->get();
-        $customers = Customer::orderBy('id', 'desc')->take(3)->get();
+        //for card count
+        $admin = DB::table('admins')->where('role','Admin')->count();
+        $employee = DB::table('admins')->where('role','Employee')->count();
         $customer = DB::table('customers')->count();
-        return view('admin.dashboard',compact('customer','user','profile','customers'));
+        
+        //for table display
+        $profile = Admin::orderBy('created_at','desc')->take(3)->get();
+        $customers = Customer::orderBy('created_at','desc')->take(3)->get();
+        $invoice = Invoice::orderBy('created_at','desc')->take(3)->get();
+        return view('admin.dashboard',compact('customer','admin','profile','customers','employee','invoice'));
     }
 
     // public function logout(){

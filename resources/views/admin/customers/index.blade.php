@@ -19,7 +19,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
-                    <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.addcustomer')}}" style="color:white"><i class="fas fa-plus">Add Customer</i></a></button>
+                    <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.addcustomer')}}" style="color:white"><i class="fas fa-plus"></i> Add Customer</a></button>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -59,7 +59,7 @@
                             <td>{{$data->fname}}</td>
                             <td>{{$data->lname}}</td>
                             <td>{{$data->email}}</td>
-                            <td><img src="{{asset('images/'. $data->image)}}" width="60px", height="60px",></td>
+                            <td><img src="{{asset('images/'. $data->image)}}" width="50px", height="auto",></td>
                             <td>
                             @if($data->status == 'Active')
                             <span class="badge badge-success">Active</span>
@@ -68,9 +68,9 @@
                             @endif
                             </td>
                             <td>
-                            <button type="button" class="btn btn-outline-info"><a href="viewcustomer{{$data->id}}" style="color:black"><i class="fas fa-eye"></i></a></button>
-                            <button type="button" class="btn btn-outline-warning"><a href="editcustomer{{$data->id}}" style="color:black"><i class="fas fa-edit"></i></a></button>
-                            <button type="button" class="btn btn-outline-danger"><a href="deletecustomer/{{$data->id}}" style="color:black"><i class="fas fa-trash-alt"></i></a></button>
+                            <button type="button" class="btn btn-secondary"><a href="viewcustomer{{$data->id}}" style="color:white"><i class="far fa-eye"></i></a></button>
+                            <button type="button" class="btn btn-secondary"><a href="editcustomer{{$data->id}}" style="color:white"><i class="far fa-edit"></i></a></button>
+                            <button type="button" class="btn btn-secondary"><a href="deletecustomer/{{$data->id}}" style="color:white"><i class="far fa-trash-alt"></i></a></button>
                             </td>
                         </tr>
                         @endforeach

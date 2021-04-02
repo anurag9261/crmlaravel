@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Validator;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Seesion;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -17,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $profile['profile'] = Customer::paginate(5);
+        $profile['profile'] = DB::table('customers')->orderBy('created_at','desc')->paginate(5);
         return view('admin.customers.index',$profile);
     }
 
@@ -62,7 +63,7 @@ class CustomerController extends Controller
         $profile->status = $request->get('status');
         $profile->password = $request->get('password');     
         $profile->save();
-        return redirect('customers')->with('message', 'Record Saved Successfully!');
+        return redirect('customers')->with('message', 'Record saved successfully!');
     }
 
     /**
@@ -118,7 +119,7 @@ class CustomerController extends Controller
         $profile->image = $imageName;
         $profile->status = $request->get('status');
         $profile->save();
-        return redirect('customers')->with('message', 'Record Updated Successfully!');
+        return redirect('customers')->with('message', 'Record updated successfully!');
     }
 
     /**
@@ -130,7 +131,7 @@ class CustomerController extends Controller
     public function destroy(Customer $customer,$id)
     {
         Customer::destroy(array('id',$id));
-        return redirect('customers')->with('error', 'Record Deleted Successfully!');
+        return redirect('customers')->with('error', 'Record deleted successfully!');
     }
 
     public function view(Customer $customer,$id){

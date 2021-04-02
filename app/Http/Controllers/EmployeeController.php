@@ -73,7 +73,7 @@ class EmployeeController extends Controller
         }
         $profile->currentdate = $request->get('currentdate');
         $profile->save();
-        return redirect('employees')->with('message', 'Records Added Successfully!');
+        return redirect('employees')->with('message', 'Record added successfully!');
 
     }
 
@@ -128,7 +128,7 @@ class EmployeeController extends Controller
         }
         $profile->currentdate = $request->get('currentdate');
         $profile->save();
-        return redirect('employees')->with('message', 'Records Updated Successfully!');
+        return redirect('employees')->with('message', 'Record updated successfully!');
     }
 
     /**
@@ -185,6 +185,6 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee,$id)
     {
         Employee::destroy(array('id',$id));
-        return redirect('employees')->with('error', 'Record Deleted Successfully!');
+        return redirect('employees')->with('error', 'Record deleted successfully!');
     }
 }

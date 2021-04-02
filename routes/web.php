@@ -73,14 +73,17 @@ Route::get('deleteemployee{id}', 'EmployeeController@destroy')->name('admin.dele
 /*---------------------InvoiceController Route---------------------------*/
 Route::get('/invoices','InvoiceController@index')->name('admin.invoices');
 Route::get('addinvoice', 'InvoiceController@create')->name('admin.addinvoice');
-// Route::post('addemployee','EmployeeController@store')->name('admin.employeesubmit');
-// Route::get('viewemployee{id}', 'EmployeeController@view')->name('admin.viewemployee');
-// Route::get('editemployee{id}', 'EmployeeController@edit')->name('admin.editemployee');
-// Route::post('updateemployee{id}', 'EmployeeController@update')->name('admin.updateemployee');
-// Route::get('/Employee', 'EmployeeController@exportCsv');
-// Route::get('deleteemployee{id}', 'EmployeeController@destroy')->name('admin.deleteemployee');
+Route::post('addinvoice','InvoiceController@store')->name('admin.invoicesubmit');
+Route::get('viewinvoice{id}', 'InvoiceController@view')->name('admin.viewinvoice');
+Route::get('editinvoice{id}', 'InvoiceController@edit')->name('admin.editinvoice');
+Route::post('updateinvoice{id}', 'InvoiceController@update')->name('admin.updateinvoice');
+Route::get('deleteinvoice{id}', 'InvoiceController@destroy')->name('admin.deleteinvoice');
 
-
-// Route::get('dropdownlist','DropdownController@index');
-Route::get('api/get-state-list','InvoiceController@getStateList');
-// Route::get('get-city-list','DropdownController@getCityList');
+/*---------------------ExpenseController Route---------------------------*/
+Route::get('/expenses','ExpenseController@index')->name('admin.expenses');
+Route::get('addexpense', 'ExpenseController@create')->name('admin.addexpense');
+Route::post('addexpense','ExpenseController@store')->name('admin.expensesubmit');
+Route::get('viewexpense{id}', 'ExpenseController@view')->name('admin.viewexpense');
+Route::get('editexpense{id}', 'ExpenseController@edit')->name('admin.editexpense');
+Route::post('updateexpense{id}', 'ExpenseController@update')->name('admin.updateexpense');
+Route::get('deleteexpense{id}', 'ExpenseController@destroy')->name('admin.deleteexpense');

@@ -20,8 +20,8 @@
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.addinvoice')}}"
-                                style="color:white"><i class="fas fa-plus">Add
-                                    Invoice</i></a></button>
+                                style="color:white"><i class="fas fa-plus">
+                                    </i> Add Invoice</a></button>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -48,38 +48,33 @@
                     @endif
                     <table class="table table-bordered table-striped">
                         <tr class="">
-                            <th>Id</th>
+                            <th>Invoice No</th>
                             <th>Title</th>
-                            <th>Status</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
+                            <th>Bill To</th>
+                            <th>Due Date</th>
+                            <th>Total</th>
                             <th>Action</th>
                         </tr>
-                        {{--@foreach($profile as $data)
+                        @foreach($profile as $data)
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$data->id}}</td>
                             <td>{{$data->title}}</td>
-                            <td>@if($data->status == 'Active')
-                                <span class="badge badge-success">Active</span>
-                                @elseif($data->status == 'InActive')
-                                <span class="badge badge-danger">InActive</span>
-                                @endif
-                            </td>
-                            <td>{{$data->created_at}}</td>
-                            <td>{{$data->updated_at}}</td>
+                            <td>{{$data->bill_to}}</td>
+                            <td>{{$data->due_date}}</td>
+                            <td>{{$data->total_amount}}</td>
                             <td>
-                                <button type="button" class="btn btn-outline-info"><a href="viewrole{{$data->id}}"
-                                        style="color:black"><i class="fas fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-outline-warning"><a href="editrole{{$data->id}}"
-                                        style="color:black"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-outline-danger"><a href="delete{{$data->id}}"
-                                        style="color:black"><i class="fas fa-trash-alt"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="viewinvoice{{$data->id}}"
+                                        style="color:white"><i class="far fa-eye"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="editinvoice{{$data->id}}"
+                                        style="color:white"><i class="far fa-edit"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="deleteinvoice{{$data->id}}"
+                                        style="color:white"><i class="far fa-trash-alt"></i></a></button>
                             </td>
                         </tr>
-                        @endforeach--}}
+                        @endforeach
                     </table>
                     <br>
-                    
+
                 </div>
             </div>
         </section>

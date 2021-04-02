@@ -28,9 +28,9 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{$user}}</h3>
+                            <h3>{{$admin}}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Admins</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -46,7 +46,7 @@
                         <div class="inner">
                             <h3>{{$customer}}</h3>
 
-                            <p>Customer Register</p>
+                            <p>Customers</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -56,22 +56,22 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                {{--<div class="col-lg-3 col-6">
+                <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-secondary">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{$employee}}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Employees</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{route('admin.users')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                {{--<div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -691,6 +691,31 @@
                     </table>
                     <br>
                     <br>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                <h3>Latest Invoice Records:-</h3>
+                    <table class="table table-bordered table-striped">
+                        <tr class="">
+                            <th>Invoice No</th>
+                            <th>Title</th>
+                            <th>Bill To</th>
+                            <th>Due Date</th>
+                            <th>Total</th>       
+                        </tr>
+                        @foreach($invoice as $data)
+                        <tr>
+                            <td>{{$data->id}}</td>
+                            <td>{{$data->title}}</td>
+                            <td>{{$data->bill_to}}</td>
+                            <td>{{$data->due_date}}</td>
+                            <td>{{$data->total_amount}}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+                    <br>
+
                 </div>
             </div>
     </section>
