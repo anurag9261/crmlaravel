@@ -87,3 +87,8 @@ Route::get('viewexpense{id}', 'ExpenseController@view')->name('admin.viewexpense
 Route::get('editexpense{id}', 'ExpenseController@edit')->name('admin.editexpense');
 Route::post('updateexpense{id}', 'ExpenseController@update')->name('admin.updateexpense');
 Route::get('deleteexpense{id}', 'ExpenseController@destroy')->name('admin.deleteexpense');
+
+/*---------------------ReportsController Route---------------------------*/
+Route::get('/employeereport','ReportController@index')->name('admin.employeereport');
+Route::get('/report', 'ReportController@daily_report')->name('report');
+
