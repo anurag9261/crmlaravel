@@ -49,7 +49,7 @@ class RoleController extends Controller
             $profile->title = $request->get('title');
             $profile->status = $request->get('status');
             $profile->save();
-            return redirect('roles')->with('message', 'Role Added Successfully!');
+            return redirect('roles')->with('message', 'Role added successfully!');
     }
 
     /**
@@ -97,7 +97,7 @@ class RoleController extends Controller
             $profile->title = $request->get('title');
             $profile->status = $request->get('status');
             $profile->save();
-            return redirect('roles')->with('message', 'Role Update Successfully!');
+            return redirect('roles')->with('message', 'Role update successfully!');
     }
 
     /**
@@ -109,6 +109,6 @@ class RoleController extends Controller
     public function destroy(Role $role,$id)
     {
         Role::destroy(array('id',$id));
-        return redirect('roles')->with('error', 'Role Deleted Successfully!');
+        return redirect('roles')->with('error', 'Role deleted successfully!');
     }
 }

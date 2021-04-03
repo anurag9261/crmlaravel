@@ -20,8 +20,8 @@
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a
-                                href="{{route('admin.adduser')}}" style="color:white"><i class="fas fa-plus">Add
-                                    User</i></a></button>
+                                href="{{route('admin.adduser')}}" style="color:white"><i class="fas fa-plus"></i> Add
+                                    User</a></button>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -70,15 +70,15 @@
                             <td>{{$data->lname}}</td>
                             <td>{{$data->mobno}}</td>
                             <td>{{$data->email}}</td>
-                            <td><img src="{{asset('images/'. $data->image)}}" width="60px" , height="60px" ,></td>
+                            <td><img src="{{asset('images/'. $data->image)}}" width="50px" , height="auto"></td>
                             <td>{{$data->role}}</td>
                             <td>
-                                <button type="button" class="btn btn-outline-info"><a href="viewuser{{$data->id}}"
-                                        style="color:black"><i class="fas fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-outline-warning"><a href="edituser{{$data->id}}"
-                                        style="color:black"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-outline-danger"><a href="deleteuser{{$data->id}}"
-                                        style="color:black"><i class="fas fa-trash-alt"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="viewuser{{$data->id}}"
+                                        style="color:white"><i class="far fa-eye"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="edituser{{$data->id}}"
+                                        style="color:white"><i class="far fa-edit"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="deleteuser{{$data->id}}"
+                                        style="color:white"><i class="far fa-trash-alt"></i></a></button>
                             </td>
                         </tr>
                         @endforeach

@@ -17,6 +17,15 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <ol class="breadcrumb float-sm-right">
+                        <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.users')}}"
+                                style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
     <div class="content">

@@ -21,8 +21,8 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
-                        <button class="btn btn-outline-info" style="float:right"><a href="{{route('admin.employee')}}"
-                                style="color:black"><i class="fas fa-arrow-left">Back</i></a></button>
+                        <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.employee')}}"
+                                style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
                 </div>
             </div>

@@ -28,9 +28,9 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{$user}}</h3>
+                            <h3>{{$admin}}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Admins</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -46,7 +46,7 @@
                         <div class="inner">
                             <h3>{{$customer}}</h3>
 
-                            <p>Customer Register</p>
+                            <p>Customers</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -56,22 +56,22 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                {{--<div class="col-lg-3 col-6">
+                <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-secondary">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{$employee}}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Employees</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{route('admin.users')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                {{--<div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -97,6 +97,22 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-chart-pie mr-1"></i>
+                                Piechart
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content p-0">
+                                <!-- Morris chart - Sales -->
+                                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                               <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>--}}
+
+                   {{--<div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
                                 Sales
                             </h3>
                             <div class="card-tools">
@@ -109,7 +125,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div><!-- /.card-header
+                        </div>
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <!-- Morris chart - Sales -->
@@ -122,10 +138,9 @@
                                 </div>
                             </div>
                         </div><!-- /.card-body -->
-                    </div>
+                    </div>--}}
                     <!-- /.card -->
-
-                    <!-- DIRECT CHAT -->
+                    {{--<!-- DIRECT CHAT -->
                     <div class="card direct-chat direct-chat-primary">
                         <div class="card-header">
                             <h3 class="card-title">Direct Chat</h3>
@@ -330,10 +345,10 @@
                             </form>
                         </div>
                         <!-- /.card-footer-->
-                    </div>
+                    </div>--}}
                     <!--/.direct-chat -->
 
-                    <!-- TO DO List -->
+                    {{--<!-- TO DO List -->
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -464,13 +479,12 @@
                         </div>
                     </div>
                     <!-- /.card -->
-                </section>
+                </section>--}}
                 <!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                <section class="col-lg-5 connectedSortable">
-
+              {{--  <section class="col-lg-5 connectedSortable">
                     <!-- Map card -->
-                    <div class="card bg-gradient-primary">
+                   <div class="card bg-gradient-primary">
                         <div class="card-header border-0">
                             <h3 class="card-title">
                                 <i class="fas fa-map-marker-alt mr-1"></i>
@@ -607,9 +621,9 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-                </section>
+                </section>--}}
                 <!-- right col -->
-            </div>--}}
+            </div>
             <div class="card">
                 <div class="card-body">
                 <h3>Latest User Records</h3>
@@ -691,6 +705,31 @@
                     </table>
                     <br>
                     <br>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                <h3>Latest Invoice Records:-</h3>
+                    <table class="table table-bordered table-striped">
+                        <tr class="">
+                            <th>Invoice No</th>
+                            <th>Title</th>
+                            <th>Bill To</th>
+                            <th>Due Date</th>
+                            <th>Total</th>       
+                        </tr>
+                        @foreach($invoice as $data)
+                        <tr>
+                            <td>{{$data->id}}</td>
+                            <td>{{$data->title}}</td>
+                            <td>{{$data->bill_to}}</td>
+                            <td>{{$data->due_date}}</td>
+                            <td>{{$data->total_amount}}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+                    <br>
+
                 </div>
             </div>
     </section>

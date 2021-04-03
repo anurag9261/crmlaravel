@@ -2,6 +2,11 @@
 <html>
 
 <head>
+    <style>
+    * {
+        font-family: Verdana, Arial, Tahoma, Serif;
+    }
+    </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CRM | Admin Panel</title>
@@ -73,8 +78,8 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <a href="{{route('admin.dashboard')}}" class="brand-link">
+                <img src="{{ asset('/images/profile/crm.png')}}" alt="" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">CRM</span>
             </a>
@@ -126,7 +131,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview menu-open">
-                            <a href="{{url('/admin')}}" class="nav-link active">
+                            <a href="{{url('/admin')}}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -166,15 +171,23 @@
                             <a href="{{route('admin.customers')}}" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                   Customer Management
+                                    Customer Management
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="{{route('admin.invoices')}}" class="nav-link">
-                            <i class="nav-icon fas fa-receipt"></i>
+                                <i class="nav-icon fas fa-receipt"></i>
                                 <p>
-                                   Invoice Management
+                                    Invoice Management
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="{{route('admin.expenses')}}" class="nav-link">
+                                <i class="nav-icon fas fa-money-bill-alt"></i>
+                                <p>
+                                    Expense Management
                                 </p>
                             </a>
                         </li>
@@ -188,7 +201,7 @@
         @yield('content')
 
         <footer class="main-footer">
-            <strong>CRM &copy; 2021</strong>
+            <strong>CRM &copy; 2021.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
             </div>
@@ -236,6 +249,116 @@
     <script src="dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <script src="{{asset('/js/dataTables.min.css')}}"></script>
+    <script src="{{asset('/js/add_edit.js')}}"></script>
+    <!-- <script src="{{asset('/js/edit_add.js')}}"></script>
+    <script src="{{asset('/js/dataTables.min.css')}}"></script> -->
+    <script src="/resources/js/add_edit.js"></script>
+    <script src="/resources/js/edit_add.js"></script>
+    <script>
+        $(document).ready(function(){
+            var i=1;
+            $("#add_row").click(function(){b=i-1;
+                $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
+                $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+                i++;
+            });
+            $("#delete_row").click(function(){
+                if(i>1){
+                    $("#addr"+(i-1)).html('');
+                i--;
+                }
+                calc();
+            });
+
+            $('#tab_logic tbody').on('keyup change',function(){
+                calc();
+            });
+            $('#tax').on('keyup change',function(){
+                calc_total();
+            });
+        });
+
+        function calc()
+        {
+            $('#tab_logic tbody tr').each(function(i, element) {
+                var html = $(this).html();
+                if(html!='')
+                {
+                    var qty = $(this).find('.qty').val();
+                    var price = $(this).find('.price').val();
+                    $(this).find('.total').val(qty*price);
+                    calc_total();
+                }
+            });
+        }
+
+        function calc_total()
+        {
+            total=0;
+            $('.total').each(function() {
+            total += parseInt($(this).val());
+            });
+            $('#sub_total').val(total.toFixed(2));
+            tax_sum=total/100*$('#tax').val();
+            $('#tax_amount').val(tax_sum.toFixed(2));
+            $('#total_amount').val((tax_sum+total).toFixed(2));
+        }
+
+    
+    </Script>
+    <script>
+        $(document).ready(function() {c=j-1;
+            var j = 1;
+            $("#edit_row").click(function() {
+                
+                c = j - 1;
+                $('#editr' + j).html($('#editr' + c).html()).find('td:first-child').html(j + 1);
+                $('#tab_logic1').append('<tr id="editr' + (j + 1) + '"></tr>');
+                j++;
+            });
+            $("#delete_row1").click(function() {
+                if (j > 1) {
+                    $("#editr" + (j - 1)).html('');
+                    j--;
+                }
+                calc();
+            });
+
+            $('#tab1_logic tbody').on('keyup change', function() {
+                calc();
+            });
+            $('#tax1').on('keyup change', function() {
+                calc_total();
+            });
+
+            function calc()
+            {
+                $('#tab1_logic tbody tr').each(function(i, element) {
+                    var html = $(this).html();
+                    if(html!='')
+                    {
+                        var qty = $(this).find('.qty').val();
+                        var price = $(this).find('.price').val();
+                        $(this).find('.total').val(qty*price);
+                        calc_total();
+                    }
+                });
+            }
+
+            function calc_total()
+            {
+                total=0;
+                $('.total').each(function() {
+                total += parseInt($(this).val());
+                });
+                $('#sub_total1').val(total.toFixed(2));
+                tax_sum=total/100*$('#tax1').val();
+                $('#tax_amount1').val(tax_sum.toFixed(2));
+                $('#total_amount1').val((tax_sum+total).toFixed(2));
+            }
+            
+        }); 
+    </Script>
 </body>
+
 </html>

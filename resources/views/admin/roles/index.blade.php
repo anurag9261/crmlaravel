@@ -20,9 +20,9 @@
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.addrole')}}"
-                                style="color:white"><i class="fas fa-plus">Add
-                                    Role</i></a></button>
-                    </ol>
+                                style="color:white"><i class="fas fa-plus"></i>
+                                    </i> Add Role</a></button>
+                    </ol>   
                 </div>
                 <!-- /.col -->
             </div>
@@ -68,12 +68,14 @@
                             <td>{{$data->created_at}}</td>
                             <td>{{$data->updated_at}}</td>
                             <td>
-                                <button type="button" class="btn btn-outline-info"><a href="viewrole{{$data->id}}"
-                                        style="color:black"><i class="fas fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-outline-warning"><a href="editrole{{$data->id}}"
-                                        style="color:black"><i class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-outline-danger"><a href="deleterole{{$data->id}}"
-                                        style="color:black"><i class="fas fa-trash-alt"></i></a></button>
+
+                                <button type="button" class="btn btn-secondary"><a href="viewrole{{$data->id}}"
+                                        style="color:white"><i class="far fa-eye"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="editrole{{$data->id}}"
+                                        style="color:white"><i class="far fa-edit"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="deleterole{{$data->id}}"
+                                        style="color:white"><i class="far fa-trash-alt"></i></a></button>
+
                             </td>
                         </tr>
                         @endforeach

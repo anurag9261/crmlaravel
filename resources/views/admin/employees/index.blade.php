@@ -24,8 +24,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a
-                                href="{{route('admin.addemployee')}}" style="color:white"><i class="fas fa-plus">Add
-                                    Employee Records</i></a></button>
+                                href="{{route('admin.addemployee')}}" style="color:white"><i class="fas fa-plus">
+                                    </i> Add Employee Records</a></button>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -73,14 +73,14 @@
                             <td>{{$data->currentdate}}</td>
                             <td>{{$data->time}}</td>
                             <td>
-                                <button type="button" class="btn btn-outline-info"><a href="viewemployee{{$data->id}}"
-                                        style="color:black"><i class="fas fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-outline-warning"><a
-                                        href="editemployee{{$data->id}}" style="color:black"><i
-                                            class="fas fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-outline-danger"><a
-                                        href="deleteemployee{{$data->id}}" style="color:black"><i
-                                            class="fas fa-trash-alt"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a href="viewemployee{{$data->id}}"
+                                        style="color:white"><i class="far fa-eye"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a
+                                        href="editemployee{{$data->id}}" style="color:white"><i
+                                            class="far fa-edit"></i></a></button>
+                                <button type="button" class="btn btn-secondary"><a
+                                        href="deleteemployee{{$data->id}}" style="color:white"><i
+                                            class="far fa-trash-alt"></i></a></button>
                             </td>
                         </tr>
                         @endforeach
