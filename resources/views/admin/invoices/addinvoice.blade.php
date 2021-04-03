@@ -20,9 +20,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
+
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.invoices')}}"
                                 style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
+
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -34,6 +36,7 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
+
                     <div class="container">
                         <form action="{{route('admin.invoicesubmit')}}" method="post">
                             @csrf
@@ -174,6 +177,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-10"></div>
@@ -189,4 +193,6 @@
         </section>
     </div>
 </div>
+
 @endsection
+

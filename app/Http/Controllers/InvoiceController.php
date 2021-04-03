@@ -200,6 +200,7 @@ class InvoiceController extends Controller
             
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -215,4 +216,5 @@ class InvoiceController extends Controller
         DB::table("products")->where("invoice_id", $id)->delete();
         return redirect('invoices')->with('error', 'Invoice deleted successfully!');
     }
+
 }
