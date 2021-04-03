@@ -97,6 +97,22 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-chart-pie mr-1"></i>
+                                Piechart
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content p-0">
+                                <!-- Morris chart - Sales -->
+                                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                               <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>--}}
+
+                   {{--<div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
                                 Sales
                             </h3>
                             <div class="card-tools">
@@ -109,7 +125,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div><!-- /.card-header
+                        </div>
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <!-- Morris chart - Sales -->
@@ -122,10 +138,9 @@
                                 </div>
                             </div>
                         </div><!-- /.card-body -->
-                    </div>
+                    </div>--}}
                     <!-- /.card -->
-
-                    <!-- DIRECT CHAT -->
+                    {{--<!-- DIRECT CHAT -->
                     <div class="card direct-chat direct-chat-primary">
                         <div class="card-header">
                             <h3 class="card-title">Direct Chat</h3>
@@ -330,10 +345,10 @@
                             </form>
                         </div>
                         <!-- /.card-footer-->
-                    </div>
+                    </div>--}}
                     <!--/.direct-chat -->
 
-                    <!-- TO DO List -->
+                    {{--<!-- TO DO List -->
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -464,13 +479,12 @@
                         </div>
                     </div>
                     <!-- /.card -->
-                </section>
+                </section>--}}
                 <!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                <section class="col-lg-5 connectedSortable">
-
+              {{--  <section class="col-lg-5 connectedSortable">
                     <!-- Map card -->
-                    <div class="card bg-gradient-primary">
+                   <div class="card bg-gradient-primary">
                         <div class="card-header border-0">
                             <h3 class="card-title">
                                 <i class="fas fa-map-marker-alt mr-1"></i>
@@ -607,9 +621,9 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-                </section>
+                </section>--}}
                 <!-- right col -->
-            </div>--}}
+            </div>
             <div class="card">
                 <div class="card-body">
                 <h3>Latest User Records</h3>

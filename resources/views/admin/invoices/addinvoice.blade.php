@@ -42,19 +42,20 @@
                                 </div>
                                 <div class="col-md-4">
                                 </div>
-                                <div class="col-md-2" style="font-size:30px;" >
+                                <div class="col-md-2" style="font-size:30px;">
                                     INVOICE
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-6">
                                     <label for="title">Title</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    <textarea class="form-control" id="" rows="3"
                                         placeholder="who is this invoice from?(required)" name="title"></textarea>
                                 </div>
                                 <div class="col-md-4"></div>
                                 <div class="input-group col-md-2">
-                                    <input type="text" class="form-control" name="invoice_no" value="{{$invoiceId}}" readonly>
+                                    <input type="text" class="form-control" name="invoice_no" value="{{$invoiceId}}"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
@@ -67,7 +68,8 @@
                                         <tbody>
                                             <tr>
                                                 <th class="text-center">Current Date</th>
-                                                <td><input type="date" name="currentdate" class="form-control" value="{{$currentDate}}"></td>
+                                                <td><input type="date" name="currentdate" class="form-control"
+                                                        value="{{$currentDate}}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -82,11 +84,10 @@
                                         name="billto"></textarea>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="bill">Ship To</label>
+                                    <label for="shipto">Ship To</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea2" rows="2"
                                         placeholder="(optional)" style="width: auto;" name="shipto"></textarea>
                                 </div>
-
                                 <div class="col-md-4">
                                     <table>
                                         <tbody>
@@ -102,7 +103,7 @@
                             <br>
                             <div class="row clearfix">
                                 <table class="table table-border table-hover" id="tab_logic">
-                                    <thead class="table table-inverse">
+                                    <thead>
                                         <tr>
                                             <th class="text-center"> # </th>
                                             <th class="text-center"> Product </th>
@@ -126,36 +127,34 @@
                                         <tr id='addr1'></tr>
                                     </tbody>
                                 </table>
-
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-2">
-                                    <button id="add_row" type="button"  class="btn btn-secondary pull-left">Add</button>
+                                    <button id="add_row" type="button" class="btn btn-secondary pull-left">Add</button>
                                 </div>
                                 <div class="col-md-9"></div>
-                                <div class="col-md-1">
+                                <div>
                                     <button id='delete_row' type="button" class="pull-right btn btn-secondary">Delete</button>
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4"></div>
-                                <div class="col-md-4">
-                                    <table class="table table-hover" id="tab_logic_total">
+                                <div class="pull-right col-md-4">
+                                    <table class="table table-border table-hover" id="tab_logic_total">
                                         <tbody>
                                             <tr>
                                                 <th class="text-center">Sub Total</th>
                                                 <td class="text-center"><input type="number" name='sub_total'
                                                         placeholder='0.00' class="form-control" id="sub_total"
-                                                        readonly />
-                                                </td>
+                                                        readonly /></td>
                                             </tr>
                                             <tr>
                                                 <th class="text-center">Tax</th>
                                                 <td class="text-center">
                                                     <div class="input-group mb-2 mb-sm-0">
-                                                        <input type="number" class="form-control" name="tax_percentage"
-                                                            id="tax" placeholder="0">
+                                                        <input type="number" class="form-control" name="tax_percentage" id="tax"
+                                                            placeholder="0">
                                                         <div class="input-group-addon">%</div>
                                                     </div>
                                                 </td>
@@ -164,8 +163,7 @@
                                                 <th class="text-center">Tax Amount</th>
                                                 <td class="text-center"><input type="number" name='tax_amount'
                                                         id="tax_amount" placeholder='0.00' class="form-control"
-                                                        readonly />
-                                                </td>
+                                                        readonly /></td>
                                             </tr>
                                             <tr>
                                                 <th class="text-center">Grand Total</th>
@@ -183,10 +181,11 @@
                                 <button type="submit" class="btn btn-secondary">Submit</button>
                                 </div>
                                 
-                            </div>
+                            </div>        
                         </form>
-                    </div>
+                    </div>  
                 </div>
+            </div>
         </section>
     </div>
 </div>

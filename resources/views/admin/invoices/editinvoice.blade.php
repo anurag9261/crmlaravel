@@ -101,7 +101,7 @@
                             </div>
                             <br>
                             <div class="row clearfix">
-                                <table class="table table-border table-hover" id="1tab_logic">
+                                <table class="table table-border table-hover" id="tab1_logic">
                                     <thead class="table table-inverse">
                                         <tr>
                                             <th class="text-center"> # </th>
@@ -120,7 +120,7 @@
                                             <td><input type="text" name='id[]' value="{{$pr->id}}"
                                                     class="form-control"/></td>
                                             <td><input type="text" name='invoice[]' value="{{$pr->invoice_id}}"
-                                                    class="form-control"readonly/></td>
+                                                    class="form-control" readonly/></td>
                                             <td><input type="text" name='product[]' value="{{$pr->product}}"
                                                     class="form-control" /></td>
                                             <td><input type="number" name='qty[]' value="{{$pr->qty}}"
@@ -131,14 +131,18 @@
                                                     class="form-control total" readonly /></td>
                                         </tr>
                                     @endforeach
-                                    <tr id='editr1'></tr>
+                                    <tr id="editr1"></tr>
+                                    <tr id="editr2"></tr>
+                                    <tr id="editr3"></tr>
+                                    <tr id="editr4"></tr>
+                                    <tr id="editr5"></tr>
                                     </tbody>
                                 </table>
 
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-2">
-                                    <button id="add1_row" type="button"  class="btn btn-secondary pull-left">Add</button>
+                                    <button id="edit_row" type="button"  class="btn btn-secondary pull-left">Add</button>
                                 </div>
                                 <div class="col-md-9"></div>
                                 <div class="col-md-1">
@@ -149,7 +153,7 @@
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <table class="table table-hover" id="tab_logic1_total">
+                                    <table class="table table-hover" id="tab1_logic_total">
                                         <tbody>
                                             <tr>
                                                 <th class="text-center">Sub Total</th>
@@ -198,4 +202,5 @@
         </section>
     </div>
 </div>
+
 @endsection

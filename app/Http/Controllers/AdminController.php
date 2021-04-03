@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Customer;
 use App\Invoice;
+
 class AdminController extends Controller
 {
     /**
@@ -200,7 +201,11 @@ class AdminController extends Controller
         $admin = DB::table('admins')->where('role','Admin')->count();
         $employee = DB::table('admins')->where('role','Employee')->count();
         $customer = DB::table('customers')->count();
+
+        //for pie chart
         
+
+
         //for table display
         $profile = Admin::orderBy('created_at','desc')->take(3)->get();
         $customers = Customer::orderBy('created_at','desc')->take(3)->get();
@@ -208,8 +213,4 @@ class AdminController extends Controller
         return view('admin.dashboard',compact('customer','admin','profile','customers','employee','invoice'));
     }
 
-    // public function logout(){
-    //     Auth::logout();
-    //     return redirect('/login');
-    // }
 }

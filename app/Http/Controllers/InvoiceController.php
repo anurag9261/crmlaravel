@@ -79,12 +79,12 @@ class InvoiceController extends Controller
             $profile->current_date = $request->get('currentdate');
             $profile->due_date = $request->get('duedate');
             $profile->total = 0;
-            //$profile->total = $request->get('total');
+            // $profile->total = $request->get('total');
             $profile->sub_total = $request->get('sub_total');
             $profile->tax_percentage = $request->get('tax_percentage');
             $profile->tax_amount = $request->get('tax_amount');
             $profile->total_amount = $request->get('total_amount');
-            //echo "<pre>";print_r($profile);die;
+            // echo "<pre>";print_r($profile);die;
             $profile->save();
 
             $count = count($request->get('product'));
@@ -97,9 +97,8 @@ class InvoiceController extends Controller
                 $product->total = $request->get('total')[$i];
                 $product->save();
             }
-            //echo'<pre>';print_r($product);die;
-            
-            return redirect('invoices')->with('message', 'Invoice added successfully!');
+         //echo'<pre>';print_r($product);die;
+         return redirect('invoices')->with('message', 'Invoice added successfully!');
 
     }
 
@@ -167,34 +166,33 @@ class InvoiceController extends Controller
             $profile->tax_percentage = $request->get('tax_percentage');
             $profile->tax_amount = $request->get('tax_amount');
             $profile->total_amount = $request->get('total_amount');
-            $profile->save();
+            // $profile->save();
             
             
             $count = count($request->get('product'));
-            $price = DB::table('products')->get('id');
+
             for ($i = 0; $i < $count; $i++) {  
                 $product  = Product::find($request->get('id')[$i]);
-                $price = DB::table('products')->where('id', $request->get('id')[$i]);
-                if($price != ''){
-                    if ($request->get('id')[$i] == $product->id){
-                        // echo'<pre>';print_r($product->id);die;
-                        $productU  = Product::find($request->get('id')[$i]);       
-                        $productU->invoice_id = $request->get('invoice_id');   
-                        $productU->product = $request->get('product')[$i];
-                        $productU->qty = $request->get('qty')[$i];
-                        $productU->price = $request->get('price')[$i];
-                        $productU->total = $request->get('total')[$i];
-                        $productU->save();
-                    }
+                 // echo'<pre>';print_r($product->id);die;
+                if ($product->id == $request->get('id')[$i]){
+                    // echo'<pre>';print_r($product->id);die;
+                    $productU  = Product::find($request->get('id')[$i]);       
+                    $productU->invoice_id = $request->get('invoice_no');   
+                    $productU->product = $request->get('product')[$i];
+                    $productU->qty = $request->get('qty')[$i];
+                    $productU->price = $request->get('price')[$i];
+                    $productU->total = $request->get('total')[$i];
+                    $productU->save();
                 }else{
                     $productP = new Product();
-                    $productP->invoice_id = $request->get('invoice_id');
+                    $productP->invoice_id = $request->get('invoice_no');
                     $productP->product = $request->get('product')[$i];
                     $productP->qty = $request->get('qty')[$i];
                     $productP->price = $request->get('price')[$i];
                     $productP->total = $request->get('total')[$i];
                     $productP->save();
-                }
+                }     
+                
             }  
             return redirect('invoices')->with('message', 'Invoice updated successfully!');
     //echo'<pre>';print_r($product);die;
