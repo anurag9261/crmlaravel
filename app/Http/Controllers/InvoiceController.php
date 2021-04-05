@@ -190,6 +190,8 @@ class InvoiceController extends Controller
                     $productU->price = $request->get('price')[$i];
                     $productU->total = $request->get('total')[$i];
                     $productU->save();
+
+                    
                 }
             }
             return redirect('invoices')->with('message', 'Invoice updated successfully!');
