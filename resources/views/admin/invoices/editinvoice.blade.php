@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="col-md-9"></div>
                                 <div class="col-md-1">
-                                    <button id='delete_row1' type="button" class="pull-right btn btn-secondary">Delete</button>
+                                    <button id='delete_row1' href="deleteinvoice{{$profile->id}}" type="button" class="pull-right btn btn-secondary">Delete</button>
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
