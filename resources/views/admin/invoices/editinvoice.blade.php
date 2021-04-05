@@ -186,7 +186,7 @@
                                                         readonly /></td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> 
                                 </div>
                             </div>
                             <div class="row clearfix">

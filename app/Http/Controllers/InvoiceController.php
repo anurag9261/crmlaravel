@@ -205,7 +205,7 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      * 
      */
-
+ 
     
     public function destroy(Invoice $invoice,$id)
     {
