@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Role Management</li>
                         <li class="breadcrumb-item active">View Role</li>
                     </ol>
                 </div><!-- /.col -->
@@ -49,8 +50,13 @@
                             
                         </tr>
                         <tr>
-                            <th>CreatedAt</th>
+                            <th>Created At</th>
                             <td>{{$profile->created_at}}</td>
+                            
+                        </tr>
+                        <tr>
+                            <th>Updated At</th>
+                            <td>{{$profile->updated_at}}</td>
                             
                         </tr>
                     </table>

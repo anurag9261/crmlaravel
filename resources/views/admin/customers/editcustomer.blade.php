@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Customer Management</li>
                         <li class="breadcrumb-item active">Edit Customer</li>
                     </ol>
                 </div><!-- /.col -->
@@ -85,10 +86,14 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name="address" value="{{$profile->address}}">
-                                @error('address')
+                            <label for="status">Staus</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="Active" {{ ($profile->status) == 'Active' ? 'selected' : '' }}>Active
+                                    </option>
+                                    <option value="InActive" {{ ($profile->status) == 'InActive' ? 'selected' : '' }}>
+                                        Inactive</option>
+                                </select>
+                                @error('status')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -109,18 +114,16 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="status">Staus</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="Active" {{ ($profile->status) == 'Active' ? 'selected' : '' }}>Active
-                                    </option>
-                                    <option value="InActive" {{ ($profile->status) == 'InActive' ? 'selected' : '' }}>
-                                        Inactive</option>
-                                </select>
-                                @error('status')
+                                <label for="address">Address</label>
+                                <textarea class="form-control @error('address') is-invalid @enderror" name="address">{{$profile->address}}</textarea>
+                                @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                @enderror
+                                @enderror          
+                            </div>
+                            <div class="col-md-5">
+                                <img src="{{asset('images/'. $profile->image)}}" width="80px", height="auto",>
                             </div>
                         </div>
                         <br>

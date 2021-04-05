@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Expense Records</h1>
+                    <h1 class="m-0 text-dark">Expense Management</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -47,7 +47,7 @@
                     @endif
                     <table id="data" class="table table-bordered table-striped">
                         <tr class="">
-                            <th>Id</th>
+                            <th>No</th>
                             <th>Category Name</th>
                             <th>Entry Date</th>
                             <th>Amount</th>
@@ -65,7 +65,7 @@
                                 <button type="button" class="btn btn-secondary"><a
                                         href="editexpense{{$data->id}}" style="color:white"><i
                                             class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a
+                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a
                                         href="deleteexpense{{$data->id}}" style="color:white"><i
                                             class="far fa-trash-alt"></i></a></button>
                             </td>

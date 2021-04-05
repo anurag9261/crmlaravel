@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Invoice Management</li>
                         <li class="breadcrumb-item active">Add Invoice</li>
                     </ol>
                 </div><!-- /.col -->
@@ -32,7 +33,7 @@
     <!-- /.content-header -->
     <div class="content">
         <!-- Left col -->
-        <section class="col-lg-12 connectedSortable">
+        <section class="col-lg-11 connectedSortable">
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">

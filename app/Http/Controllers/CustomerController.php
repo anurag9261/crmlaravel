@@ -104,19 +104,23 @@ class CustomerController extends Controller
             'mobno' => 'required',
             'email' => 'required',
             'address' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
             'status' => 'required',
             //'password' => 'required',
         ]);
         $profile=Customer::find($id);
+        if( $request->image == ""){
+            $imageName = $profile->image;
+        }else{
+            $imageName = time().'.'.$request->image->extension();       
+            $request->image->move(public_path('images'), $imageName);
+            $profile->image = $imageName;
+        }
         $profile->fname = $request->get('fname');
         $profile->lname = $request->get('lname');
         $profile->mobno = $request->get('mobno');
         $profile->email = $request->get('email');
         $profile->address = $request->get('address');
-        $imageName = time().'.'.$request->image->extension();       
-        $request->image->move(public_path('images'), $imageName);
-        $profile->image = $imageName;
         $profile->status = $request->get('status');
         $profile->save();
         return redirect('customers')->with('message', 'Record updated successfully!');

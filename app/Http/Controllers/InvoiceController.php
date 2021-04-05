@@ -76,7 +76,7 @@ class InvoiceController extends Controller
             $profile->title = $request->get('title');
             $profile->bill_to = $request->get('billto');
             $profile->ship_to = $request->get('shipto');
-            $profile->current_date = $request->get('currentdate');
+            $profile->current_date = $request->get('currentdate')->date_format;
             $profile->due_date = $request->get('duedate');
             $profile->total = 0;
             // $profile->total = $request->get('total');

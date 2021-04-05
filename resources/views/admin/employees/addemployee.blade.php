@@ -7,12 +7,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Add Employee Records</h1>
+                    <h1 class="m-0 text-dark">Add Attandance</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Add Employee Records</li>
+                        <li class="breadcrumb-item active">Timesheet Management</li>
+                        <li class="breadcrumb-item active">Add Attandance</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -37,7 +38,7 @@
                     <form action="{{route('admin.employeesubmit')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <label for="role">Employee Name</label>
                                 <?php //echo"<pre>"; print_r($employee); die; ?>
                                 <select class="form-control  @error('employee') is-invalid @enderror" name="employee"
@@ -53,9 +54,20 @@
                                 </span>
                                 @enderror
                             </div>
+                            <div class="col-md-5">
+                                <label for="date">Current Date</label>
+                                <input type="date" class="form-control @error('currentdate') is-invalid @enderror"
+                                    name="currentdate">
+                                @error('currentdate')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                         </div>
+                        <br>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <label for="attandance">Attandance:</label>
                             </div>
                         </div>
@@ -96,18 +108,6 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label for="date">Current Date</label>
-                                <input type="date" class="form-control @error('currentdate') is-invalid @enderror"
-                                    name="currentdate">
-                                @error('currentdate')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
                                 @enderror
                             </div>
                         </div>

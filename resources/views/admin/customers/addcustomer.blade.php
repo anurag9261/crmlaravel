@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Customer Management</li>
                         <li class="breadcrumb-item active">Add Customer</li>
                     </ol>
                 </div><!-- /.col -->
@@ -82,29 +83,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name="address" placeholder="Enter Address Here">
-                                @error('address')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="col-md-5">
-                            <label for="image">Image</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
+                        <div class="row">   
                             <div class="col-md-5">
                                 <label for="status">Status</label>
                                 <select class="form-control @error('status') is-invalid @enderror" name="status">
@@ -122,6 +101,28 @@
                                 </span>
                                 @enderror
                             </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                        <div class="col-md-5">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="address">Address</label>
+                                <textarea class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Enter Address Here"></textarea>            
+                                @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                           
                         </div>
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>

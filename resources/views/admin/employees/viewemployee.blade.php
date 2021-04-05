@@ -7,12 +7,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">View Employee Records</h1>
+                    <h1 class="m-0 text-dark">View Attandance</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">View Employee Records</li>
+                        <li class="breadcrumb-item">Timesheet Management</li>
+                        <li class="breadcrumb-item active">View Attandance</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -61,6 +62,14 @@
                         <tr>
                             <th>OutTime</th>
                             <td>{{$profile->outtime}}</td>      
+                        </tr>
+                        <tr>
+                            <th>Created At</th>
+                            <td>{{$profile->created_at}}</td>      
+                        </tr>
+                        <tr>
+                            <th>Updated At</th>
+                            <td>{{$profile->updated_at}}</td>      
                         </tr>
                     </table>
                 </div>

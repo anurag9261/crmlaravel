@@ -7,12 +7,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Add Invoice</h1>
+                    <h1 class="m-0 text-dark">Edit Invoice</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Add Invoice</li>
+                        <li class="breadcrumb-item">Invoice Management</li>
+                        <li class="breadcrumb-item active">Edit Invoice</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -67,7 +68,12 @@
                                         <tbody>
                                             <tr>
                                                 <th class="text-center">Current Date</th>
-                                                <td><input type="date" name="currentdate" class="form-control" value="{{$profile->current_date}}"></td>
+                                                <?php 
+                                                $currentDate = date('Y-m-d',strtotime($profile->current_date)); 
+                                            // dd($currentDate)
+                                                ?>
+                                                
+                                                <td><input type="date" name="currentdate" class="form-control" value="{{$currentDate}}"></td>
                                             </tr>
                                         </tbody>
                                     </table>

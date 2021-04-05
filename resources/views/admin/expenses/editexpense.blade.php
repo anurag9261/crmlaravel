@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Expense Management</li>
                         <li class="breadcrumb-item active">Edit Expense</li>
                     </ol>
                 </div><!-- /.col -->
@@ -49,9 +50,9 @@
                             </div>
                             <div class="col-md-5">
                                 <label for="date">Entry Date</label>
-                                <input type="date" class="form-control @error('date') is-invalid @enderror"
+                                <input type="date" class="form-control @error('entry_date') is-invalid @enderror"
                                     name="entry_date" value="{{$profile->entry_date}}">
-                                @error('date')
+                                @error('entry_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

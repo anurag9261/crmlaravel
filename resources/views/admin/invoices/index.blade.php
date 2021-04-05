@@ -48,7 +48,7 @@
                     @endif
                     <table class="table table-bordered table-striped">
                         <tr class="">
-                            <th>Invoice No</th>
+                            <th>No</th>
                             <th>Title</th>
                             <th>Bill To</th>
                             <th>Due Date</th>
@@ -67,7 +67,7 @@
                                         style="color:white"><i class="far fa-eye"></i></a></button>
                                 <button type="button" class="btn btn-secondary"><a href="editinvoice{{$data->id}}"
                                         style="color:white"><i class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a href="deleteinvoice{{$data->id}}"
+                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deleteinvoice{{$data->id}}"
                                         style="color:white"><i class="far fa-trash-alt"></i></a></button>
                             </td>
                         </tr>

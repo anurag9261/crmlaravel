@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Customer Management</li>
                         <li class="breadcrumb-item active">View Customer</li>
                     </ol>
                 </div><!-- /.col -->
@@ -49,18 +50,31 @@
                             
                         </tr>
                         <tr>
+                            <th>Mobile No</th>
+                            <td>{{$profile->mobno}}</td>
+                            
+                        </tr>
+                        <tr>
                             <th>Email</th>
                             <td>{{$profile->email}}</td>
                             
                         </tr>
                         <tr>
                             <th>Image</th>
-                            <td><img src="{{asset('images/'. $profile->image)}}" width="60px", height="60px",></td>
+                            <td><img src="{{asset('images/'. $profile->image)}}" width="60px", height="auto",></td>
                             
                         </tr>
                         <tr>
                             <th>Status</th>
                             <td>{{$profile->status}}</td>
+                        </tr>
+                        <tr>
+                            <th>Created At</th>
+                            <td>{{$profile->created_at}}</td>
+                        </tr>
+                        <tr>
+                            <th>Updated At</th>
+                            <td>{{$profile->updated_at}}</td>
                         </tr>                        
                     </table>
                 </div>

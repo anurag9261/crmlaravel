@@ -127,17 +127,22 @@ class AdminController extends Controller
             'mobno' => 'required',
             'email' => 'required',
             'address' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
             'role' => 'required',
         ]);
         $profile=Admin::find($id);  
+        if( $request->image == ""){
+            $imageName = $profile->image;
+        }else{
+            $imageName = time().'.'.$request->image->extension();       
+            $request->image->move(public_path('images'), $imageName);
+            $profile->image = $imageName;
+        }
         $profile->fname = $request->get('fname');
         $profile->lname = $request->get('lname');
         $profile->mobno = $request->get('mobno');
         $profile->email = $request->get('email');
         $profile->address = $request->get('address');
-        $imageName = time().'.'.$request->image->extension();       
-        $request->image->move(public_path('images'), $imageName);
         $profile->image = $imageName;
         $profile->role = $request->get('role');
         $profile->save();

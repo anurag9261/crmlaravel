@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Employee Records</h1>
+                    <h1 class="m-0 text-dark">Timesheet Management</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Employee Records</li>
+                        <li class="breadcrumb-item active">Timesheet Mangement</li>
                     </ol>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a
                                 href="{{route('admin.addemployee')}}" style="color:white"><i class="fas fa-plus">
-                                    </i> Add Employee Records</a></button>
+                                    </i> Add Attandance</a></button>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -58,7 +58,7 @@
                     </form> --}}
                     <table id="data" class="table table-bordered table-striped">
                         <tr class="">
-                            <th>Id</th>
+                            <th>No</th>
                             <th>Employee</th>
                             <th>Attandance</th>
                             <th>CurrentDate</th>
@@ -78,7 +78,7 @@
                                 <button type="button" class="btn btn-secondary"><a
                                         href="editemployee{{$data->id}}" style="color:white"><i
                                             class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a
+                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a
                                         href="deleteemployee{{$data->id}}" style="color:white"><i
                                             class="far fa-trash-alt"></i></a></button>
                             </td>

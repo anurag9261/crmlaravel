@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Customers</h1>
+                    <h1 class="m-0 text-dark">Customer Management</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Customers</li>
+                        <li class="breadcrumb-item active">Customer Management</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -45,7 +45,7 @@
                     @endif
                     <table class="table table-bordered table-striped">
                         <tr class="">
-                            <th>Id</th>
+                            <th>No</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
@@ -70,7 +70,7 @@
                             <td>
                             <button type="button" class="btn btn-secondary"><a href="viewcustomer{{$data->id}}" style="color:white"><i class="far fa-eye"></i></a></button>
                             <button type="button" class="btn btn-secondary"><a href="editcustomer{{$data->id}}" style="color:white"><i class="far fa-edit"></i></a></button>
-                            <button type="button" class="btn btn-secondary"><a href="deletecustomer/{{$data->id}}" style="color:white"><i class="far fa-trash-alt"></i></a></button>
+                            <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deletecustomer/{{$data->id}}" style="color:white"><i class="far fa-trash-alt"></i></a></button>
                             </td>
                         </tr>
                         @endforeach
