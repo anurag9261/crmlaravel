@@ -191,6 +191,47 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-poll"></i>
+                                <p>
+                                    Report Managment
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.employeereport')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-user-tie"></i>
+                                        <p>Employee Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.roles')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-receipt"></i>
+                                        <p>Invoice Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.employee')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Timesheet Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.employee')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-dollar-sign"></i>
+                                        <p>Payroll Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.employee')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Balance Report</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

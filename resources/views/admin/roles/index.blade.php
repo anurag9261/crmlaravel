@@ -68,12 +68,14 @@
                             <td>{{$data->created_at}}</td>
                             <td>{{$data->updated_at}}</td>
                             <td>
+
                                 <button type="button" class="btn btn-secondary"><a href="viewrole{{$data->id}}"
                                         style="color:white"><i class="far fa-eye"></i></a></button>
                                 <button type="button" class="btn btn-secondary"><a href="editrole{{$data->id}}"
                                         style="color:white"><i class="far fa-edit"></i></a></button>
                                 <button type="button" class="btn btn-secondary"><a href="deleterole{{$data->id}}"
                                         style="color:white"><i class="far fa-trash-alt"></i></a></button>
+
                             </td>
                         </tr>
                         @endforeach
