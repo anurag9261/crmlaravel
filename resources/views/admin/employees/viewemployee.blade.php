@@ -55,21 +55,32 @@
                             
                         </tr>
                         <tr>
+                        @if($profile->intime == "")
+                            <tr>
+                                <th>InTime</th>
+                                <td>NA</td>
+                            </tr>
+                        @else
                             <th>InTime</th>
                             <td>{{$profile->intime}}</td>
-                            
+                            @endif    
                         </tr>
                         <tr>
-                            <th>OutTime</th>
-                            <td>{{$profile->outtime}}</td>      
+                        @if($profile->outtime == "")
+                            <th>InTime</th>
+                            <td>NA</td>
+                        @else
+                            <th>InTime</th>
+                            <td>{{$profile->outtime}}</td>
+                        @endif
                         </tr>
                         <tr>
                             <th>Created At</th>
-                            <td>{{$profile->created_at}}</td>      
+                            <td>{{$profile->created_at->format('Y-m-d')}}</td>      
                         </tr>
                         <tr>
                             <th>Updated At</th>
-                            <td>{{$profile->updated_at}}</td>      
+                            <td>{{$profile->updated_at->format('Y-m-d')}}</td>      
                         </tr>
                     </table>
                 </div>

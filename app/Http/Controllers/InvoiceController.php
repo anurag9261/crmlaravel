@@ -29,6 +29,7 @@ class InvoiceController extends Controller
     public function create()
     {
         $invoiceDatas = DB::table('invoices')->orderBy('id','desc')->limit(1)->get();
+        $customers = DB::table('customers')->get();
         $invoiceData = (array) $invoiceDatas;
        foreach($invoiceData as $invoiced){
         if(empty($invoiced)){
@@ -44,7 +45,7 @@ class InvoiceController extends Controller
     }
         $mytime = Carbon\Carbon::now();
         $currentDate =  $mytime->toDateString();
-        return view('admin.invoices.addinvoice',compact('invoiceId','currentDate'));
+        return view('admin.invoices.addinvoice',compact('invoiceId','currentDate','customers'));
     }
 
     /**
@@ -76,7 +77,7 @@ class InvoiceController extends Controller
             $profile->title = $request->get('title');
             $profile->bill_to = $request->get('billto');
             $profile->ship_to = $request->get('shipto');
-            $profile->current_date = $request->get('currentdate')->date_format;
+            $profile->current_date = $request->get('currentdate');
             $profile->due_date = $request->get('duedate');
             $profile->total = 0;
             // $profile->total = $request->get('total');
@@ -123,10 +124,11 @@ class InvoiceController extends Controller
     public function edit(Invoice $invoice,$id)
     {
         $profile = Invoice::find($id);
+        $customers = DB::table('customers')->get();
         $products = DB::table('products')
             ->where('invoice_id', $id)
             ->get();
-        return view('admin.invoices.editinvoice', compact('profile','products'));
+        return view('admin.invoices.editinvoice', compact('profile','products','customers'));
     }
 
     /**
@@ -147,7 +149,8 @@ class InvoiceController extends Controller
             'sub_total' => 'required',
             'tax_percentage' => 'required',
             'tax_amount' => 'required',
-            'total_amount' =>'required'
+            'total_amount' =>'required',
+            'status' => 'required',
         ]);
         $product = $request->validate([
             'product' => 'required',
@@ -161,16 +164,15 @@ class InvoiceController extends Controller
             $profile->ship_to = $request->get('shipto');
             $profile->current_date = $request->get('currentdate');
             $profile->due_date = $request->get('duedate');
-            // $profile->total = 0;
             $profile->sub_total = $request->get('sub_total');
             $profile->tax_percentage = $request->get('tax_percentage');
             $profile->tax_amount = $request->get('tax_amount');
             $profile->total_amount = $request->get('total_amount');
+            $profile->status = $request->get('status');
             $profile->save();
-            
-            
-            $count = count($request->get('product'));
 
+
+            $count = count($request->get('product'));
             for ($i = 0; $i < $count; $i++) {
                 // echo'<pre>';print_r($product->id);die;
                 $product = Product::find($request->get('id')[$i]);
@@ -184,14 +186,12 @@ class InvoiceController extends Controller
                     $productP->save();
                 } else {
                     $productU  = Product::find($request->get('id')[$i]);
-                    $productU->invoice_id = $request->get('invoice_no');
+                    // $productU->invoice_id = $request->get('invoice_no');
                     $productU->product = $request->get('product')[$i];
                     $productU->qty = $request->get('qty')[$i];
                     $productU->price = $request->get('price')[$i];
                     $productU->total = $request->get('total')[$i];
-                    $productU->save();
-
-                    
+                    $productU->save();                  
                 }
             }
             return redirect('invoices')->with('message', 'Invoice updated successfully!');
@@ -213,8 +213,13 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice,$id)
     {
         Invoice::destroy(array('id',$id));
-        DB::table("products")->where("invoice_id", $id)->delete();
+        DB::table("products")->where("invoice_id", $id)->delete();    
         return redirect('invoices')->with('error', 'Invoice deleted successfully!');
+    }
+
+    public function destroy1($id){
+        Product::destroy(array('id',$id));
+        return redirect("admin.editinvoice");
     }
 
 }

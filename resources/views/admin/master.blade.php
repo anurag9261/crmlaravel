@@ -37,7 +37,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('/css/dataTables.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/dataTables.min.css')}}">
+    <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <style>
     .btn-outline-success {
         cursor: pointer;
@@ -291,6 +292,9 @@
     <script src="{{asset('/js/dataTables.min.css')}}"></script> -->
     <script src="/resources/js/add_edit.js"></script>
     <script src="/resources/js/edit_add.js"></script>
+    
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/dataTables.min.js')}}"></script>
     <script>
         $(document).ready(function(){
             var i=1;
@@ -354,6 +358,7 @@
                 j++;
             });
             $("#delete_row1").click(function() {
+               
                 if (j > 1) {
                     $("#editr" + (j - 1)).html('');
                     j--;
@@ -396,6 +401,7 @@
             
         }); 
     </Script>
+    @stack('scripts')
 </body>
 
 </html>

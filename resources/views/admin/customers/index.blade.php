@@ -43,7 +43,7 @@
                         {{ session()->get('message') }}
                     </div>
                     @endif
-                    <table class="table table-bordered table-striped">
+                    <table id="empTable" class="table table-bordered table-striped">
                         <tr class="">
                             <th>No</th>
                             <th>First Name</th>
@@ -85,3 +85,22 @@
     </div>
 </div>
 @endsection
+<!-- Script -->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+      // DataTable
+      $('#empTable').DataTable({
+         processing: true,
+         serverSide: true,
+         ajax: "{{route('admin.getCustomers')}}",
+         columns: [
+            { data: 'id' },
+            { data: 'fname' },
+            { data: 'lname' },
+            { data: 'email' },
+         ]
+      });
+
+    });
+    </script>

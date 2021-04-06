@@ -70,11 +70,11 @@
                         </tr>
                         <tr>
                             <th>Created At</th>
-                            <td>{{$profile->created_at}}</td>
+                            <td>{{$profile->created_at->format('Y-m-d')}}</td>
                         </tr>
                         <tr>
                             <th>Updated At</th>
-                            <td>{{$profile->updated_at}}</td>
+                            <td>{{$profile->updated_at->format('Y-m-d')}}</td>
                         </tr>                        
                     </table>
                 </div>

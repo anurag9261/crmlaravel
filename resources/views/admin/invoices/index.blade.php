@@ -53,6 +53,7 @@
                             <th>Bill To</th>
                             <th>Due Date</th>
                             <th>Total</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         @foreach($profile as $data)
@@ -62,6 +63,13 @@
                             <td>{{$data->bill_to}}</td>
                             <td>{{$data->due_date}}</td>
                             <td>{{$data->total_amount}}</td>
+                            <td>
+                            @if($data->status == 'Paid')
+                            <span class="badge badge-success">Paid</span>
+                            @elseif($data->status == 'Pending')
+                            <span class="badge badge-danger">Pending</span>
+                            @endif
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-secondary"><a href="viewinvoice{{$data->id}}"
                                         style="color:white"><i class="far fa-eye"></i></a></button>

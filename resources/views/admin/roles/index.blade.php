@@ -1,4 +1,7 @@
 @extends('admin.master')
+@section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -86,3 +89,11 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready( function () {
+    $('#myTable12').DataTable();
+} );
+</script>
+@endpush

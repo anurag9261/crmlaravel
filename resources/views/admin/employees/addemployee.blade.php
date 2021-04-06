@@ -55,9 +55,9 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="date">Current Date</label>
-                                <input type="date" class="form-control @error('currentdate') is-invalid @enderror"
-                                    name="currentdate">
+                                <label for="currentdate">Current Date</label>
+                                <input type="text" id="datepicker2" class="form-control @error('currentdate') is-invalid @enderror"
+                                    name="currentdate" placeholder="yyyy-mm-dd">
                                 @error('currentdate')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -127,4 +127,14 @@ function hide(){
 function show(){
   document.getElementById('toggle').style.display = 'block';
 }
+</script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$(function() {
+    $("#datepicker2").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+});
 </script>
