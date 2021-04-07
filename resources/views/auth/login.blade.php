@@ -28,9 +28,13 @@
     }
 
     .login-form {
-        width: 350px;
+        width: 380px;
         margin: 0 auto;
         padding: 30px 0;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .login-form form {
@@ -144,6 +148,17 @@
                 <a href="{{ route('password.request') }}" class="forgot-link">Forgot Password?</a>
             </div>
             <input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
+            <br>
+            @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+            @endif
         </form>
     </div>
 </body>

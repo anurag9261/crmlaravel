@@ -5,6 +5,11 @@
     <style>
     * {
         font-family: Verdana, Arial, Tahoma, Serif;
+       
+    }
+
+    .layout-fixed .main-sidebar {
+    font-size: 15px;
     }
     </style>
     <meta charset="utf-8">
@@ -32,7 +37,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('/css/dataTables.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/dataTables.min.css')}}">
+    <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <style>
     .btn-outline-success {
         cursor: pointer;
@@ -53,24 +59,15 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
                 </li>
+                <li class="nav-item">
+                
+                </li>
             </ul>
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li>
-                    <a href="{{route('logout')}}">Logout</a>
+                    Welcome {{Auth::user()->fname}}
+                    <a href="{{route('logout')}}">Logout</a> 
                 </li>
             </ul>
         </nav>
@@ -242,7 +239,7 @@
         @yield('content')
 
         <footer class="main-footer">
-            <strong>CRM &copy; 2021.</strong>
+            <strong>CRM-<a href="https://www.webcreta.com/">Webcreta Techonologies</a>&copy; 2021.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
             </div>
@@ -295,6 +292,9 @@
     <script src="{{asset('/js/dataTables.min.css')}}"></script> -->
     <script src="/resources/js/add_edit.js"></script>
     <script src="/resources/js/edit_add.js"></script>
+    
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('/js/dataTables.min.js')}}"></script>
     <script>
         $(document).ready(function(){
             var i=1;
@@ -358,6 +358,7 @@
                 j++;
             });
             $("#delete_row1").click(function() {
+               
                 if (j > 1) {
                     $("#editr" + (j - 1)).html('');
                     j--;
@@ -400,6 +401,7 @@
             
         }); 
     </Script>
+    @stack('scripts')
 </body>
 
 </html>

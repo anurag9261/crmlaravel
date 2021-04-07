@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">User Management</li>
                         <li class="breadcrumb-item active">Edit User</li>
                     </ol>
                 </div><!-- /.col -->
@@ -81,12 +82,40 @@
                                 @enderror
                             </div>
                         </div>
+                       
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    name="image"  accept="image/x-png,image/gif,image/jpeg">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <?php //echo "<pre>"; print_r($profile->image); die;?>
+                            <div class="col-md-5">
+                            <label for="role">Role</label>
+                                <select class="form-control  @error('role') is-invalid @enderror" name="role">
+                                    @foreach($roles as $roleSingle)
+                                    <option>{{$roleSingle->title}}</option>
+                                    @endforeach
+                                </select>
+                                @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                               
+                            </div>
+                        </div>
                         <br>
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name="address" value="{{$profile->address}}">
+                                <textarea class="form-control @error('address') is-invalid @enderror" name="address">{{$profile->address}}</textarea>
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -94,31 +123,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-
-                                <label for="image">Image</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                    name="image">
-                                @error('image')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5">
-                            <label for="role">Role</label>
-                                <select class="form-control  @error('role') is-invalid @enderror" name="role">         
-                                        @foreach($roles as $profile)
-                                            <option>{{$profile->title}}</option> 
-                                        @endforeach
-                                </select>    
-                                @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <img src="{{asset('images/'. $profile->image )}}" width="150px" , height="auto"></td>
                             </div>
                         </div>
                         <br>

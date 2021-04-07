@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Role Management</li>
                         <li class="breadcrumb-item active">View Role</li>
                     </ol>
                 </div><!-- /.col -->
@@ -20,8 +21,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                <ol class="breadcrumb float-sm-right">
-                    <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.roles')}}" style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
+                    <ol class="breadcrumb float-sm-right">
+                        <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.roles')}}"
+                                style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -33,7 +35,7 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
-                <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped">
                         <tr>
                             <th>Id</th>
                             <td>{{$profile->id}}</td>
@@ -41,17 +43,22 @@
                         <tr>
                             <th>Title</th>
                             <td>{{$profile->title}}</td>
-                            
+
                         </tr>
                         <tr>
                             <th>Status</th>
                             <td>{{$profile->status}}</td>
-                            
+
                         </tr>
                         <tr>
-                            <th>CreatedAt</th>
-                            <td>{{$profile->created_at}}</td>
-                            
+                            <th>Created At</th>
+                            <td>{{$profile->created_at->format('Y-m-d')}}</td>
+
+                        </tr>
+                        <tr>
+                            <th>Updated At</th>
+                            <td>{{$profile->updated_at->format('Y-m-d')}}</td>
+
                         </tr>
                     </table>
                 </div>

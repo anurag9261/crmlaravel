@@ -7,12 +7,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Edit Employee Records</h1>
+                    <h1 class="m-0 text-dark">Edit Attandance</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Edit Employee Records</li>
+                        <li class="breadcrumb-item active">Timesheet Management</li>
+                        <li class="breadcrumb-item active">Edit Attandance</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->

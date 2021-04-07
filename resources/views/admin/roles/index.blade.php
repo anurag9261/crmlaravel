@@ -1,4 +1,7 @@
 @extends('admin.master')
+@section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -7,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Roles Profile</h1>
+                    <h1 class="m-0 text-dark">Role Management</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Roles</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admin</a></li>
+                        <li class="breadcrumb-item active">Role Management</li>
                     </ol>
                 </div>
             </div>
@@ -48,11 +51,9 @@
                     @endif
                     <table class="table table-bordered table-striped">
                         <tr class="">
-                            <th>Id</th>
+                            <th>No</th>
                             <th>Title</th>
                             <th>Status</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
                             <th>Action</th>
                         </tr>
                         @foreach($profile as $data)
@@ -65,15 +66,13 @@
                                 <span class="badge badge-danger">InActive</span>
                                 @endif
                             </td>
-                            <td>{{$data->created_at}}</td>
-                            <td>{{$data->updated_at}}</td>
                             <td>
 
                                 <button type="button" class="btn btn-secondary"><a href="viewrole{{$data->id}}"
                                         style="color:white"><i class="far fa-eye"></i></a></button>
                                 <button type="button" class="btn btn-secondary"><a href="editrole{{$data->id}}"
                                         style="color:white"><i class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a href="deleterole{{$data->id}}"
+                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deleterole{{$data->id}}"
                                         style="color:white"><i class="far fa-trash-alt"></i></a></button>
 
                             </td>
@@ -90,3 +89,11 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready( function () {
+    $('#myTable12').DataTable();
+} );
+</script>
+@endpush

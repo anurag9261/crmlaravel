@@ -11,7 +11,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admin</a></li>
+                        <li class="breadcrumb-item active">User Management</li>
                         <li class="breadcrumb-item active">Add User</li>
                     </ol>
                 </div><!-- /.col -->
@@ -20,8 +21,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                <ol class="breadcrumb float-sm-right">
-                    <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.users')}}" style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
+                    <ol class="breadcrumb float-sm-right">
+                        <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.users')}}"
+                                style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -34,8 +36,8 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.usersubmit') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row">
+                        @csrf
+                        <div class="row">
                             <div class="col-md-5">
                                 <label for="fname">First Name</label>
                                 <input type="text" class="form-control @error('fname') is-invalid @enderror"
@@ -81,41 +83,19 @@
                             </div>
                         </div>
                         <br>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name="address" placeholder="Enter Address Here">
-                                @error('address')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="col-md-5">
-                            <label for="image">Image</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <br>
                         <?php //echo"<pre>"; print_r($roles); die; ?>
                         <div class="row">
                             <div class="col-md-5">
-                            <label for="role">Role</label>
-                                <select class="form-control  @error('role') is-invalid @enderror" name="role">         
-                                        @foreach($roles as $profile)
-                                            <option>{{$profile->title}}</option> 
-                                        @endforeach
-                                </select>    
+                                <label for="role">Role</label>
+                                <select class="form-control  @error('role') is-invalid @enderror" name="role">
+                                    @foreach($roles as $profile)
+                                    <option>{{$profile->title}}</option>
+                                    @endforeach
+                                </select>
                                 @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="col-md-5">
@@ -123,6 +103,29 @@
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" placeholder="Enter Password Here">
                                 @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    name="image">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="address">Address</label>
+                                <textarea class="form-control @error('address') is-invalid @enderror" name="address"
+                                    placeholder="Enter Address Here"></textarea>
+                                @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

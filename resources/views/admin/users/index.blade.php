@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Users Profile</h1>
+                    <h1 class="m-0 text-dark">User Management</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admin</a></li>
+                        <li class="breadcrumb-item active">User Management</li>
                     </ol>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     </form> --}}
                     <table id="data" class="table table-bordered table-striped">
                         <tr class="">
-                            <th>Id</th>
+                            <th>No</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Mobile No</th>
@@ -77,7 +77,7 @@
                                         style="color:white"><i class="far fa-eye"></i></a></button>
                                 <button type="button" class="btn btn-secondary"><a href="edituser{{$data->id}}"
                                         style="color:white"><i class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a href="deleteuser{{$data->id}}"
+                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deleteuser{{$data->id}}"
                                         style="color:white"><i class="far fa-trash-alt"></i></a></button>
                             </td>
                         </tr>

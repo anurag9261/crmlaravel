@@ -12,6 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Expense Management</li>
                         <li class="breadcrumb-item active">View Expense</li>
                     </ol>
                 </div><!-- /.col -->
@@ -56,6 +57,14 @@
                         <tr>
                             <th>Description</th>
                             <td>{{$profile->description}}</td>
+                        </tr>
+                        <tr>
+                            <th>Created At</th>
+                            <td>{{$profile->created_at}}</td>
+                        </tr>
+                        <tr>
+                            <th>Updated At</th>
+                            <td>{{$profile->updated_at}}</td>
                         </tr>                        
                     </table>
                 </div>

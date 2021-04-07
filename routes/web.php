@@ -44,6 +44,7 @@ Route::get('deleteuser{id}', 'AdminController@destroy')->name('admin.deleteuser'
 
 /*---------------------CustomerController Route---------------------------*/
 Route::get('/customers','CustomerController@index')->name('admin.customers');
+Route::get('/customers/getCustomers/','CustomerController@getCustomers')->name('admin.getCustomers');
 Route::get('addcustomer', 'CustomerController@create')->name('admin.addcustomer');
 Route::post('addcustomer','CustomerController@store')->name('admin.customersubmit');
 Route::get('viewcustomer{id}', 'CustomerController@view')->name('admin.viewcustomer');
@@ -78,7 +79,7 @@ Route::get('viewinvoice{id}', 'InvoiceController@view')->name('admin.viewinvoice
 Route::get('editinvoice{id}', 'InvoiceController@edit')->name('admin.editinvoice');
 Route::post('updateinvoice{id}', 'InvoiceController@update')->name('admin.updateinvoice');
 Route::get('deleteinvoice{id}', 'InvoiceController@destroy')->name('admin.deleteinvoice');
-
+Route::get('deleteproduct{id}', 'InvoiceController@destroy1')->name('admin.deleteproduct');
 /*---------------------ExpenseController Route---------------------------*/
 Route::get('/expenses','ExpenseController@index')->name('admin.expenses');
 Route::get('addexpense', 'ExpenseController@create')->name('admin.addexpense');

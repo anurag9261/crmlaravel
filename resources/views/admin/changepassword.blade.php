@@ -57,6 +57,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-8">
                             <label for="newpassword">New Password</label>
@@ -68,6 +69,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-8">
                             <label for="confirmpassword">Confirm Password</label>
