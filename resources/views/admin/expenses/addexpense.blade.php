@@ -1,5 +1,38 @@
 @extends('admin.master')
 @section('content')
+<style>
+    .files input {
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    padding: 30px 0px 85px 35%;
+    text-align: center !important;
+    margin: 0;
+    width: 100% !important;
+    }
+    .files input:focus{ outline: 2px dashed #92b0b3; outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+    }
+
+    .color input{ background-color:#f1f1f1;}
+    .files:before {
+    position: absolute;
+    bottom: 10px;
+    left: 0; pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 40px;
+    content: "drag it here. ";
+    display: block;
+    margin: 0 auto;
+    color:black;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -82,6 +115,14 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label>Attach Bill</label>
+                                <div class="form-group files color">
+                                    <input type="file" name="attach_bill" class="form-control" multiple="">
+                                </div>
+                            </div>
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
@@ -101,3 +142,4 @@ $(function() {
     });
 });
 </script>
+

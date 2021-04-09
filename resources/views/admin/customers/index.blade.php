@@ -44,63 +44,44 @@
                     </div>
                     @endif
                     <table id="empTable" class="table table-bordered table-striped">
+                        <thead>
                         <tr class="">
-                            <th>No</th>
+                            <th>No</td>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th>Mob No</th>
                             <th>Image</th>
                             <th>Stauts</th>
-                            <th>Action</th>
                         </tr>
-                        @foreach($profile as $data)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$data->fname}}</td>
-                            <td>{{$data->lname}}</td>
-                            <td>{{$data->email}}</td>
-                            <td><img src="{{asset('images/'. $data->image)}}" width="50px", height="auto",></td>
-                            <td>
-                            @if($data->status == 'Active')
-                            <span class="badge badge-success">Active</span>
-                            @elseif($data->status == 'InActive')
-                            <span class="badge badge-danger">InActive</span>
-                            @endif
-                            </td>
-                            <td>
-                            <button type="button" class="btn btn-secondary"><a href="viewcustomer{{$data->id}}" style="color:white"><i class="far fa-eye"></i></a></button>
-                            <button type="button" class="btn btn-secondary"><a href="editcustomer{{$data->id}}" style="color:white"><i class="far fa-edit"></i></a></button>
-                            <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deletecustomer/{{$data->id}}" style="color:white"><i class="far fa-trash-alt"></i></a></button>
-                            </td>
-                        </tr>
-                        @endforeach
+                        </thead>
                     </table>
-                    <br>
-                    <span style="float:right">
-                        {{$profile->links()}}
-                    </span>
                 </div>
             </div>
         </section>
     </div>
 </div>
-@endsection
-<!-- Script -->
-<script type="text/javascript">
+<script>
     $(document).ready(function(){
-
-      // DataTable
-      $('#empTable').DataTable({
-         processing: true,
-         serverSide: true,
-         ajax: "{{route('admin.getCustomers')}}",
-         columns: [
-            { data: 'id' },
-            { data: 'fname' },
-            { data: 'lname' },
-            { data: 'email' },
-         ]
-      });
-
+        $('#empTable').DataTable({
+             processing:true,
+             serverSide:true,
+             ajax:"{{ route('admin.getcustomers') }}",
+            columns:[
+                {data:'id'},
+                {data:'fname'},
+                {data:'lname'},
+                {data:'email'},
+                {data:'mobno'},
+                {data:'image'},
+                {data:'status'},
+            ]
+        })
     });
-    </script>
+</script>
+@endsection
+<script type="text/javascript" src="{{ asset('DataTables/jquery-3.5.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('DataTables/datatables.min.js') }}"></script>
+<link href="{{ asset('Datatables/datatables.min.css') }}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{{ asset('Datatables/datatables.js') }}"></script>
+

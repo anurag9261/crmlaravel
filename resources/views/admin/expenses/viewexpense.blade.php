@@ -42,21 +42,25 @@
                         <tr>
                             <th>Category Name</th>
                             <td>{{$profile->category}}</td>
-                            
+
                         </tr>
                         <tr>
                             <th>Entry Date</th>
                             <td>{{$profile->entry_date}}</td>
-                            
+
                         </tr>
                         <tr>
                             <th>Amount</th>
                             <td>{{$profile->amount}}</td>
-                            
+
                         </tr>
                         <tr>
                             <th>Description</th>
                             <td>{{$profile->description}}</td>
+                        </tr>
+                        <tr>
+                            <th>Attach Bill</th>
+                            <td><img src="{{asset('images/'. $profile->attach_bill)}}" width="60px" , height="auto" ,></td>
                         </tr>
                         <tr>
                             <th>Created At</th>
@@ -65,7 +69,8 @@
                         <tr>
                             <th>Updated At</th>
                             <td>{{$profile->updated_at}}</td>
-                        </tr>                        
+                        </tr>
+
                     </table>
                 </div>
             </div>

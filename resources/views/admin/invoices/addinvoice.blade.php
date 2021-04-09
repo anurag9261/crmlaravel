@@ -170,7 +170,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
-                                                </td>             
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th class="text-center">Tax</th>
