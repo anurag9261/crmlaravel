@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use PDF;
+use App\Employee;
+use DateTime;
 
 class ReportController extends Controller
 {
@@ -15,6 +19,39 @@ class ReportController extends Controller
     public function index()
     {
         return view('admin.reports.employee');
+    }
+
+    public function timesheet(){
+
+        $employee = DB::table('admins')->where('role', 'Employee')->get();
+        return view('admin.reports.timesheet',compact('employee'));
+    }
+
+    public function invoice()
+    {
+
+        $customer = DB::table('customers')->get();
+        return view('admin.reports.invoice', compact('customer'));
+    }
+
+    public function balancesheet()
+    {
+        return view('admin.reports.balance');
+    }
+
+    public function generatePDF(Request $request)
+    {
+        // dd($request->all());
+        // $employeData['emp'] =   Employee::get();
+        $employeData =  DB::table('employees')
+                                //  ->select('employees.*','admins.fname','admins.lname')
+                                // ->join('admins','admins.fname','=','employees.employee')
+                                ->whereMonth('employees.currentdate',$request->get('month'))
+                                ->where('employees.employee', $request->get('employee'))
+                                ->get();
+        $data = ['title' => 'Welcome to CRM'];
+        $pdf = PDF::loadView('myPDF', $data,compact('employeData'));
+        return $pdf->download('employeereport.pdf');
     }
 
     /**
@@ -83,5 +120,5 @@ class ReportController extends Controller
         //
     }
 
-   
+
 }

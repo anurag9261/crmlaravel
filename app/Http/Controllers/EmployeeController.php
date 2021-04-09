@@ -19,7 +19,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         // $profile = Employee::paginate(5);
         $employeData['emp'] =   Employee::get();
         $row = 0;
@@ -31,7 +31,7 @@ class EmployeeController extends Controller
             $interval = $time1->diff($time2);
             $employeData['emp'][$row]['time'] = $interval->format('%H:%I:%S');
             $row++;
-         }  
+         }
         //  dd($employeData);
         return view('admin.employees.index',compact('employeData'));
     }
@@ -66,7 +66,7 @@ class EmployeeController extends Controller
         if($request->get('attandance') == 'present' ){
             $profile->intime = $request->get('intime');
             $profile->outtime = $request->get('outtime');
-            
+
         }else{
             $profile->intime = $request->get('');
             $profile->outtime = $request->get('');
@@ -115,13 +115,13 @@ class EmployeeController extends Controller
             // 'attandance' => 'required',
             'currentdate' => 'required',
         ]);
-        $profile=Employee::find($id); 
+        $profile=Employee::find($id);
         $profile->employee = $request->get('employee');
         $profile->attandance = $request->get('attandance');
         if($request->get('attandance') == 'present' ){
             $profile->intime = $request->get('intime');
             $profile->outtime = $request->get('outtime');
-            
+
         }else{
             $profile->intime = $request->get('');
             $profile->outtime = $request->get('');
@@ -137,7 +137,7 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    
+
 
     public function view(Employee $employee,$id){
         $profile = Employee::find($id);

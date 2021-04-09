@@ -204,13 +204,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.roles')}}" class="nav-link">
+                                    <a href="{{route('admin.invoicereport')}}" class="nav-link">
                                     <i class="nav-icon fas fa-receipt"></i>
                                         <p>Invoice Report</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.employee')}}" class="nav-link">
+                                    <a href="{{route('admin.timesheetreport')}}" class="nav-link">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Timesheet Report</p>
                                     </a>
@@ -222,9 +222,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.employee')}}" class="nav-link">
+                                    <a href="{{route('admin.balancereport')}}" class="nav-link">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
-                                        <p>Balance Report</p>
+                                        <p>Balancesheet Report</p>
                                     </a>
                                 </li>
                             </ul>

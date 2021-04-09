@@ -33,10 +33,50 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('admin.rolesubmit')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                        
-                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="month">Select Month</label>
+                            <select class="form-control @error('month') is-invalid @enderror" name="month">
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                            </select>
+                            @error('month')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-5">
+                            <label for="status">Status</label>
+                            <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                <option>Active</option>
+                                <option>InActive</option>
+                            </select>
+                            @error('title')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"></div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5">
+                        <button type="submit" class="btn btn-secondary">Print Report</button>
+                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
