@@ -80,7 +80,6 @@
                     <br>
                     <div class="row">
                         <div class="col-md-5">
-                            <button><a href="{{ URL::to('generate-pdf') }}">Export PDF</a></button>
                             <button type="submit" class="btn btn-secondary">Print Report</button>
                         </div>
                     </div>

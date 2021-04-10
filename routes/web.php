@@ -91,13 +91,21 @@ Route::post('updateexpense{id}', 'ExpenseController@update')->name('admin.update
 Route::get('deleteexpense{id}', 'ExpenseController@destroy')->name('admin.deleteexpense');
 
 // /*---------------------ReportsController Route---------------------------*/
-Route::get('/employeereport','ReportController@index')->name('admin.employeereport');
-Route::get('/report', 'ReportController@daily_report')->name('report');
+Route::get('/employeereport','ReportController@employee')->name('admin.employeereport');
+Route::post('/employeePDF', 'ReportController@employeePDF')->name('report.employee');
+
+
 
 Route::get('/timesheetreport', 'ReportController@timesheet')->name('admin.timesheetreport');
-Route::post('/timesheetPDF', 'ReportController@generatePDF')->name('report.timesheet');
+Route::post('/timesheetPDF', 'ReportController@timesheetPDF')->name('report.timesheet');
+
 
 Route::get('/invoicereport', 'ReportController@invoice')->name('admin.invoicereport');
+Route::post('/invoicePDF', 'ReportController@invoicePDF')->name('report.invoice');
+
+
+
+
 Route::get('/balancesheetreport', 'ReportController@balancesheet')->name('admin.balancereport');
 Route::delete('products{id}', 'InvoiceController@destroy1')->name('products.destroy');
 //
