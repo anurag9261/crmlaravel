@@ -198,6 +198,7 @@
     </div>
 </div>
 @endsection
+@push('js')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -235,3 +236,58 @@ $(function() {
     });
     });
 </script>
+<script>
+    $(document).ready(function() {c=j-1;
+            var j = 1;
+            $("#edit_row").click(function() {
+
+                c = j - 1;
+                $('#editr' + j).html($('#editr' + c).html()).find('td:first-child').html(j + 1);
+                $('#tab_logic1').append('<tr id="editr' + (j + 1) + '"></tr>');
+                j++;
+            });
+            $("#delete_row1").click(function() {
+                console.log(j);
+                if (j > 1) {
+                    $("#editr" + (j - 1)).html('');
+                    j--;
+                }
+                calc();
+            });
+
+            $('#tab1_logic tbody').on('keyup change', function() {
+                calc();
+            });
+            $('#tax1').on('keyup change', function() {
+                calc_total();
+            });
+
+            function calc()
+            {
+                $('#tab1_logic tbody tr').each(function(i, element) {
+                    var html = $(this).html();
+                    if(html!='')
+                    {
+                        var qty = $(this).find('.qty').val();
+                        var price = $(this).find('.price').val();
+                        $(this).find('.total').val(qty*price);
+                        calc_total();
+                    }
+                });
+            }
+
+            function calc_total()
+            {
+                total=0;
+                $('.total').each(function() {
+                total += parseInt($(this).val());
+                });
+                $('#sub_total1').val(total.toFixed(2));
+                tax_sum=total/100*$('#tax1').val();
+                $('#tax_amount1').val(tax_sum.toFixed(2));
+                $('#total_amount1').val((tax_sum+total).toFixed(2));
+            }
+
+        });
+</Script>
+@endpush

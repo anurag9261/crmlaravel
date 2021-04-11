@@ -208,14 +208,15 @@ class AdminController extends Controller
         $customer = DB::table('customers')->count();
 
         //for pie chart
-
-
-
+        $paid = DB::table('invoices')->where('status', 'Paid')->get();
+        $pending = DB::table('invoices')->where('status', 'Pending')->get();
+        $paid_count = count($paid);
+        $pending_count = count($pending);
         //for table display
-        $profile = Admin::orderBy('created_at','desc')->take(3)->get();
+        $profile = Admin::orderBy('created_at','desc')->where('role','employee')->take(3)->get();
         $customers = Customer::orderBy('created_at','desc')->take(3)->get();
         $invoice = Invoice::orderBy('created_at','desc')->take(3)->get();
-        return view('admin.dashboard',compact('customer','admin','profile','customers','employee','invoice'));
+        return view('admin.dashboard',compact('paid_count','pending_count','customer','admin','profile','customers','employee','invoice'));
     }
 
 }

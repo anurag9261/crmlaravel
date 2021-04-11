@@ -88,7 +88,7 @@
             </div>
             <!-- /.row -->
             <!-- Main row -->
-            {{--<div class="row">
+            <div class="row">
                 <!-- Left col -->
                 <section class="col-lg-7 connectedSortable">
                     <!-- Custom tabs (Charts with tabs)-->
@@ -100,13 +100,11 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <div class="tab-content p-0">
-                                <!-- Morris chart - Sales -->
-                                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-                               <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                           <div class="chart-container">
+                                <div class="chart has-fixed-height" id="pie_basic"></div>
                             </div>
                         </div><!-- /.card-body -->
-                    </div>--}}
+                    </div>
 
                    {{--<div class="card">
                         <div class="card-header">
@@ -625,7 +623,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                <h3>Latest User Records</h3>
+                <h3>Latest Employee Records</h3>
                     <table id="data" class="table table-bordered table-striped">
                         <tr class="">
                             <th>Id</th>
@@ -634,7 +632,6 @@
                             <th>Mobile No</th>
                             <th>Email</th>
                             <th>Image</th>
-                            <th>Role</th>
                          {{--   <th>Action</th> --}}
                         </tr>
 
@@ -646,7 +643,6 @@
                             <td>{{$data->mobno}}</td>
                             <td>{{$data->email}}</td>
                             <td><img src="{{asset('images/'. $data->image)}}" width="60px" , height="60px" ,></td>
-                            <td>{{$data->role}}</td>
                           {{--  <td>
                                 <button type="button" class="btn btn-outline-info"><a href="viewuser{{$data->id}}"
                                         style="color:black"><i class="fas fa-eye"></i></a></button>
@@ -674,7 +670,7 @@
                             <th>Email</th>
                             <th>Image</th>
                             <th>Status</th>
-                            {{--   <th>Action</th>   --}} 
+                            {{--   <th>Action</th>   --}}
                         </tr>
 
                      @foreach($customers as $data)
@@ -715,7 +711,7 @@
                             <th>Title</th>
                             <th>Bill To</th>
                             <th>Due Date</th>
-                            <th>Total</th>       
+                            <th>Total</th>
                         </tr>
                         @foreach($invoice as $data)
                         <tr>
@@ -739,4 +735,74 @@
 <!-- /.content -->
 </div>
 /.content-wrapper
+<script type="text/javascript">
+    var pie_basic_element = document.getElementById('pie_basic');
+if (pie_basic_element) {
+    var pie_basic = echarts.init(pie_basic_element);
+    pie_basic.setOption({
+        color: [
+            '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
+            '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
+            '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
+            '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+        ],
+
+        textStyle: {
+            fontFamily: 'Roboto, Arial, Verdana, sans-serif',
+            fontSize: 13
+        },
+
+        title: {
+            text: 'Pie Chart Example',
+            left: 'center',
+            textStyle: {
+                fontSize: 17,
+                fontWeight: 500
+            },
+            subtextStyle: {
+                fontSize: 12
+            }
+        },
+
+        tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(0,0,0,0.75)',
+            padding: [10, 15],
+            textStyle: {
+                fontSize: 13,
+                fontFamily: 'Roboto, sans-serif'
+            },
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+
+        legend: {
+            orient: 'horizontal',
+            bottom: '0%',
+            left: 'center',
+            data: ['Paid', 'Pending'],
+            itemHeight: 8,
+            itemWidth: 8
+        },
+
+        series: [{
+            name: 'Product Type',
+            type: 'pie',
+            radius: '70%',
+            center: ['50%', '50%'],
+            itemStyle: {
+                normal: {
+                    borderWidth: 1,
+                    borderColor: '#fff'
+                }
+            },
+            data: [
+                {value: {{$paid_count}}, name: 'Paid'},
+                {value: {{$pending_count}}, name: 'Pending'},
+            ]
+        }]
+    });
+}
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/echarts/5.0.2/echarts.min.js"></script>
 @endsection
+
