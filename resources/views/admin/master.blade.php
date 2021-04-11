@@ -222,7 +222,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.balancereport')}}" class="nav-link">
+                                    <a href="{{route('admin.balancesheetreport')}}" class="nav-link">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Balancesheet Report</p>
                                     </a>

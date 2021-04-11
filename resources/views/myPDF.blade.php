@@ -2,53 +2,105 @@
 <html>
 
 <head>
+
     <style>
         table {
             border-collapse: collapse;
             width: 100%;
+            border:1px solid #525252;
         }
 
         th,
         td {
             text-align: left;
             padding: 8px;
+            border:1px solid #525252;
         }
 
         tr:nth-child(even) {
-            background-color: #f2f2f2
+            background-color: #f2f2f2;
         }
 
-        th {
-           background-color: #4d97b4
+        .tr-bg-color {
+            background-color:rgb(38, 146, 165);
+            color:white;
         }
         body{
             border-collapse: collapse;
         }
+        footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color:#1f1f1f;
+        color: white;
+        padding:8px 0px;
+        text-align: center;
+        }
+        .header img {
+        float: left;
+        width: 80px;
+        height: auto;
+        background: #555;
+        }
+
+        .header h2 {
+        position: relative;
+        top: 18px;
+        left: 28%;
+        }
     </style>
 </head>
 <body>
-    <header style="text-align:right">{{ $title }}</header>
-    <h1 style="text-align: center;text-decoration:underline">Timesheet Report</h1>
-    <img src="{{ public_path('/images/profile/crm.png') }}" style="width: 100px; height: 100px">
-    <h3 style="float:right;">Employee Name:-{{ $employee }}</h3>
-    <table>
-        <tr>
+    <header class="header">
+        <img src="{{ public_path('/images/profile/crm.png') }}">
+        <h2 class="">Timesheet Report</h2>
+    </header>
+    <br>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-md-4 mt-3 mb-3">
+            <h3>Employee Name: {{ $employee }}</h3>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <tr class="tr-bg-color">
             <th>No</th>
-            <th>Attendance</th>
             <th>Date</th>
+            <th>Attendance</th>
             <th>Total Time</th>
         </tr>
         <?php //echo "<pre>"; print_r($employeData); die;?>
         @foreach($employeData as $data)
+        <?php
+        $time1 = new DateTime($data->intime);
+        $time2 = new DateTime($data->outtime);
+        $interval = $time1->diff($time2);
+        $hours = $interval->format('%H:%I:%S');
+        $totalTime[] = $hours;
+        ?>
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$data->attandance}}</td>
             <td>{{$data->currentdate}}</td>
-            <td></td>
+            <td>{{$data->attandance}}</td>
+            <td>{{ $hours }}</td>
         </tr>
         @endforeach
-    </table>
-    <footer style="background-color:gray;padding:05px">CRM-Admin Panel</footer>
+        <tr>
+<?php
+     $totalHours = array_sum($totalTime);
+    //echo "<pre>"; print_r($totalHours ); die;
+        ?>
+<td></td>
+<td></td>
+<td></td>
+<td><b>Total Hours: {{ $totalHours }}</b></td>
+</tr>
+</table>
+<footer>CRM-Admin Panel</footer>
+
 </body>
 
 </html>

@@ -34,6 +34,8 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
+                    <form action="{{ route('report.balancesheet') }}" method="post">
+                    @csrf
                     <div class="row">
                         <div class="col-md-5">
                             <label for="month">Select Month</label>
@@ -64,6 +66,7 @@
                             <button type="submit" class="btn btn-secondary">Print Report</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </section>

@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-5">
                             <label for="month">Select Month</label>
-                            <select class="form-control @error('month') is-invalid @enderror" name="month">
+                            <select class="form-control @error('month') is-invalid @enderror" name="">
                                 <option>Select Month</option>
                                 <option value="01">January</option>
                                 <option value="02">February</option>
@@ -76,7 +76,11 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="month" id="datepicker" placeholder="Select Month" />
+                        </div>
+                    </div>
                     <br>
                     <div class="row">
                         <div class="col-md-5">
@@ -89,4 +93,19 @@
         </section>
     </div>
 </div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $("#datepicker").datepicker( {
+    format: "yyyy-MM",
+    startView: "months",
+    minViewMode: "months"
+    });
+</script>
+
 @endsection
+
+
+

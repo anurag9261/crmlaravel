@@ -60,9 +60,10 @@
                             <th>Email</th>
                             <th>Image</th>
                             <th>Role</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
-                        
+
                         @foreach($profile as $data)
                         <tr>
                             <td>{{$loop->iteration}}</td>
@@ -72,6 +73,11 @@
                             <td>{{$data->email}}</td>
                             <td><img src="{{asset('images/'. $data->image)}}" width="50px" , height="auto"></td>
                             <td>{{$data->role}}</td>
+                            <td>@if($data->status == '1')
+                                <span class="badge badge-success">Active</span>
+                                @elseif($data->status == '0')
+                                <span class="badge badge-danger">InActive</span>
+                                @endif</td>
                             <td>
                                 <button type="button" class="btn btn-secondary"><a href="viewuser{{$data->id}}"
                                         style="color:white"><i class="far fa-eye"></i></a></button>
@@ -83,7 +89,7 @@
                         </tr>
                         @endforeach
                     </table>
-                    <br>    
+                    <br>
                     <span style="float:right">
                         {{$profile->links()}}
                     </span>

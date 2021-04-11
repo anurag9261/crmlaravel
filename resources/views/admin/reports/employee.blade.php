@@ -61,8 +61,8 @@
                         <div class="col-md-5">
                             <label for="status">Status</label>
                             <select class="form-control @error('status') is-invalid @enderror" name="status">
-                                <option>Active</option>
-                                <option>InActive</option>
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
                             </select>
                             @error('title')
                             <span class="invalid-feedback" role="alert">
