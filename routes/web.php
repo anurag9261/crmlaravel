@@ -106,8 +106,8 @@ Route::post('/invoicePDF', 'ReportController@invoicePDF')->name('report.invoice'
 
 
 
-Route::get('/balancesheetreport', 'ReportController@balancesheet')->name('admin.balancereport');
-Route::delete('products{id}', 'InvoiceController@destroy1')->name('products.destroy');
+Route::get('/balancesheetreport', 'ReportController@balancesheet')->name('admin.balancesheetreport');
+Route::post('/balancePDF', 'ReportController@balancesheetPDF')->name('report.balancesheet');
 //
 // Route::get('generate-pdf', 'ReportController@generatePDF')->name('timesheet');
 

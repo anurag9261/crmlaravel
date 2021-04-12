@@ -44,6 +44,8 @@ class Admin extends Authenticatable
     }
 
     public function isAdmin() {
-        
+
     }
+
+    protected $guarded = [];
 }

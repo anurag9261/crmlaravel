@@ -68,6 +68,7 @@ class AdminController extends Controller
             'address' => 'required',
             'image' => 'required',
             'role' => 'required',
+            'status'=>'required',
             'password' => 'required',
         ]);
             $profile=new Admin();
@@ -80,6 +81,7 @@ class AdminController extends Controller
             $request->image->move(public_path('images'), $imageName);
             $profile->image = $imageName;
             $profile->role = $request->get('role');
+            $profile->status = $request->get('status');
             $profile->password = Hash::make($request->get('password'));
             $profile->save();
             return redirect('users')->with('message', 'Record added successfully!');
@@ -129,6 +131,7 @@ class AdminController extends Controller
             'address' => 'required',
             // 'image' => 'required',
             'role' => 'required',
+            'status' => 'required',
         ]);
         $profile=Admin::find($id);
         if( $request->image == ""){
@@ -145,6 +148,7 @@ class AdminController extends Controller
         $profile->address = $request->get('address');
         $profile->image = $imageName;
         $profile->role = $request->get('role');
+        $profile->status = $request->get('status');
         $profile->save();
         return redirect('users')->with('message', 'Record updated successfully!');
     }
@@ -206,16 +210,23 @@ class AdminController extends Controller
         $admin = DB::table('admins')->where('role','Admin')->count();
         $employee = DB::table('admins')->where('role','Employee')->count();
         $customer = DB::table('customers')->count();
+        $invoice_paid = DB::table('invoices')->where('status','Paid')->count();
 
         //for pie chart
-
+        $paid = DB::table('invoices')->where('status', 'Paid')->get();
+        $pending = DB::table('invoices')->where('status', 'Pending')->get();
+        $paid_count = count($paid);
+        $pending_count = count($pending);
+        $total = Invoice::count();
+        $paid_1 = $paid_count / $total * 100;
+        $pending_1 = $pending_count / $total * 100;
 
 
         //for table display
-        $profile = Admin::orderBy('created_at','desc')->take(3)->get();
+        $profile = Admin::orderBy('created_at','desc')->where('role','employee')->take(3)->get();
         $customers = Customer::orderBy('created_at','desc')->take(3)->get();
         $invoice = Invoice::orderBy('created_at','desc')->take(3)->get();
-        return view('admin.dashboard',compact('customer','admin','profile','customers','employee','invoice'));
+        return view('admin.dashboard',compact('paid_1','pending_1','customer','admin','profile','customers','employee','invoice','invoice_paid'));
     }
 
 }

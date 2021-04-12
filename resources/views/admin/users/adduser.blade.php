@@ -132,6 +132,21 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="status">Status</label>
+                                <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                    <option>Select Status</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">In Active</option>
+                                </select>
+                                @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
