@@ -39,6 +39,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     {{--  <link rel="stylesheet" href="{{ asset('/css/dataTables.min.css')}}">  --}}
     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
     <style>
     .btn-outline-success {
         cursor: pointer;
@@ -290,6 +291,7 @@
     {{--  <script src="{{asset('/js/add_edit.js')}}"></script>  --}}
     <!-- <script src="{{asset('/js/edit_add.js')}}"></script>
     <script src="{{asset('/js/dataTables.min.css')}}"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
 
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>

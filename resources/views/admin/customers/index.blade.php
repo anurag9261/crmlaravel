@@ -33,7 +33,8 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
-                @if(session()->has('error'))
+                <div class="container mt-3 mb-3">
+                     @if(session()->has('error'))
                     <div class="alert alert-danger">
                         {{ session()->get('error') }}
                     </div>
@@ -56,6 +57,7 @@
                         </tr>
                         </thead>
                     </table>
+                </div>
                 </div>
             </div>
         </section>
@@ -84,4 +86,5 @@
 <script type="text/javascript" src="{{ asset('DataTables/datatables.min.js') }}"></script>
 <link href="{{ asset('Datatables/datatables.min.css') }}" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{{ asset('Datatables/datatables.js') }}"></script>
+
 
