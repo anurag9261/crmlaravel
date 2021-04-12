@@ -22,14 +22,18 @@ class ReportController extends Controller
 
     public function timesheetPDF(Request $request)
     {
-        // dd($request->all());
-        // $employeData['emp'] =   Employee::get();
+        // dd($request->get('month'));
+        $month = date('m', strtotime($request->get('month').'-01'));
+        $year =  date("Y", strtotime($request->get('month').'-01'));
+
         $employeData =  DB::table('employees')
                                 //  ->select('employees.*','admins.fname','admins.lname')
                                 // ->join('admins','admins.fname','=','employees.employee')
-                                ->whereMonth('employees.currentdate',$request->get('month'))
+                                ->whereMonth('employees.currentdate',$month)
+                                ->whereYear('employees.currentdate', $year)
                                 ->where('employees.employee', $request->get('employee'))
                                 ->get();
+
         $data = ['title' => 'CRM', $employee = $request->get('employee')];
         $pdf = PDF::loadView('myPDF', $data,compact('employeData','employee'));
         return $pdf->download('timesheetreport.pdf');
@@ -38,6 +42,22 @@ class ReportController extends Controller
     public function balancesheet()
     {
         return view('admin.reports.balance');
+    }
+
+    public function balancesheetPDF(Request $request)
+    {
+        $employeData =  DB::table('invoices')
+                        ->whereMonth('current_date', $request->get('month'))
+                        ->where('invoices.status', 'Paid')
+                        ->get();
+        // $expense =  DB::table('expenses')
+        //                 ->whereMonth('entry_date', $request->get('month'))
+        //                 ->where('invoices.status', 'paid')
+        //                 ->get();
+        dd($employeData);
+        $data = ['title' => 'CRM'];
+        $pdf = PDF::loadView('balancereport', $data, compact('employeData'));
+        return $pdf->download('balancereport.pdf');
     }
 
     public function employee()
@@ -50,6 +70,7 @@ class ReportController extends Controller
         $employeData =  DB::table('admins')
                         ->whereMonth('created_at', $request->get('month'))
                         ->where('admins.role', 'employee')
+                        ->where('admins.status',$request->get('status'))
                         ->get();
         $data = ['title' => 'CRM', $employee = $request->get('employee')];
         $pdf = PDF::loadView('employeereport', $data, compact('employeData', 'employee'));

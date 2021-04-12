@@ -82,7 +82,7 @@
                                 @enderror
                             </div>
                         </div>
-                       
+
                         <br>
                         <div class="row">
                             <div class="col-md-5">
@@ -108,7 +108,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                               
+
                             </div>
                         </div>
                         <br>
@@ -124,6 +124,21 @@
                             </div>
                             <div class="col-md-5">
                                 <img src="{{asset('images/'. $profile->image )}}" width="150px" , height="auto"></td>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="status">Staus</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option>Select Status</option>
+                                    <option value="1" {{ ($profile->status) == '1' ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ ($profile->status) == '0' ? 'selected' : '' }}>In Active</option>
+                                </select>
+                                @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <br>
