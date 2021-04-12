@@ -177,7 +177,7 @@ class InvoiceController extends Controller
             for ($i = 0; $i < $count; $i++) {
                 // echo'<pre>';print_r($request->get('product'));die;
                 $product = Product::find($request->get('id')[$i]);
-                echo'<pre>';print_r($request->get('id')[$i]);die;
+                // echo'<pre>';print_r($request->get('id')[$i]);die;
                 if ($product == null) {
                     $productP = new Product();
                     $productP->invoice_id = $request->get('invoice_no');
