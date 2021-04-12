@@ -33,10 +33,52 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('admin.rolesubmit')}}" method="post" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('report.employee') }}">
                     @csrf
-                        
-                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="month">Select Month</label>
+                            <select class="form-control @error('month') is-invalid @enderror" name="month">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            @error('month')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-5">
+                            <label for="status">Status</label>
+                            <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                <option>Active</option>
+                                <option>InActive</option>
+                            </select>
+                            @error('title')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"></div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5">
+                        <button type="submit" class="btn btn-secondary">Print Report</button>
+                        </div>
+                    </div>
                     </form>
                 </div>
             </div>

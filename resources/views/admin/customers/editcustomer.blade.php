@@ -120,7 +120,7 @@
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                @enderror          
+                                @enderror
                             </div>
                             <div class="col-md-5">
                                 <img src="{{asset('images/'. $profile->image)}}" width="80px", height="auto",>
