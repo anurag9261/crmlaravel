@@ -33,15 +33,15 @@ class LoginController extends Controller
     protected $redirectTo = "/admin";
 
     public function login(Request $request)
-    {   
+    {
         $input = $request->all();
-   
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-   
-        
+
+
 
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
@@ -55,7 +55,7 @@ class LoginController extends Controller
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
         }
-          
+
     }
 
     /**
@@ -68,5 +68,5 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-  
+
 }

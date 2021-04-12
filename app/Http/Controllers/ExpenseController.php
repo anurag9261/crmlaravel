@@ -48,6 +48,9 @@ class ExpenseController extends Controller
         $profile->entry_date = $request->get('entry_date');
         $profile->amount = $request->get('amount');
         $profile->description = $request->get('description');
+        $imageName = time() . '.' . $request->attach_bill->extension();
+        $request->attach_bill->move(public_path('images'), $imageName);
+        $profile->attach_bill = $imageName;
         $profile->save();
         return redirect('expenses')->with('message', 'Record saved successfully!');
     }
@@ -95,6 +98,13 @@ class ExpenseController extends Controller
         $profile->entry_date = $request->get('entry_date');
         $profile->amount = $request->get('amount');
         $profile->description = $request->get('description');
+        if ($request->attach_bill == "") {
+            $imageName = $profile->attach_bill;
+        } else {
+            $imageName = time() . '.' . $request->attach_bill->extension();
+            $request->attach_bill->move(public_path('images'), $imageName);
+            $profile->attach_bill = $imageName;
+        }
         $profile->save();
         return redirect('expenses')->with('message', 'Record updated successfully!');
     }

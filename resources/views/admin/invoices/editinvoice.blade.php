@@ -96,7 +96,7 @@
                                         <tr>
                                             <th class="text-center"> # </th>
                                             <th class="text-center">Id</th>
-                                            
+                                            <th class="text-center">Invoice Id</th>
                                             <th class="text-center"> Product </th>
                                             <th class="text-center"> Qty </th>
                                             <th class="text-center"> Price </th>
@@ -104,12 +104,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($products as $pr)
-                                        <tr id='editr0'>
+                                    @foreach($products as $key=>$pr)
+                                        <tr id='editr{{ $key + 1 }}'>
                                             <td>1</td>
                                             <td><input type="text" name='id[]' value="{{$pr->id}}"
                                                     class="form-control"/></td>
-                                           
+                                            <td><input type="text" name='invoice_id[]' value="{{$pr->invoice_id}}" class="form-control" disabled/></td>
                                             <td><input type="text" name='product[]' value="{{$pr->product}}"
                                                     class="form-control" /></td>
                                             <td><input type="number" name='qty[]' value="{{$pr->qty}}"
@@ -118,15 +118,8 @@
                                                     class="form-control price" step="0.00" min="0" /></td>
                                             <td><input type="number" name='total[]' value="{{$pr->total}}"
                                                     class="form-control total" readonly /></td>
-                                      
                                         </tr>
                                     @endforeach
-                                    <tr id="editr1"></tr>
-                                    <tr id="editr2"></tr>
-                                    <tr id="editr3"></tr>
-                                    <tr id="editr4"></tr>
-                                    <tr id="editr5"></tr>
-                                   
                                     </tbody>
                                 </table>
 
@@ -137,7 +130,7 @@
                                 </div>
                                 <div class="col-md-9"></div>
                                 <div>
-                                    <button id='delete_row1' href="" type="button" class="pull-right btn btn-secondary">Delete</button>
+                                    <button id='delete_row1' href="" type="button" class="pull-right btn btn-secondary deleteRecord">Delete</button>
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
@@ -188,7 +181,7 @@
                                                         readonly /></td>
                                             </tr>
                                         </tbody>
-                                    </table> 
+                                    </table>
                                 </div>
                             </div>
                             <div class="row clearfix">
@@ -196,7 +189,7 @@
                                 <div class="col-md-2">
                                 <button type="submit" class="btn btn-secondary">Submit</button>
                                 </div>
-                                
+
                             </div>
                         </form>
                     </div>
@@ -221,4 +214,24 @@ $(function() {
         dateFormat: "yy-mm-dd"
     });
 });
+</script>
+<script>
+    $(".deleteRecord").click(function(){
+
+    var id = $(this).data("id");
+
+    var token = $("meta[name='csrf-token']").attr("content");
+    $.ajax(
+    {
+    url: "products/"+id,
+    type: 'DELETE',
+    data: {
+    "id": id,
+    "_token": token,
+    },
+    success: function (){
+    console.log("it Works");
+    }
+    });
+    });
 </script>

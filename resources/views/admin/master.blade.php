@@ -5,7 +5,7 @@
     <style>
     * {
         font-family: Verdana, Arial, Tahoma, Serif;
-       
+
     }
 
     .layout-fixed .main-sidebar {
@@ -20,7 +20,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}">
+    {{--  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}">  --}}
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/css/dataTables.min.css')}}">
+    {{--  <link rel="stylesheet" href="{{ asset('/css/dataTables.min.css')}}">  --}}
     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <style>
     .btn-outline-success {
@@ -60,14 +60,14 @@
                     <a href="index3.html" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                
+
                 </li>
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li>
                     Welcome {{Auth::user()->fname}}
-                    <a href="{{route('logout')}}">Logout</a> 
+                    <a href="{{route('logout')}}">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -287,12 +287,11 @@
     <script src="dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <script src="{{asset('/js/add_edit.js')}}"></script>
+    {{--  <script src="{{asset('/js/add_edit.js')}}"></script>  --}}
     <!-- <script src="{{asset('/js/edit_add.js')}}"></script>
     <script src="{{asset('/js/dataTables.min.css')}}"></script> -->
-    <script src="/resources/js/add_edit.js"></script>
-    <script src="/resources/js/edit_add.js"></script>
-    
+
+
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="{{ asset('/js/dataTables.min.js')}}"></script>
     <script>
@@ -345,20 +344,20 @@
             $('#total_amount').val((tax_sum+total).toFixed(2));
         }
 
-    
+
     </Script>
     <script>
         $(document).ready(function() {c=j-1;
             var j = 1;
             $("#edit_row").click(function() {
-                
+
                 c = j - 1;
                 $('#editr' + j).html($('#editr' + c).html()).find('td:first-child').html(j + 1);
                 $('#tab_logic1').append('<tr id="editr' + (j + 1) + '"></tr>');
                 j++;
             });
             $("#delete_row1").click(function() {
-               
+                console.log(j);
                 if (j > 1) {
                     $("#editr" + (j - 1)).html('');
                     j--;
@@ -398,8 +397,8 @@
                 $('#tax_amount1').val(tax_sum.toFixed(2));
                 $('#total_amount1').val((tax_sum+total).toFixed(2));
             }
-            
-        }); 
+
+        });
     </Script>
     @stack('scripts')
 </body>

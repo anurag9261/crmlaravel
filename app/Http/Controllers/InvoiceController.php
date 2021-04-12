@@ -34,14 +34,14 @@ class InvoiceController extends Controller
        foreach($invoiceData as $invoiced){
         if(empty($invoiced)){
             $invoiceId = '1';
-            
+
         }else{
             foreach($invoiceDatas as $invData){
                 $oldInvoiceId = $invData->id;
                 $invoiceId = $oldInvoiceId + 1;
             }
         }
-       
+
     }
         $mytime = Carbon\Carbon::now();
         $currentDate =  $mytime->toDateString();
@@ -127,6 +127,7 @@ class InvoiceController extends Controller
         $customers = DB::table('customers')->get();
         $products = DB::table('products')
             ->where('invoice_id', $id)
+            ->orWhere('id',$id)
             ->get();
         return view('admin.invoices.editinvoice', compact('profile','products','customers'));
     }
@@ -174,8 +175,9 @@ class InvoiceController extends Controller
 
             $count = count($request->get('product'));
             for ($i = 0; $i < $count; $i++) {
-                // echo'<pre>';print_r($product->id);die;
+                // echo'<pre>';print_r($request->get('product'));die;
                 $product = Product::find($request->get('id')[$i]);
+                echo'<pre>';print_r($request->get('id')[$i]);die;
                 if ($product == null) {
                     $productP = new Product();
                     $productP->invoice_id = $request->get('invoice_no');
@@ -186,18 +188,18 @@ class InvoiceController extends Controller
                     $productP->save();
                 } else {
                     $productU  = Product::find($request->get('id')[$i]);
-                    // $productU->invoice_id = $request->get('invoice_no');
+                    $productU->invoice_id = $request->get('invoice_no');
                     $productU->product = $request->get('product')[$i];
                     $productU->qty = $request->get('qty')[$i];
                     $productU->price = $request->get('price')[$i];
                     $productU->total = $request->get('total')[$i];
-                    $productU->save();                  
+                    $productU->save();
                 }
             }
             return redirect('invoices')->with('message', 'Invoice updated successfully!');
     //echo'<pre>';print_r($product);die;
-            
-            
+
+
     }
 
 
@@ -206,20 +208,26 @@ class InvoiceController extends Controller
      *
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
-     * 
+     *
      */
- 
-    
+
+
     public function destroy(Invoice $invoice,$id)
     {
         Invoice::destroy(array('id',$id));
-        DB::table("products")->where("invoice_id", $id)->delete();    
+        DB::table("products")->where("invoice_id", $id)->delete();
         return redirect('invoices')->with('error', 'Invoice deleted successfully!');
     }
 
-    public function destroy1($id){
-        Product::destroy(array('id',$id));
-        return redirect("admin.editinvoice");
+    public function deleteProduct($product_ids = array())
+    {
+        $product_ids = $this->input->post('product_ids');
+        foreach ($product_ids as $userid) {
+            $this->db->delete('prodcuts', array('id' => $userid));
+        }
+
+        return 1;
     }
+
 
 }

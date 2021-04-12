@@ -46,7 +46,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $roles = DB::table('roles')->where('status', 'Active')->get();
         return view('admin.users.adduser', compact('roles'));
     }
@@ -59,7 +59,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-            
+
         $profile = $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -76,11 +76,11 @@ class AdminController extends Controller
             $profile->mobno = $request->get('mobno');
             $profile->email = $request->get('email');
             $profile->address = $request->get('address');
-            $imageName = time().'.'.$request->image->extension();       
+            $imageName = time().'.'.$request->image->extension();
             $request->image->move(public_path('images'), $imageName);
             $profile->image = $imageName;
             $profile->role = $request->get('role');
-            $profile->password = Hash::make($request->get('password'));     
+            $profile->password = Hash::make($request->get('password'));
             $profile->save();
             return redirect('users')->with('message', 'Record added successfully!');
 
@@ -120,7 +120,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin,$id)
     {
-       
+
         $profile = $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -130,11 +130,11 @@ class AdminController extends Controller
             // 'image' => 'required',
             'role' => 'required',
         ]);
-        $profile=Admin::find($id);  
+        $profile=Admin::find($id);
         if( $request->image == ""){
             $imageName = $profile->image;
         }else{
-            $imageName = time().'.'.$request->image->extension();       
+            $imageName = time().'.'.$request->image->extension();
             $request->image->move(public_path('images'), $imageName);
             $profile->image = $imageName;
         }
@@ -155,7 +155,7 @@ class AdminController extends Controller
     }
 
     public function updatepassword(Request $request,$id){
- 
+
         $profile=Admin::find($id);
         if(!(Hash::check($request->get('currentpassword'),Auth::user()->password))){
             return back()->with('error','Your current password does not match with what you provide');
@@ -188,13 +188,13 @@ class AdminController extends Controller
     // public function search(Request $request){
     //     // Get the search value from the request
     //     $search = $request->input('search');
-    
+
     //     // Search in the title and body columns from the posts table
     //     $profile['profile'] = Admin::query()
     //         ->where('role', 'LIKE', "%{$search}%")
     //         ->orWhere('fname', 'LIKE', "%{$search}%")
     //         ->get();
-    
+
     //     // Return the search view with the resluts compacted
     //     //return view('admin.users', compact('profile'));
     //     return view('admin.users',compact('profile'));
@@ -208,7 +208,7 @@ class AdminController extends Controller
         $customer = DB::table('customers')->count();
 
         //for pie chart
-        
+
 
 
         //for table display
