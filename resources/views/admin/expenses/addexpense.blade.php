@@ -1,38 +1,49 @@
 @extends('admin.master')
-@section('content')
+@push('styles')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
     .files input {
-    outline: 2px dashed #92b0b3;
-    outline-offset: -10px;
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    padding: 30px 0px 85px 35%;
-    text-align: center !important;
-    margin: 0;
-    width: 100% !important;
-    }
-    .files input:focus{ outline: 2px dashed #92b0b3; outline-offset: -10px;
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        padding: 30px 0px 85px 35%;
+        text-align: center !important;
+        margin: 0;
+        width: 100% !important;
     }
 
-    .color input{ background-color:#f1f1f1;}
+    .files input:focus {
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        border: 1px solid #92b0b3;
+    }
+
+    .color input {
+        background-color: #f1f1f1;
+    }
+
     .files:before {
-    position: absolute;
-    bottom: 10px;
-    left: 0; pointer-events: none;
-    width: 100%;
-    right: 0;
-    height: 40px;
-    content: "drag it here. ";
-    display: block;
-    margin: 0 auto;
-    color:black;
-    font-weight: 600;
-    text-transform: capitalize;
-    text-align: center;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        pointer-events: none;
+        width: 100%;
+        right: 0;
+        height: 40px;
+        content: "drag it here. ";
+        display: block;
+        margin: 0 auto;
+        color: black;
+        font-weight: 600;
+        text-transform: capitalize;
+        text-align: center;
     }
 </style>
+@endpush
+@section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -132,14 +143,16 @@
     </div>
 </div>
 @endsection
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@push('scripts')
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-$(function() {
+    $(function() {
     $("#datepicker3").datepicker({
         dateFormat: "yy-mm-dd"
     });
 });
 </script>
+@endpush
+
 

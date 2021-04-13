@@ -2,36 +2,72 @@
 <html>
 
 <head>
+
     <style>
         table {
             border-collapse: collapse;
             width: 100%;
+            border: 1px solid #525252;
         }
 
         th,
         td {
             text-align: left;
             padding: 8px;
+            border: 1px solid #525252;
         }
 
         tr:nth-child(even) {
-            background-color: #f2f2f2
+            background-color: #f2f2f2;
         }
 
-        th {
-           background-color: #4d97b4
+        .tr-bg-color {
+            background-color: rgb(38, 146, 165);
+            color: white;
         }
-        body{
+
+        body {
             border-collapse: collapse;
+        }
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #1f1f1f;
+            color: white;
+            padding: 8px 0px;
+            text-align: center;
+        }
+
+        .header img {
+            float: left;
+            width: 80px;
+            height: auto;
+            background: #555;
+        }
+
+        .header h2 {
+            position: relative;
+            top: 18px;
+            left: 28%;
         }
     </style>
 </head>
+
 <body>
-    <header style="text-align:right">{{ $title }}</header>
-    <h1 style="text-align: center;text-decoration:underline">Employee Report</h1>
-    <img src="{{ public_path('/images/profile/crm.png') }}" style="width: 100px; height: 100px">
-    <table>
-        <tr>
+
+    <header class="header">
+        <img src="{{ public_path('/images/profile/crm.png') }}">
+        <h2 class="">Employee Report</h2>
+    </header>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <table class="table table-bordered">
+        <tr class="tr-bg-color">
             <th>No</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -48,11 +84,11 @@
             <td>{{$data->mobno}}</td>
             <td>{{$data->email}}</td>
             <td><img src="{{ public_path('/images/'.$data->image) }}" style="width: 30px; height:auto"></td>
-            <td></td>
         </tr>
         @endforeach
     </table>
-    <footer style="background-color:gray;padding:05px">CRM-Admin Panel</footer>
+    <footer>CRM-Admin Panel</footer>
+
 </body>
 
 </html>

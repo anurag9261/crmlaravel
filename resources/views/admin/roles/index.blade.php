@@ -1,7 +1,7 @@
 @extends('admin.master')
-@section('css')
+@push('styles')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-@endsection
+@endpush
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -25,7 +25,7 @@
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.addrole')}}"
                                 style="color:white"><i class="fas fa-plus"></i>
                                     </i> Add Role</a></button>
-                    </ol>   
+                    </ol>
                 </div>
                 <!-- /.col -->
             </div>

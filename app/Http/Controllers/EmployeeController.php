@@ -12,11 +12,7 @@ use Illuminate\Support\Carbon as SupportCarbon;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
 
@@ -31,28 +27,16 @@ class EmployeeController extends Controller
             $interval = $time1->diff($time2);
             $employeData['emp'][$row]['time'] = $interval->format('%H:%I:%S');
             $row++;
-         }
-        //  dd($employeData);
+        }
         return view('admin.employees.index',compact('employeData'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $employee = DB::table('admins')->where('role', 'Employee')->get();
         return view('admin.employees.addemployee', compact('employee'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $profile = $request->validate([
@@ -77,23 +61,6 @@ class EmployeeController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Employee $employee,$id)
     {
         $admin = Employee::find($id);
@@ -101,13 +68,6 @@ class EmployeeController extends Controller
         return view('admin.employees.editemployee', compact('admin','employee'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Employee $employee,$id)
     {
         $profile = $request->validate([
@@ -131,56 +91,48 @@ class EmployeeController extends Controller
         return redirect('employees')->with('message', 'Record updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-
-
     public function view(Employee $employee,$id){
         $profile = Employee::find($id);
         return view('admin.employees.viewemployee',compact('profile'));
     }
 
-    public function exportCsv(Request $request)
-    {
-        $fileName = 'Employees.csv';
-        $tasks = Employee::all();
+    // public function exportCsv(Request $request)
+    // {
+    //     $fileName = 'Employees.csv';
+    //     $tasks = Employee::all();
 
-        $headers = array(
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
-        );
+    //     $headers = array(
+    //         "Content-type"        => "text/csv",
+    //         "Content-Disposition" => "attachment; filename=$fileName",
+    //         "Pragma"              => "no-cache",
+    //         "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+    //         "Expires"             => "0"
+    //     );
 
-        $columns = array('Employee', 'Attandance', 'Currentdate', 'Total Time');
+    //     $columns = array('Employee', 'Attandance', 'Currentdate', 'Total Time');
 
-        $callback = function() use($tasks, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
+    //     $callback = function() use($tasks, $columns) {
+    //         $file = fopen('php://output', 'w');
+    //         fputcsv($file, $columns);
 
-            foreach ($tasks as $task) {
-                $row['Employee']  = $task->employee;
-                $row['Attandance']    = $task->attandance;
-                $row['Currentdate']    = $task->currentdate;
-                $inTimeResult = $task->intime;
-                $outTimeResult = $task->outtime;
-                $time1 = new DateTime($inTimeResult);
-                $time2 = new DateTime($outTimeResult);
-                $interval = $time1->diff($time2);
-                $row['Total Time'] = $interval->format('%H:%I:%S');
-                fputcsv($file, array($row['Employee'], $row['Attandance'], $row['Currentdate'], $row['Total Time']));
-            }
+    //         foreach ($tasks as $task) {
+    //             $row['Employee']  = $task->employee;
+    //             $row['Attandance']    = $task->attandance;
+    //             $row['Currentdate']    = $task->currentdate;
+    //             $inTimeResult = $task->intime;
+    //             $outTimeResult = $task->outtime;
+    //             $time1 = new DateTime($inTimeResult);
+    //             $time2 = new DateTime($outTimeResult);
+    //             $interval = $time1->diff($time2);
+    //             $row['Total Time'] = $interval->format('%H:%I:%S');
+    //             fputcsv($file, array($row['Employee'], $row['Attandance'], $row['Currentdate'], $row['Total Time']));
+    //         }
 
-            fclose($file);
-        };
+    //         fclose($file);
+    //     };
 
-        return response()->stream($callback, 200, $headers);
-    }
+    //     return response()->stream($callback, 200, $headers);
+    // }
 
     public function destroy(Employee $employee,$id)
     {

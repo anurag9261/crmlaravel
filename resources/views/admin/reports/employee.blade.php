@@ -1,4 +1,7 @@
 @extends('admin.master')
+@push('styles')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+@endpush
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -29,29 +32,22 @@
     <!-- /.content-header -->
     <div class="content">
         <!-- Left col -->
+
         <section class="col-lg-9 connectedSortable">
+            @if (session('error'))
+            <div class="alert alert-warning">{{ session('error') }}</div>
+            @endif
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
+
                 <div class="card-body">
                     <form method="post" action="{{ route('report.employee') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-5">
                             <label for="month">Select Month</label>
-                            <select class="form-control @error('month') is-invalid @enderror" name="month">
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
+                            <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker"
+                                placeholder="Select Month" />
                             @error('month')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -61,10 +57,12 @@
                         <div class="col-md-5">
                             <label for="status">Status</label>
                             <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                <option value="" >Select Status</option>
                                 <option value="1">Active</option>
                                 <option value="0">InActive</option>
                             </select>
-                            @error('title')
+
+                           @error('status')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -86,3 +84,15 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $("#datepicker").datepicker( {
+    format: "yyyy-MM",
+    startView: "months",
+    minViewMode: "months"
+    });
+</script>
+@endpush

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <style>
     * {
@@ -12,6 +11,7 @@
     font-size: 15px;
     }
     </style>
+    <link href="{{ asset('Datatables/datatables.min.css') }}" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CRM | Admin Panel</title>
@@ -24,6 +24,7 @@
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
+    @stack('styles')
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css')}}">
@@ -39,6 +40,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     {{--  <link rel="stylesheet" href="{{ asset('/css/dataTables.min.css')}}">  --}}
     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
     <style>
     .btn-outline-success {
         cursor: pointer;
@@ -120,7 +122,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -259,7 +260,7 @@
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -287,66 +288,16 @@
     <script src="dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    {{--  <script src="{{asset('/js/add_edit.js')}}"></script>  --}}
+    {{--  <script src="{{asset('/js/add_edit.js')}}"></script> --}}
     <!-- <script src="{{asset('/js/edit_add.js')}}"></script>
-    <script src="{{asset('/js/dataTables.min.css')}}"></script> -->
-
+        <script src="{{asset('/js/dataTables.min.css')}}"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+        @stack('scripts')
+    <script type="text/javascript" src="{{ asset('DataTables/jquery-3.5.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('Datatables/datatables.js') }}"></script>
 
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="{{ asset('/js/dataTables.min.js')}}"></script>
-    <script>
-        $(document).ready(function(){
-            var i=1;
-            $("#add_row").click(function(){b=i-1;
-                $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
-                $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-                i++;
-            });
-            $("#delete_row").click(function(){
-                if(i>1){
-                    $("#addr"+(i-1)).html('');
-                i--;
-                }
-                calc();
-            });
-
-            $('#tab_logic tbody').on('keyup change',function(){
-                calc();
-            });
-            $('#tax').on('keyup change',function(){
-                calc_total();
-            });
-        });
-
-        function calc()
-        {
-            $('#tab_logic tbody tr').each(function(i, element) {
-                var html = $(this).html();
-                if(html!='')
-                {
-                    var qty = $(this).find('.qty').val();
-                    var price = $(this).find('.price').val();
-                    $(this).find('.total').val(qty*price);
-                    calc_total();
-                }
-            });
-        }
-
-        function calc_total()
-        {
-            total=0;
-            $('.total').each(function() {
-            total += parseInt($(this).val());
-            });
-            $('#sub_total').val(total.toFixed(2));
-            tax_sum=total/100*$('#tax').val();
-            $('#tax_amount').val(tax_sum.toFixed(2));
-            $('#total_amount').val((tax_sum+total).toFixed(2));
-        }
-
-
-    </Script>
-    @stack('scripts')
 </body>
-
 </html>
