@@ -1,6 +1,5 @@
 @extends('admin.master')
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -22,17 +21,11 @@
                     <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.addexpense')}}" style="color:white"><i class="fas fa-plus"></i> Add Expense</a></button>
                     </ol>
                 </div>
-                <!-- /.col -->
             </div>
-
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-12 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
                     @if(session()->has('error'))

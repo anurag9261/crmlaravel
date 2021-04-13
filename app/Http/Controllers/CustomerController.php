@@ -11,24 +11,10 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $profile['profile'] = DB::table('customers')->orderBy('created_at','desc')->paginate(5);
-        // $profile = Customer::select(['id', 'fname', 'lname', 'mobno', 'email', 'image', 'status']);
-        // if(request()->ajax()){
-        //     return datatables()->of(Customer::latest()->get())
-        //     ->addColumn('action', function ($profile) {
-        //         return '<a href="/admin/customers' . $profile->id . '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-        //            <a href="' . route('admin.cust.destroy', $profile->id) . '" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>   ';
-        //     })
-        //     ->make(true);
-        // }
-
         return view('admin.customers.index',$profile);
     }
 
@@ -37,7 +23,6 @@ class CustomerController extends Controller
         $draw = $request->get('draw');
         $start = $request->get('start');
         $rowperpage = $request->get('length');
-
         $columnIndex_arr = $request->get('order');
         $columnName_arr = $request->get('columns');
         $order_arr = $request->get('order');
@@ -47,32 +32,29 @@ class CustomerController extends Controller
         $columnSortOrder = $order_arr[0]['dir'];
         $searchValue = $search_arr['value'];
 
-
-
-
         //Total Records
         $totalRecords = Customer::select('count(*) as allcount')->count();
 
         //Records with search Filter
         $totalRecordswithFilter = Customer::select('count(*) as allcount')
-                                            ->where('fname','like','%'.$searchValue.'%')
-                                            ->orWhere('lname', 'like', '%' . $searchValue . '%')
-                                            ->orWhere('email', 'like', '%' . $searchValue . '%')
-                                            ->orwhere('mobno', 'like', '%' . $searchValue . '%')
-                                            ->orwhere('status', 'like', '%' . $searchValue . '%')
-                                            ->count();
+                                        ->where('fname','like','%'.$searchValue.'%')
+                                        ->orWhere('lname', 'like', '%' . $searchValue . '%')
+                                        ->orWhere('email', 'like', '%' . $searchValue . '%')
+                                        ->orwhere('mobno', 'like', '%' . $searchValue . '%')
+                                        ->orwhere('status', 'like', '%' . $searchValue . '%')
+                                        ->count();
 
         //Filter Records
         $records = Customer::orderby($columnName,$columnSortOrder)
-                                ->where('customers.fname','like','%'.$searchValue.'%')
-                                ->orWhere('customers.lname', 'like', '%' . $searchValue . '%')
-                                ->orWhere('customers.email', 'like', '%' . $searchValue . '%')
-                                ->orWhere('customers.mobno', 'like', '%' . $searchValue . '%')
-                                ->orWhere('customers.status', 'like', '%' . $searchValue . '%')
-                                ->select('customers.*')
-                                ->skip($start)
-                                ->take($rowperpage)
-                                ->get();
+                            ->where('customers.fname','like','%'.$searchValue.'%')
+                            ->orWhere('customers.lname', 'like', '%' . $searchValue . '%')
+                            ->orWhere('customers.email', 'like', '%' . $searchValue . '%')
+                            ->orWhere('customers.mobno', 'like', '%' . $searchValue . '%')
+                            ->orWhere('customers.status', 'like', '%' . $searchValue . '%')
+                            ->select('customers.*')
+                            ->skip($start)
+                            ->take($rowperpage)
+                            ->get();
 
         $data_arr = array();
         foreach($records as $record){
@@ -104,23 +86,11 @@ class CustomerController extends Controller
         exit;
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.customers.addcustomer');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -149,36 +119,12 @@ class CustomerController extends Controller
         return redirect('customers')->with('message', 'Record saved successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Customer $customer,$id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Customer $customer,$id)
     {
         $profile = Customer::find($id);
         return view('admin.customers.editcustomer',compact('profile'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request,$id)
     {
         $request->validate([
@@ -209,12 +155,6 @@ class CustomerController extends Controller
         return redirect('customers')->with('message', 'Record updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Customer $customer,$id)
     {
         Customer::destroy(array('id',$id));
@@ -232,12 +172,10 @@ class CustomerController extends Controller
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length"); // Rows display per page
-
         $columnIndex_arr = $request->get('order');
         $columnName_arr = $request->get('columns');
         $order_arr = $request->get('order');
         $search_arr = $request->get('search');
-
         $columnIndex = $columnIndex_arr[0]['column']; // Column index
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
@@ -249,11 +187,11 @@ class CustomerController extends Controller
 
         // Fetch records
         $records = Customer::orderBy($columnName,$columnSortOrder)
-          ->where('customer.fname', 'like', '%' .$searchValue . '%')
-          ->select('customer.*')
-          ->skip($start)
-          ->take($rowperpage)
-          ->get();
+                            ->where('customer.fname', 'like', '%' .$searchValue . '%')
+                            ->select('customer.*')
+                            ->skip($start)
+                            ->take($rowperpage)
+                            ->get();
 
         $data_arr = array();
 

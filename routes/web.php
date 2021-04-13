@@ -21,12 +21,12 @@ use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
-
 Route::get('/admin','HomeController@index')->name('admin');
-// Route::get('/','HomeController@index');
 Route::get('/logout','HomeController@logout');
 Route::get('/admin', [AdminController::class, 'adminHome'])->name('admin.dashboard')->middleware('role');
 Route::get('/','AdminController@index');
+
+
     /*---------------------Change password Route---------------------------*/
 Route::get('/editPassword{id}','AdminController@editpassword')->name('admin.editpassword');
 Route::post('/updatePassword{id}','AdminController@updatepassword')->name('admin.updatepassword');
@@ -52,6 +52,7 @@ Route::get('editcustomer{id}', 'CustomerController@edit')->name('admin.editcusto
 Route::post('updatecustomer{id}', 'CustomerController@update')->name('admin.updatecustomer');
 Route::get('deletecustomer/{id}', 'CustomerController@destroy')->name('admin.deletecustomer');
 
+
 /*---------------------RoleController Route---------------------------*/
 Route::get('roles','RoleController@index')->name('admin.roles');
 Route::get('addrole', 'RoleController@create')->name('admin.addrole');
@@ -60,6 +61,7 @@ Route::get('viewrole{id}', 'RoleController@view')->name('admin.viewrole');
 Route::get('editrole{id}', 'RoleController@edit')->name('admin.editrole');
 Route::post('updaterole{id}', 'RoleController@update')->name('admin.updaterole');
 Route::get('deleterole{id}', 'RoleController@destroy')->name('admin.deleterole');
+
 
 /*---------------------EmployeeController Route---------------------------*/
 Route::get('/employees','EmployeeController@index')->name('admin.employee');
@@ -71,6 +73,7 @@ Route::post('updateemployee{id}', 'EmployeeController@update')->name('admin.upda
 Route::get('/Employee', 'EmployeeController@exportCsv');
 Route::get('deleteemployee{id}', 'EmployeeController@destroy')->name('admin.deleteemployee');
 
+
 /*---------------------InvoiceController Route---------------------------*/
 Route::get('/invoices','InvoiceController@index')->name('admin.invoices');
 Route::get('addinvoice', 'InvoiceController@create')->name('admin.addinvoice');
@@ -79,6 +82,7 @@ Route::get('viewinvoice{id}', 'InvoiceController@view')->name('admin.viewinvoice
 Route::get('editinvoice{id}', 'InvoiceController@edit')->name('admin.editinvoice');
 Route::post('updateinvoice{id}', 'InvoiceController@update')->name('admin.updateinvoice');
 Route::get('deleteinvoice{id}', 'InvoiceController@destroy')->name('admin.deleteinvoice');
+
 
 
 /*---------------------ExpenseController Route---------------------------*/
@@ -90,26 +94,17 @@ Route::get('editexpense{id}', 'ExpenseController@edit')->name('admin.editexpense
 Route::post('updateexpense{id}', 'ExpenseController@update')->name('admin.updateexpense');
 Route::get('deleteexpense{id}', 'ExpenseController@destroy')->name('admin.deleteexpense');
 
+
 // /*---------------------ReportsController Route---------------------------*/
 Route::get('/employeereport','ReportController@employee')->name('admin.employeereport');
 Route::post('/employeePDF', 'ReportController@employeePDF')->name('report.employee');
-
-
-
 Route::get('/timesheetreport', 'ReportController@timesheet')->name('admin.timesheetreport');
 Route::post('/timesheetPDF', 'ReportController@timesheetPDF')->name('report.timesheet');
-
-
 Route::get('/invoicereport', 'ReportController@invoice')->name('admin.invoicereport');
-Route::post('/invoicePDF', 'ReportController@invoicePDF')->name('report.invoice');
-
-
-
-
+// Route::post('/invoicereport', 'ReportController@invoice')->name('admin.invoicereport');
+Route::get('/invoicepdfprint{id}', 'ReportController@invoicePDF')->name('report.invoice');
 Route::get('/balancesheetreport', 'ReportController@balancesheet')->name('admin.balancesheetreport');
 Route::post('/balancePDF', 'ReportController@balancesheetPDF')->name('report.balancesheet');
-//
-// Route::get('generate-pdf', 'ReportController@generatePDF')->name('timesheet');
 
 
 

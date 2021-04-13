@@ -30,9 +30,7 @@
     </div>
     <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-11 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
                     <div class="container">

@@ -63,6 +63,8 @@
         </section>
     </div>
 </div>
+@endsection
+@push('scripts')
 <script>
     $(document).ready(function(){
         $('#empTable').DataTable({
@@ -81,10 +83,6 @@
         })
     });
 </script>
-@endsection
-<script type="text/javascript" src="{{ asset('DataTables/jquery-3.5.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('DataTables/datatables.min.js') }}"></script>
-<link href="{{ asset('Datatables/datatables.min.css') }}" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="{{ asset('Datatables/datatables.js') }}"></script>
+@endpush
 
 

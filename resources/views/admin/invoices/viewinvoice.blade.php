@@ -1,32 +1,32 @@
 @extends('admin.master')
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">View Invoice</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
                         <li class="breadcrumb-item active">Invoice Management</li>
                         <li class="breadcrumb-item active">View Invoice</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.invoices')}}"
                                 style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+
+                    </ol>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.content-header -->
     <div class="content">
@@ -36,7 +36,7 @@
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
-                        
+
                         <tr>
                             <th>Title</th>
                             <td>{{$profile->title}}</td>

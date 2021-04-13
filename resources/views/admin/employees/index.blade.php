@@ -98,9 +98,12 @@
     </div>
 </div>
 @endsection
+@push('scripts')
 <script>
-function exportTasks(_this) {
+    function exportTasks(_this) {
     let _url = $(_this).data('href');
     window.location.href = _url;
 }
 </script>
+@endpush
+

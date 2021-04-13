@@ -1,8 +1,9 @@
 @extends('admin.master')
+@push('styles')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endpush
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -15,29 +16,25 @@
                         <li class="breadcrumb-item active">Invoice Management</li>
                         <li class="breadcrumb-item active">Add Invoice</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.invoices')}}"
                                 style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
-
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                    </ol>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-11 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
-
                     <div class="container">
                         <form action="{{route('admin.invoicesubmit')}}" method="post">
                             @csrf
@@ -230,22 +227,72 @@
         </section>
     </div>
 </div>
-
 @endsection
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        var i=1;
+        $("#add_row").click(function(){b=i-1;
+            $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
+            $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+            i++;
+        });
+        $("#delete_row").click(function(){
+            if(i>1){
+                $("#addr"+(i-1)).html('');
+            i--;
+            }
+            calc();
+        });
+
+        $('#tab_logic tbody').on('keyup change',function(){
+            calc();
+        });
+        $('#tax').on('keyup change',function(){
+            calc_total();
+        });
+    });
+
+    function calc()
+    {
+        $('#tab_logic tbody tr').each(function(i, element) {
+            var html = $(this).html();
+            if(html!='')
+            {
+                var qty = $(this).find('.qty').val();
+                var price = $(this).find('.price').val();
+                $(this).find('.total').val(qty*price);
+                calc_total();
+            }
+        });
+    }
+
+    function calc_total()
+    {
+        total=0;
+        $('.total').each(function() {
+        total += parseInt($(this).val());
+        });
+        $('#sub_total').val(total.toFixed(2));
+        tax_sum=total/100*$('#tax').val();
+        $('#tax_amount').val(tax_sum.toFixed(2));
+        $('#total_amount').val((tax_sum+total).toFixed(2));
+    }
+</Script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-$(function() {
+    $(function() {
     $("#datepicker").datepicker({
         dateFormat: "yy-mm-dd"
     });
 });
 </script>
 <script>
-$(function() {
+    $(function() {
     $("#datepicker1").datepicker({
         dateFormat: "yy-mm-dd"
     });
 });
 </script>
+@endpush

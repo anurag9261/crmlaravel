@@ -10,22 +10,14 @@ use Carbon;
 
 class InvoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $profile['profile'] = DB::table('invoices')->orderBy('created_at','desc')->paginate(5);
         return view('admin.invoices.index',$profile);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $invoiceDatas = DB::table('invoices')->orderBy('id','desc')->limit(1)->get();
@@ -48,12 +40,7 @@ class InvoiceController extends Controller
         return view('admin.invoices.addinvoice',compact('invoiceId','currentDate','customers'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $profile = $request->validate([
@@ -103,24 +90,12 @@ class InvoiceController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function view($id){
         $profile = Invoice::find($id);
         $pr = Product::find($id);
         return view('admin.invoices.viewinvoice',compact('profile','pr'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Invoice $invoice,$id)
     {
         $profile = Invoice::find($id);
@@ -132,13 +107,6 @@ class InvoiceController extends Controller
         return view('admin.invoices.editinvoice', compact('profile','products','customers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Invoice $invoice,$id)
     {
         $profile = $request->validate([
@@ -159,58 +127,46 @@ class InvoiceController extends Controller
             'price' => 'required',
             'total' => 'required',
         ]);
-            $profile=Invoice::find($id);
-            $profile->title = $request->get('title');
-            $profile->bill_to = $request->get('billto');
-            $profile->ship_to = $request->get('shipto');
-            $profile->current_date = $request->get('currentdate');
-            $profile->due_date = $request->get('duedate');
-            $profile->sub_total = $request->get('sub_total');
-            $profile->tax_percentage = $request->get('tax_percentage');
-            $profile->tax_amount = $request->get('tax_amount');
-            $profile->total_amount = $request->get('total_amount');
-            $profile->status = $request->get('status');
-            $profile->save();
+        $profile=Invoice::find($id);
+        $profile->title = $request->get('title');
+        $profile->bill_to = $request->get('billto');
+        $profile->ship_to = $request->get('shipto');
+        $profile->current_date = $request->get('currentdate');
+        $profile->due_date = $request->get('duedate');
+        $profile->sub_total = $request->get('sub_total');
+        $profile->tax_percentage = $request->get('tax_percentage');
+        $profile->tax_amount = $request->get('tax_amount');
+        $profile->total_amount = $request->get('total_amount');
+        $profile->status = $request->get('status');
+        $profile->save();
 
 
-            $count = count($request->get('product'));
-            for ($i = 0; $i < $count; $i++) {
-                // echo'<pre>';print_r($request->get('product'));die;
-                $product = Product::find($request->get('id')[$i]);
-                // echo'<pre>';print_r($request->get('id')[$i]);die;
-                if ($product == null) {
-                    $productP = new Product();
-                    $productP->invoice_id = $request->get('invoice_no');
-                    $productP->product = $request->get('product')[$i];
-                    $productP->qty = $request->get('qty')[$i];
-                    $productP->price = $request->get('price')[$i];
-                    $productP->total = $request->get('total')[$i];
-                    $productP->save();
-                } else {
-                    $productU  = Product::find($request->get('id')[$i]);
-                    $productU->invoice_id = $request->get('invoice_no');
-                    $productU->product = $request->get('product')[$i];
-                    $productU->qty = $request->get('qty')[$i];
-                    $productU->price = $request->get('price')[$i];
-                    $productU->total = $request->get('total')[$i];
-                    $productU->save();
-                }
+        $count = count($request->get('product'));
+        for ($i = 0; $i < $count; $i++) {
+            // echo'<pre>';print_r($request->get('product'));die;
+            $product = Product::find($request->get('id')[$i]);
+            // echo'<pre>';print_r($request->get('id')[$i]);die;
+            if ($product == null) {
+                $productP = new Product();
+                $productP->invoice_id = $request->get('invoice_no');
+                $productP->product = $request->get('product')[$i];
+                $productP->qty = $request->get('qty')[$i];
+                $productP->price = $request->get('price')[$i];
+                $productP->total = $request->get('total')[$i];
+                $productP->save();
+            } else {
+                $productU  = Product::find($request->get('id')[$i]);
+                $productU->invoice_id = $request->get('invoice_no');
+                $productU->product = $request->get('product')[$i];
+                $productU->qty = $request->get('qty')[$i];
+                $productU->price = $request->get('price')[$i];
+                $productU->total = $request->get('total')[$i];
+                $productU->save();
             }
-            return redirect('invoices')->with('message', 'Invoice updated successfully!');
-    //echo'<pre>';print_r($product);die;
-
+        }
+        return redirect('invoices')->with('message', 'Invoice updated successfully!');
 
     }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     *
-     */
-
 
     public function destroy(Invoice $invoice,$id)
     {
@@ -225,7 +181,6 @@ class InvoiceController extends Controller
         foreach ($product_ids as $userid) {
             $this->db->delete('prodcuts', array('id' => $userid));
         }
-
         return 1;
     }
 

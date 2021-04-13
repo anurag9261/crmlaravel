@@ -1,5 +1,6 @@
 @extends('admin.master')
-@section('content')
+@push('styles')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
     .files input {
         outline: 2px dashed #92b0b3;
@@ -41,6 +42,8 @@
         text-align: center;
     }
 </style>
+@endpush
+@section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -145,13 +148,14 @@
     </div>
 </div>
 @endsection
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@push('scripts')
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-$(function() {
+    $(function() {
     $("#datepicker4").datepicker({
         dateFormat: "yy-mm-dd"
     });
 });
 </script>
+@endpush

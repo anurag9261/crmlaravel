@@ -90,13 +90,42 @@
         @endforeach
         <tr>
 <?php
-     $totalHours = array_sum($totalTime);
-    //echo "<pre>"; print_r($totalHours ); die;
-        ?>
+    function explode_time($time) { //explode time and convert into seconds
+        $time = explode(':', $time);
+        $time = $time[0] * 3600 + $time[1] * 60;
+        return $time;
+}
+
+function second_to_hhmm($time) { //convert seconds to hh:mm
+        $hour = floor($time / 3600);
+        $minute = strval(floor(($time % 3600) / 60));
+         $second = strval(floor(($minute % 3600) / 60));
+        if ($minute == 0) {
+            $minute = "00";
+        }elseif($second == 0) {
+            $second = "00";
+        }
+         else {
+            $minute = $minute;
+            $second = $second;
+        }
+
+        $time = $hour . ":" . $minute. ":" . $second;
+        return $time;
+}
+
+$time = 0;
+$time_arr = $totalTime;
+ foreach ($time_arr as $time_val) {
+    $time +=explode_time($time_val); // this fucntion will convert all hh:mm to seconds
+}
+
+$totalHours = second_to_hhmm($time);
+?>
 <td></td>
 <td></td>
-<td></td>
-<td><b>Total Hours: {{ $totalHours }}</b></td>
+<td>Total Hours:</td>
+<td><b>{{ $totalHours }}</b></td>
 </tr>
 </table>
 <footer>CRM-Admin Panel</footer>

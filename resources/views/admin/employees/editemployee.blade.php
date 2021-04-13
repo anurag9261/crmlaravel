@@ -1,4 +1,7 @@
 @extends('admin.master')
+@push('styles')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endpush
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -38,14 +41,25 @@
                     <form action="{{route('admin.updateemployee',[$admin->id])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <label for="employee">Employee Name</label>
                                 <input type="text" class="form-control"
                                     name="employee" value="{{$admin->employee}}">
                             </div>
+                            <div class="col-md-5">
+                                <label for="date">Current Date</label>
+                                <input type="text" id="datepicker2" class="form-control @error('currentdate') is-invalid @enderror" name="currentdate"
+                                    value="{{$admin->currentdate}}">
+                                @error('currentdate')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                         </div>
+                        <br>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <label for="attandance">Attandance:</label>
                             </div>
                         </div>
@@ -90,16 +104,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
-                                <label for="date">Current Date</label>
-                                <input type="date" class="form-control @error('currentdate') is-invalid @enderror"
-                                    name="currentdate" value="{{$admin->currentdate}}">
-                                @error('currentdate')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+
                         </div>
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>
@@ -110,8 +115,9 @@
     </div>
 </div>
 @endsection
+@push('scripts')
 <script type="text/javascript">
-function hide(){
+    function hide(){
   document.getElementById('toggle').style.display ='none';
 }
 function show(){
@@ -119,10 +125,18 @@ function show(){
 }
 </script>
 <script type="text/javascript">
-   
     $(".attandance").change(function(){
         var selValue = $("input[type='radio']:checked").val();
         console.log(selValue);
     });
-   
 </script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+    $("#datepicker2").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+});
+</script>
+@endpush
