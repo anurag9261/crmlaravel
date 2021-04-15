@@ -39,46 +39,42 @@
                         {{ session()->get('message') }}
                     </div>
                     @endif
-                    <table class="table table-bordered table-striped">
-                        <tr class="">
-                            <th>No</th>
-                            <th>Title</th>
-                            <th>Bill To</th>
-                            <th>Due Date</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        @foreach($profile as $data)
-                        <tr>
-                            <td>{{$data->id}}</td>
-                            <td>{{$data->title}}</td>
-                            <td>{{$data->bill_to}}</td>
-                            <td>{{$data->due_date}}</td>
-                            <td>{{$data->total_amount}}</td>
-                            <td>
-                            @if($data->status == 'Paid')
-                            <span class="badge badge-success">Paid</span>
-                            @elseif($data->status == 'Pending')
-                            <span class="badge badge-danger">Pending</span>
-                            @endif
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-secondary"><a href="viewinvoice{{$data->id}}"
-                                        style="color:white"><i class="far fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a href="editinvoice{{$data->id}}"
-                                        style="color:white"><i class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deleteinvoice{{$data->id}}"
-                                        style="color:white"><i class="far fa-trash-alt"></i></a></button>
-                            </td>
-                        </tr>
-                        @endforeach
+                    <table id="invoices" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
+                                <th>No</th>
+                                <th>Title</th>
+                                <th>Bill To</th>
+                                <th>Due Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
                     </table>
-                    <br>
-
                 </div>
             </div>
         </section>
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $('#invoices').DataTable({
+             processing:true,
+             serverSide:true,
+             ajax:"{{ route('admin.getinvoices') }}",
+            columns:[
+            {data: 'id', name: 'id'},
+            {data: 'title', name: 'title'},
+            {data: 'bill_to', name: 'bill_to'},
+            {data: 'due_date', name: 'due_date'},
+            {data: 'total_amount', name: 'total_amount'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
+        })
+    });
+</script>
+@endpush

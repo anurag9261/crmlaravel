@@ -44,7 +44,7 @@
                             <div class="col-md-5">
                                 <label for="employee">Employee Name</label>
                                 <input type="text" class="form-control"
-                                    name="employee" value="{{$admin->employee}}">
+                                    name="employee" value="{{$admin->admin_id}}">
                             </div>
                             <div class="col-md-5">
                                 <label for="date">Current Date</label>

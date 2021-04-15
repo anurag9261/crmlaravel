@@ -39,52 +39,58 @@
                         {{ session()->get('message') }}
                     </div>
                     @endif
-                    <table id="data" class="table table-bordered table-striped">
-                        <tr class="">
-                            <th>No</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Mobile No</th>
-                            <th>Email</th>
-                            <th>Image</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-
-                        @foreach($profile as $data)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$data->fname}}</td>
-                            <td>{{$data->lname}}</td>
-                            <td>{{$data->mobno}}</td>
-                            <td>{{$data->email}}</td>
-                            <td><img src="{{asset('images/'. $data->image)}}" width="50px" , height="auto"></td>
-                            <td>{{$data->role}}</td>
-                            <td>@if($data->status == '1')
-                                <span class="badge badge-success">Active</span>
-                                @elseif($data->status == '0')
-                                <span class="badge badge-danger">InActive</span>
-                                @endif</td>
-                            <td>
-                                <button type="button" class="btn btn-secondary"><a href="viewuser{{$data->id}}"
-                                        style="color:white"><i class="far fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a href="edituser{{$data->id}}"
-                                        style="color:white"><i class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deleteuser{{$data->id}}"
-                                        style="color:white"><i class="far fa-trash-alt"></i></a></button>
-                            </td>
-                        </tr>
-                        @endforeach
+                    <table id="empTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
+                                <th>No</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Mobile No</th>
+                                <th>Image</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
                     </table>
-                    <br>
-                    <span style="float:right">
-                        {{$profile->links()}}
-                    </span>
-                    <br>
                 </div>
             </div>
         </section>
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $('#empTable').DataTable({
+             processing:true,
+             serverSide:true,
+             ajax:"{{ route('admin.getusers') }}",
+            columns:[
+            {data: 'id', name: 'id'},
+            {data: 'fname', name: 'fname'},
+            {data: 'lname', name: 'lname'},
+            {data: 'email', name: 'email'},
+            {data: 'mobno', name: 'mobno'},
+            {
+                name: "image",
+                data: "image",
+                render: function (data, type, full, meta) {
+                    return "<img src=\"/images/" + data + "\" width=\"50\" height=\"50\"/ >";
+                },
+                title: "Image",
+                orderable: true,
+                searchable: true
+            },
+            {data: 'role', name: 'role'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
+
+
+
+        })
+    });
+</script>
+@endpush

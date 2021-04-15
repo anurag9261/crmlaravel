@@ -62,7 +62,7 @@
     <hr>
     <div class="row">
         <div class="col-md-4 mt-3 mb-3">
-            <h3>Employee Name: {{ $employee }}</h3>
+            <h3>Employee Name: {{ $employeData[0]->fname }} {{ $employeData[0]->lname }}</h3>
         </div>
     </div>
     <table class="table table-bordered">

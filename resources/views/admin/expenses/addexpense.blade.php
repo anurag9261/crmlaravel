@@ -130,9 +130,15 @@
                             <div class="col-md-10">
                                 <label>Attach Bill</label>
                                 <div class="form-group files color">
-                                    <input type="file" name="attach_bill" class="form-control" multiple="">
+                                    <input type="file" name="attach_bill" class="form-control @error('attach_bill') is-invalid @enderror" accept=".jpg,.pdf">
+                                    @error('attach_bill')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
+                            <p style="color:red;font-size:12px">*Bill format must be jpeg,png,jpg,PDF with max-size:5mb.</p>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>

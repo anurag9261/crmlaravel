@@ -11,10 +11,27 @@ use Carbon;
 class InvoiceController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $profile['profile'] = DB::table('invoices')->orderBy('created_at','desc')->paginate(5);
         return view('admin.invoices.index',$profile);
+    }
+
+    public function getInvoices(Request $request)
+    {
+        $invoices = Invoice::all();
+        return datatables()->of($invoices)
+            ->addColumn('action', function ($row) {
+                $html = '<a href="viewinvoice' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
+                $html .= '<a href="editinvoice' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
+                $html .= '<a href="deleteinvoice' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                return $html;
+            })->toJson();
     }
 
 

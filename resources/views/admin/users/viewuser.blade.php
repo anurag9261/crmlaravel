@@ -56,6 +56,38 @@
 
                         </tr>
                         <tr>
+                            <th>Birth Date</th>
+                            <td>{{$profile->birthdate}}</td>
+
+                        </tr>
+                        <tr>
+                            <th>Joining Date</th>
+                            <td>{{$profile->joining_date}}</td>
+
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            @if($profile->gender == 1)
+                                <td>Male</td>
+                            @elseif($profile->gender == 2)
+                                <td>Female</td>
+                            @else
+                                <td>Other</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>Salary Type</th>
+                            @if($profile->salary_type == 1)
+                                <td>Hourly</td>
+                            @else
+                                <td>Monthly</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>Salary Amount</th>
+                            <td>{{ $profile->salary_amount }}</td>
+                        </tr>
+                        <tr>
                             <th>Image</th>
                             <td><img src="{{asset('images/'. $profile->image)}}" width="60px", height="60px",></td>
 
@@ -66,11 +98,7 @@
                         </tr>
                         <tr>
                             <th>Created At</th>
-                            <td>{{$profile->created_at}}</td>
-                        </tr>
-                        <tr>
-                            <th>Updated At</th>
-                            <td>{{$profile->updated_at}}</td>
+                            <td>{{$profile->created_at->format('Y-m-d')}}</td>
                         </tr>
                     </table>
                 </div>

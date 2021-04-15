@@ -199,33 +199,39 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.employeereport')}}" class="nav-link">
-                                    <i class="nav-icon fas fa-user-tie"></i>
-                                        <p>Employee Report</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin.invoicereport')}}" class="nav-link">
-                                    <i class="nav-icon fas fa-receipt"></i>
-                                        <p>Invoice Report</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="{{route('admin.timesheetreport')}}" class="nav-link">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Timesheet Report</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.employee')}}" class="nav-link">
-                                    <i class="nav-icon fas fa-dollar-sign"></i>
-                                        <p>Payroll Report</p>
+                                    <a href="{{route('admin.employeereport')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-user-tie"></i>
+                                        <p>Employee Report</p>
+                                    </a>
+                                </li>
+                               <li class="nav-item">
+                                    <a href="{{route('admin.invoicereport')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-receipt"></i>
+                                        <p>Invoice Report</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.balancesheetreport')}}" class="nav-link">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Balancesheet Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.generatepayslip')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-print"></i>
+                                        <p>Generate Payslip</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.payrollreport')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-dollar-sign"></i>
+                                        <p>Payroll Report</p>
                                     </a>
                                 </li>
                             </ul>

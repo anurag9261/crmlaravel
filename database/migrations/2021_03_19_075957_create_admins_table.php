@@ -20,9 +20,14 @@ class CreateAdminsTable extends Migration
             $table->string('mobno');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->date('birthdate');
+            $table->date('joining_date');
+            $table->int('gender');
+            $table->enum('role', ['Admin', 'Employee']);
+            $table->int('salary_type');
+            $table->float('salary_amount');
             $table->string('address');
             $table->string('image');
-            $table->enum('role',['Admin','Employee']);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

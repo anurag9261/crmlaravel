@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use DateTime;
 use App\Http\Controllers\Carbon;
 use Carbon\Carbon as CarbonCarbon;
@@ -12,6 +12,10 @@ use Illuminate\Support\Carbon as SupportCarbon;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(Request $request)
     {
@@ -31,6 +35,18 @@ class EmployeeController extends Controller
         return view('admin.employees.index',compact('employeData'));
     }
 
+    public function getEmployees(Request $request)
+    {
+        $employees = Employee::all();
+        return datatables()->of($employees)
+            ->addColumn('action', function ($row) {
+                $html = '<a href="viewemployee' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
+                $html .= '<a href="editemployee' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
+                $html .= '<a href="deleteemployee' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                return $html;
+            })->toJson();
+    }
+
     public function create()
     {
         $employee = DB::table('admins')->where('role', 'Employee')->get();
@@ -40,12 +56,13 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $profile = $request->validate([
-            'employee' => 'required',
+            // 'employee' => 'required',
             // 'attandance' => 'required',
             'currentdate' => 'required',
         ]);
+        // echo "<pre>"; print_r($request->all()); die;
         $profile=new Employee();
-        $profile->employee = $request->get('employee');
+        $profile->admin_id = $request->get('employee');
         $profile->attandance = $request->get('attandance');
         if($request->get('attandance') == 'present' ){
             $profile->intime = $request->get('intime');
@@ -76,7 +93,7 @@ class EmployeeController extends Controller
             'currentdate' => 'required',
         ]);
         $profile=Employee::find($id);
-        $profile->employee = $request->get('employee');
+        $profile->admin_id = $request->get('employee');
         $profile->attandance = $request->get('attandance');
         if($request->get('attandance') == 'present' ){
             $profile->intime = $request->get('intime');

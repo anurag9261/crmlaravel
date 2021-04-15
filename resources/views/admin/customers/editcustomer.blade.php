@@ -1,4 +1,7 @@
 @extends('admin.master')
+@push('styles')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endpush
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -84,10 +87,45 @@
                             </div>
                         </div>
                         <br>
+                        <br>
                         <div class="row">
+                            <div class="col-md-5">
+                                <label for="gender">Select Gender</label>
+                                <br>
+                                <input type="radio" name="gender" name="gender" value="1" {{ ($profile->gender) == '1' ? 'checked' : '' }}>
+                                <label>Male</label>
+                                <input type="radio" name="gender" name="gender" value="2" {{ ($profile->gender) == '2' ? 'checked' : '' }}>
+                                <label>Female</label>
+                                <input type="radio" name="gender" name="gender" value="0" {{ ($profile->gender) == '0' ? 'checked' : '' }}>
+                                <label>Other</lable>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="birth_date">Birth Date</label>
+                                <input type="text" id="birthdate" class="form-control @error('birth_date') is-invalid @enderror"
+                                    name="birth_date" placeholder="yyyy-mm-dd">
+                                @error('birth_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                <p style="color:red;font-size:12px">*Image format must be jpeg,png,jpg.</p>
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                             <div class="col-md-5">
                             <label for="status">Staus</label>
                                 <select name="status" id="status" class="form-control">
+                                    <option value="">Select Status</option>
                                     <option value="Active" {{ ($profile->status) == 'Active' ? 'selected' : '' }}>Active
                                     </option>
                                     <option value="InActive" {{ ($profile->status) == 'InActive' ? 'selected' : '' }}>
@@ -99,19 +137,8 @@
                                 </span>
                                 @enderror
                             </div>
-                            <div class="col-md-5">
 
-                                <label for="image">Image</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                    name="image">
-                                @error('image')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
                         </div>
-                        <br>
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="address">Address</label>
@@ -135,3 +162,14 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+    $("#birthdate").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+});
+</script>
+@endpush

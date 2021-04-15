@@ -49,40 +49,16 @@
                         {{ session()->get('message') }}
                     </div>
                     @endif
-                    <table class="table table-bordered table-striped">
-                        <tr class="">
-                            <th>No</th>
-                            <th>Title</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        @foreach($profile as $data)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$data->title}}</td>
-                            <td>@if($data->status == 'Active')
-                                <span class="badge badge-success">Active</span>
-                                @elseif($data->status == 'InActive')
-                                <span class="badge badge-danger">InActive</span>
-                                @endif
-                            </td>
-                            <td>
-
-                                <button type="button" class="btn btn-secondary"><a href="viewrole{{$data->id}}"
-                                        style="color:white"><i class="far fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a href="editrole{{$data->id}}"
-                                        style="color:white"><i class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a href="deleterole{{$data->id}}"
-                                        style="color:white"><i class="far fa-trash-alt"></i></a></button>
-
-                            </td>
-                        </tr>
-                        @endforeach
+                    <table id="employee" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
+                                <th>No</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
                     </table>
-                    <br>
-                    <span style="float:right">
-                        {{$profile->links()}}
-                    </span>
                 </div>
             </div>
         </section>
@@ -90,10 +66,19 @@
 </div>
 @endsection
 @push('scripts')
-<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script>
-$(document).ready( function () {
-    $('#myTable12').DataTable();
-} );
+    $(document).ready(function(){
+        $('#employee').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ route('admin.getroles') }}",
+            columns:[
+            {data: 'id', name: 'id'},
+            {data: 'title', name: 'title'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
+        })
+    });
 </script>
 @endpush

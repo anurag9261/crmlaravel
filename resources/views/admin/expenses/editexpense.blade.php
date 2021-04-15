@@ -133,6 +133,7 @@
                                     <input type="file" name="attach_bill" class="form-control" multiple="">
                                 </div>
                             </div>
+                            <p style="color:red;font-size:12px">*Bill format must be jpeg,png,jpg,PDF with max-size:5mb.</p>
                         </div>
                         <div class="row">
                             <div class="col-md-5">

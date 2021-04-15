@@ -25,6 +25,19 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
+
+    public function getUsers(Request $request)
+    {
+        $admins = Admin::all();
+        return datatables()->of($admins)
+            ->addColumn('action', function ($row) {
+                $html = '<a href="viewuser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
+                $html .= '<a href="edituser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
+                $html .= '<a href="deleteuser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                return $html;
+            })->toJson();
+    }
+
     public function create()
     {
         $roles = DB::table('roles')->where('status', 'Active')->get();
@@ -39,9 +52,14 @@ class AdminController extends Controller
             'lname' => 'required',
             'mobno' => 'required',
             'email' => 'required',
+            'birthdate' => 'required',
+            'joining_date' => 'required',
+            'gender'=> 'in:1,2,3',
+            'salary_type' => 'required',
             'address' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'role' => 'required',
+            'salary_amount' => 'required',
             'status'=>'required',
             'password' => 'required',
         ]);
@@ -50,11 +68,16 @@ class AdminController extends Controller
         $profile->lname = $request->get('lname');
         $profile->mobno = $request->get('mobno');
         $profile->email = $request->get('email');
+        $profile->birthdate = $request->get('birthdate');
+        $profile->gender = $request->get('gender');
+        $profile->joining_date = $request->get('joining_date');
         $profile->address = $request->get('address');
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
         $profile->image = $imageName;
         $profile->role = $request->get('role');
+        $profile->salary_type = $request->get('salary_type');
+        $profile->salary_amount = $request->get('salary_amount');
         $profile->status = $request->get('status');
         $profile->password = Hash::make($request->get('password'));
         $profile->save();
@@ -82,10 +105,15 @@ class AdminController extends Controller
             'lname' => 'required',
             'mobno' => 'required',
             'email' => 'required',
+            'birthdate' => 'required',
+            'joining_date' => 'required',
+            'gender' => 'required',
             'address' => 'required',
             // 'image' => 'required',
             'role' => 'required',
             'status' => 'required',
+            'salary_type' => 'required',
+            'salary_amount' => 'required',
         ]);
         $profile=Admin::find($id);
         if( $request->image == ""){
@@ -99,9 +127,14 @@ class AdminController extends Controller
         $profile->lname = $request->get('lname');
         $profile->mobno = $request->get('mobno');
         $profile->email = $request->get('email');
+        $profile->birthdate = $request->get('birthdate');
+        $profile->joining_date = $request->get('joining_date');
+        $profile->gender = $request->get('gender');
         $profile->address = $request->get('address');
         $profile->image = $imageName;
         $profile->role = $request->get('role');
+        $profile->salary_type = $request->get('salary_type');
+        $profile->salary_amount = $request->get('salary_amount');
         $profile->status = $request->get('status');
         $profile->save();
         return redirect('users')->with('message', 'Record updated successfully!');

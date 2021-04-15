@@ -15,7 +15,8 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('employee');
+            $table->int('admin_id')->unsigned();
+            $table->foreign('admin_id')->references('id')->on('admins');
             $table->string('attandance');
             $table->date('currentdate');
             $table->time('intime');
