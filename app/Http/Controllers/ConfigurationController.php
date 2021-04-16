@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 class ConfigurationController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function edit(Configuration $configuration,$id)
     {
         $profile = Configuration::find($id);
