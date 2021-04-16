@@ -138,9 +138,6 @@
             <td><b>{{ ($employeData[0]->salary_amount * $attandance)/30 }}</b></td>
         </tr>
     </table>
-<?php
- echo "<pre>"; print_r($attandance); die;
-?>
 <footer>CRM-Admin Panel</footer>
 
 </body>
