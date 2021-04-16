@@ -23,7 +23,8 @@ class ReportController extends Controller
     public function timesheet(){
 
         $employee = DB::table('admins')->where('role', 'Employee')->get();
-        return view('admin.reports.timesheet',compact('employee'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.timesheet',compact('employee','config'));
     }
 
 
@@ -59,7 +60,8 @@ class ReportController extends Controller
 
     public function balancesheet()
     {
-        return view('admin.reports.balance');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.balance',compact('config'));
     }
 
     public function balancesheetPDF(Request $request)
@@ -94,8 +96,8 @@ class ReportController extends Controller
 
     public function employee(Request $request)
     {
-
-        return view('admin.reports.employee');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.employee',compact('config'));
     }
 
     public function employeePDF(Request $request)
@@ -129,6 +131,7 @@ class ReportController extends Controller
     public function invoice(Request $request)
     {
         $customer = DB::table('customers')->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
         if(!empty($request->all())){
         $dataTable = $request->validate([
             'month' => 'required',
@@ -153,7 +156,7 @@ class ReportController extends Controller
         }else{
             $dataTable = 'no_data_found';
         }
-        return view('admin.reports.invoice', compact('customer', 'dataTable'));
+        return view('admin.reports.invoice', compact('customer', 'dataTable','config'));
     }
 
     public function invoicePDF(Request $request,$id)
@@ -173,7 +176,8 @@ class ReportController extends Controller
     {
 
         $employee = DB::table('admins')->where('role','Employee')->get();
-        return view('admin.reports.payslip', compact('employee'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.payslip', compact('employee','config'));
     }
 
 
@@ -211,7 +215,8 @@ class ReportController extends Controller
 
     public function payrollreport()
     {
-        return view('admin.reports.payroll');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.payroll',compact('config'));
     }
 
 

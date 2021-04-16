@@ -21,11 +21,11 @@ use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
-Route::get('/admin','HomeController@index')->name('admin');
+// Route::get('/admin','HomeController@index')->name('admin');
 Route::get('/logout','HomeController@logout');
 Route::get('/admin', [AdminController::class, 'adminHome'])->name('admin.dashboard')->middleware('role');
-Route::get('/','AdminController@index');
-
+Route::get('/', 'HomeController@index');
+// Route::get('/')
 /*---------------------Change password Route---------------------------*/
 Route::get('/editPassword{id}','AdminController@editpassword')->name('admin.editpassword');
 Route::post('/updatePassword{id}','AdminController@updatepassword')->name('admin.updatepassword');
@@ -113,5 +113,10 @@ Route::post('/payslipPDF', 'ReportController@payslipPDF')->name('report.payslip'
 Route::get('/payrollreport', 'ReportController@payrollreport')->name('admin.payrollreport');
 Route::post('/payrollreportPDF', 'ReportController@payrollPDF')->name('report.payroll');
 
+
+/*---------------------ConfigurationController Route---------------------------*/
+// Route::get('/configuration', 'ConfigurationController@index')->name('admin.configuration');
+Route::get('configuration{id}', 'ConfigurationController@edit')->name('admin.editconfiguration');
+Route::post('updateconfiguration{id}', 'ConfigurationController@update')->name('admin.updateconfiguration');
 
 

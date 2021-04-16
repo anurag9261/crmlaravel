@@ -15,8 +15,9 @@ class ExpenseController extends Controller
 
     public function index()
     {
-        $profile['profile'] = DB::table('expenses')->orderBy('created_at','desc')->paginate(5);
-        return view('admin.expenses.index',$profile);
+        $profile = DB::table('expenses');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.index',compact('config','profile'));
     }
 
     public function getExpenses(Request $request)
@@ -33,7 +34,8 @@ class ExpenseController extends Controller
 
     public function create()
     {
-        return view('admin.expenses.addexpense');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.addexpense',compact('config'));
     }
 
     public function store(Request $request)
@@ -60,7 +62,8 @@ class ExpenseController extends Controller
     public function edit(Expense $expense,$id)
     {
         $profile = Expense::find($id);
-        return view('admin.expenses.editexpense',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.editexpense',compact('profile','config'));
     }
 
 
@@ -96,6 +99,7 @@ class ExpenseController extends Controller
 
     public function view($id){
         $profile = Expense::find($id);
-        return view('admin.expenses.viewexpense',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.viewexpense',compact('profile','config'));
     }
 }

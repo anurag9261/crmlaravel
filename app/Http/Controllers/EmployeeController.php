@@ -22,6 +22,7 @@ class EmployeeController extends Controller
 
         // $profile = Employee::paginate(5);
         $employeData['emp'] =   Employee::get();
+        $admin = DB::table('admins')->where('role','Employee');
         $row = 0;
          foreach($employeData['emp'] as $employee){
             $inTimeResult = $employee->intime;
@@ -32,7 +33,8 @@ class EmployeeController extends Controller
             $employeData['emp'][$row]['time'] = $interval->format('%H:%I:%S');
             $row++;
         }
-        return view('admin.employees.index',compact('employeData'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.employees.index',compact('employeData','admin','config'));
     }
 
     public function getEmployees(Request $request)
@@ -40,6 +42,7 @@ class EmployeeController extends Controller
         $employees = Employee::all();
         return datatables()->of($employees)
             ->addColumn('action', function ($row) {
+
                 $html = '<a href="viewemployee' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
                 $html .= '<a href="editemployee' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
                 $html .= '<a href="deleteemployee' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
@@ -50,7 +53,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $employee = DB::table('admins')->where('role', 'Employee')->get();
-        return view('admin.employees.addemployee', compact('employee'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.employees.addemployee', compact('employee','config'));
     }
 
     public function store(Request $request)
@@ -82,7 +86,8 @@ class EmployeeController extends Controller
     {
         $admin = Employee::find($id);
         $employee = DB::table('admins')->where('role', 'Employee')->get();
-        return view('admin.employees.editemployee', compact('admin','employee'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.employees.editemployee', compact('admin','employee','config'));
     }
 
     public function update(Request $request, Employee $employee,$id)
@@ -110,7 +115,8 @@ class EmployeeController extends Controller
 
     public function view(Employee $employee,$id){
         $profile = Employee::find($id);
-        return view('admin.employees.viewemployee',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.employees.viewemployee',compact('profile','config'));
     }
 
     // public function exportCsv(Request $request)

@@ -18,8 +18,9 @@ class InvoiceController extends Controller
 
     public function index()
     {
-        $profile['profile'] = DB::table('invoices')->orderBy('created_at','desc')->paginate(5);
-        return view('admin.invoices.index',$profile);
+        $profile = DB::table('invoices');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.invoices.index',compact('profile','config'));
     }
 
     public function getInvoices(Request $request)
@@ -39,6 +40,7 @@ class InvoiceController extends Controller
     {
         $invoiceDatas = DB::table('invoices')->orderBy('id','desc')->limit(1)->get();
         $customers = DB::table('customers')->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
         $invoiceData = (array) $invoiceDatas;
        foreach($invoiceData as $invoiced){
         if(empty($invoiced)){
@@ -54,7 +56,7 @@ class InvoiceController extends Controller
     }
         $mytime = Carbon\Carbon::now();
         $currentDate =  $mytime->toDateString();
-        return view('admin.invoices.addinvoice',compact('invoiceId','currentDate','customers'));
+        return view('admin.invoices.addinvoice',compact('invoiceId','currentDate','customers','config'));
     }
 
 
@@ -110,7 +112,8 @@ class InvoiceController extends Controller
     public function view($id){
         $profile = Invoice::find($id);
         $pr = Product::find($id);
-        return view('admin.invoices.viewinvoice',compact('profile','pr'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.invoices.viewinvoice',compact('profile','pr','config'));
     }
 
     public function edit(Invoice $invoice,$id)
@@ -121,7 +124,8 @@ class InvoiceController extends Controller
             ->where('invoice_id', $id)
             ->orWhere('id',$id)
             ->get();
-        return view('admin.invoices.editinvoice', compact('profile','products','customers'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.invoices.editinvoice', compact('profile','products','customers','config'));
     }
 
     public function update(Request $request, Invoice $invoice,$id)

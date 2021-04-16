@@ -14,8 +14,9 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $profile['profile'] = DB::table('customers')->orderBy('created_at','desc')->paginate(5);
-        return view('admin.customers.index',$profile);
+        $profile = DB::table('customers')->orderBy('created_at','desc')->paginate(5);
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.customers.index',compact('profile','config'));
     }
 
     public function __construct()
@@ -37,7 +38,8 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view('admin.customers.addcustomer');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.customers.addcustomer',compact('config'));
     }
 
     public function store(Request $request)
@@ -75,7 +77,8 @@ class CustomerController extends Controller
     public function edit(Customer $customer,$id)
     {
         $profile = Customer::find($id);
-        return view('admin.customers.editcustomer',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.customers.editcustomer',compact('profile','config'));
     }
 
     public function update(Request $request,$id)
@@ -120,7 +123,8 @@ class CustomerController extends Controller
 
     public function view(Customer $customer,$id){
         $profile = Customer::find($id);
-        return view('admin.customers.viewcustomer',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.customers.viewcustomer',compact('profile','config'));
     }
 
 }

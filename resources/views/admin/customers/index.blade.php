@@ -34,7 +34,7 @@
             <div class="card">
                 <div class="card-body">
                 <div class="container mt-3 mb-3">
-                     @if(session()->has('error'))
+                    @if(session()->has('error'))
                     <div class="alert alert-danger">
                         {{ session()->get('error') }}
                     </div>

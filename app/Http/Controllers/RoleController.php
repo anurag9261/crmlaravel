@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -15,8 +16,9 @@ class RoleController extends Controller
 
     public function index()
     {
-        $profile['profile'] = Role::paginate(5);
-        return view('admin.roles.index',$profile);
+        $profile = Role::paginate(5);
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.index',compact('profile','config'));
     }
 
     public function getRoles(Request $request)
@@ -33,7 +35,8 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('admin.roles.addrole');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.addrole',compact('config'));
     }
 
 
@@ -53,7 +56,8 @@ class RoleController extends Controller
 
     public function view(Role $role,$id){
         $profile = Role::find($id);
-        return view('admin.roles.viewrole',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.viewrole',compact('profile','config'));
     }
     public function show(Role $role)
     {
@@ -63,7 +67,8 @@ class RoleController extends Controller
     public function edit(Role $role,$id)
     {
         $profile = Role::find($id);
-        return view('admin.roles.editrole',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.editrole',compact('profile','config'));
     }
 
 

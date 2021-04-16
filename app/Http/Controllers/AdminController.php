@@ -17,7 +17,8 @@ class AdminController extends Controller
     public function index()
     {
         $profile['profile'] = DB::table('admins')->orderBy('created_at','desc')->paginate(5);
-        return view('admin.users.index',$profile);
+        $config['config'] = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.users.index',$profile,$config);
     }
 
     public function __construct()
@@ -41,7 +42,9 @@ class AdminController extends Controller
     public function create()
     {
         $roles = DB::table('roles')->where('status', 'Active')->get();
-        return view('admin.users.adduser', compact('roles'));
+        //for master Controller
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.users.adduser', compact('roles','config'));
     }
 
     public function store(Request $request)
@@ -87,14 +90,16 @@ class AdminController extends Controller
 
     public function view(Admin $admin,$id){
         $profile = Admin::find($id);
-        return view('admin.users.viewuser',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.users.viewuser',compact('profile','config'));
     }
 
     public function edit(Admin $admin,$id)
     {
         $profile = Admin::find($id);
+        $config = DB::table('configurations')->where('id', '1')->get();
         $roles = DB::table('roles')->where('status', 'Active')->get();
-        return view('admin.users.edituser', compact('roles','profile'));
+        return view('admin.users.edituser', compact('roles','profile','config'));
     }
 
     public function update(Request $request, Admin $admin,$id)
@@ -142,7 +147,9 @@ class AdminController extends Controller
 
     public function editpassword(){
 
-        return view('admin.changepassword');
+        //for master Controller
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.changepassword',compact('config'));
     }
 
     public function updatepassword(Request $request,$id){
@@ -186,13 +193,13 @@ class AdminController extends Controller
         $total = Invoice::count();
         $paid_1 = $paid_count / $total * 100;
         $pending_1 = $pending_count / $total * 100;
-
+        $config = DB::table('configurations')->where('id', '1')->get();
 
         //for table display
         $profile = Admin::orderBy('created_at','desc')->where('role','employee')->take(3)->get();
         $customers = Customer::orderBy('created_at','desc')->take(3)->get();
         $invoice = Invoice::orderBy('created_at','desc')->take(3)->get();
-        return view('admin.dashboard',compact('paid_1','pending_1','customer','admin','profile','customers','employee','invoice','invoice_paid'));
+        return view('admin.dashboard',compact('paid_1','pending_1','customer','admin','profile','customers','employee','config','invoice','invoice_paid'));
     }
 
 }
