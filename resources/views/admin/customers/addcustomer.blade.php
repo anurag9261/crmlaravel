@@ -1,4 +1,7 @@
 @extends('admin.master')
+@push('styles')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endpush
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -83,19 +86,22 @@
                             </div>
                         </div>
                         <br>
-                        <div class="row">   
+                        <div class="row">
                             <div class="col-md-5">
-                                <label for="status">Status</label>
-                                <select class="form-control @error('status') is-invalid @enderror" name="status">
-                                    <option>Active</option>
-                                    <option>InActive</option>
-                                </select>
+                                <label for="gender">Gender</label>
+                                <br>
+                                <input type="radio" name="gender" value="1">
+                                <label>Male</label>
+                                <input type="radio" name="gender" value="2">
+                                <label>Female</label>
+                                <input type="radio" name="gender" value="0">
+                                <label>Other</lable>
                             </div>
                             <div class="col-md-5">
-                                <label for="password">password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    name="password" placeholder="Enter Password Here">
-                                @error('password')
+                                <label for="birth_date">Birth Date</label>
+                                <input type="text" id="birthdate" class="form-control @error('birthdate') is-invalid @enderror"
+                                    name="birthdate" placeholder="yyyy-mm-dd">
+                                @error('birthdate')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -104,25 +110,52 @@
                         </div>
                         <br>
                         <div class="row">
-                        <div class="col-md-5">
+                            <div class="col-md-5">
                                 <label for="image">Image</label>
                                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                <p style="color:red;font-size:12px">*Image format must be jpeg,png,jpg</p>
                                 @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="col-md-5">
+                                <label for="status">Status</label>
+                                <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                    <option value="">Select Status</option>
+                                    <option>Active</option>
+                                    <option>InActive</option>
+                                </select>
+                                @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
                                 <label for="address">Address</label>
-                                <textarea class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Enter Address Here"></textarea>            
+                                <textarea class="form-control @error('address') is-invalid @enderror" name="address"
+                                    placeholder="Enter Address Here"></textarea>
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-                           
+                            <div class="col-md-5">
+                                <label for="password">password</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                                    placeholder="Enter Password Here">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>
@@ -133,3 +166,14 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+    $("#birthdate").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+});
+</script>
+@endpush

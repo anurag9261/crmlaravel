@@ -15,10 +15,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ReportController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function timesheet(){
 
         $employee = DB::table('admins')->where('role', 'Employee')->get();
-        return view('admin.reports.timesheet',compact('employee'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.timesheet',compact('employee','config'));
     }
 
 
@@ -31,19 +37,19 @@ class ReportController extends Controller
         $month = date('m', strtotime($request->get('month').'-01'));
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month').'-01'));
-        $employee = $request->get('emp');
-        $employeData =  DB::table('employees')
-                                //  ->select('employees.*','admins.fname','admins.lname')
-                                // ->join('admins','admins.fname','=','employees.employee')
-                                ->whereMonth('employees.currentdate',$month)
+        $employeeId = $request->get('emp');
+        $employeData = DB::table('admins')
+                                ->select('admins.id', 'admins.fname', 'admins.lname', 'admins.salary_amount', 'employees.*')
+                                ->join('employees', 'admin_id', '=', 'admins.id')
+                                ->whereMonth('employees.currentdate', $month)
                                 ->whereYear('employees.currentdate', $year)
-                                ->where('employees.employee', $employee)
+                                ->where('employees.admin_id', $employeeId)
                                 ->get();
         $array = (array)$employeData;
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
-                $data = ['title' => 'CRM', $employee];
-                $pdf = PDF::loadView('myPDF', $data, compact('employeData', 'employee'));
+                $data = ['title' => 'CRM', $employeeId];
+                $pdf = PDF::loadView('myPDF', $data, compact('employeData', 'employeeId'));
                 return $pdf->download('timesheetreport.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');
@@ -54,7 +60,8 @@ class ReportController extends Controller
 
     public function balancesheet()
     {
-        return view('admin.reports.balance');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.balance',compact('config'));
     }
 
     public function balancesheetPDF(Request $request)
@@ -89,8 +96,8 @@ class ReportController extends Controller
 
     public function employee(Request $request)
     {
-
-        return view('admin.reports.employee');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.employee',compact('config'));
     }
 
     public function employeePDF(Request $request)
@@ -124,6 +131,7 @@ class ReportController extends Controller
     public function invoice(Request $request)
     {
         $customer = DB::table('customers')->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
         if(!empty($request->all())){
         $dataTable = $request->validate([
             'month' => 'required',
@@ -148,7 +156,7 @@ class ReportController extends Controller
         }else{
             $dataTable = 'no_data_found';
         }
-        return view('admin.reports.invoice', compact('customer', 'dataTable'));
+        return view('admin.reports.invoice', compact('customer', 'dataTable','config'));
     }
 
     public function invoicePDF(Request $request,$id)
@@ -164,4 +172,130 @@ class ReportController extends Controller
         return $pdf->download('invoicereport.pdf');
     }
 
+    public function generatepayslip(Request $request)
+    {
+
+        $employee = DB::table('admins')->where('role','Employee')->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.payslip', compact('employee','config'));
+    }
+
+
+    public function payslipPDF(Request $request)
+    {
+        $employeData = $request->validate([
+            // 'employee' => 'required',
+            'month' => 'required',
+        ]);
+        $month = date('m', strtotime($request->get('month') . '-01'));
+        $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
+        $year =  date("Y", strtotime($request->get('month') . '-01'));
+        $employeeId = $request->get('employee');
+        $employeData = DB::table('admins')
+                            ->select('admins.id', 'admins.fname', 'admins.lname','admins.salary_amount','employees.*')
+                            ->join('employees', 'admin_id', '=', 'admins.id')
+                            ->whereMonth('employees.currentdate', $month)
+                             ->whereYear('employees.currentdate', $year)
+                             ->where('employees.admin_id', $employeeId)
+                             ->get();
+        $attandance = DB::table('employees')
+                                ->where('employees.admin_id',$employeeId)
+                                ->where('employees.attandance','present')->count();
+        $array = (array)$employeData;
+        foreach ($array as $newArray) {
+            if (!empty($newArray)) {
+                $data = ['title' => 'CRM', $employeeId];
+                $pdf = PDF::loadView('payslipPDF', $data, compact('employeData', 'employeeId','attandance'));
+                return $pdf->download('payslip.pdf');
+            } else {
+                return back()->withError(' Data not found for ' . $errorMonth . '!');
+            }
+        }
+    }
+
+    public function payrollreport()
+    {
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.reports.payroll',compact('config'));
+    }
+
+
+    public function payroldlPDF(Request $request)
+    {
+        $employeData = $request->validate([
+            'month' => 'required',
+        ]);
+        $month = date('m', strtotime($request->get('month') . '-01'));
+        $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
+        $year =  date("Y", strtotime($request->get('month') . '-01'));
+        // $employeeId = $request->get('employee');
+        // $employeData = DB::table('employees')
+        //                     ->select('admin_id', 'employees.intime','employees.outtime','employees.currentdate','admins.*')
+        //                     ->join('admins', 'admins.id', '=', 'admin_id')
+        //                     ->whereMonth('employees.currentdate', $month)
+        //                     ->whereYear('employees.currentdate', $year)
+        //                     ->get();
+        $employeData = DB::table('admins')->where('role','Employee')
+        //                     ->whereMonth('employees.currentdate', $month)
+        //                     ->whereYear('employees.currentdate', $year)
+                                ->get();
+        // dd($employeData[0]);
+
+        foreach($employeData as $employe){
+            $employeId = $employe->id;
+
+            $attandance[] = DB::table('admins')
+                // ->select('admins.id', 'admins.fname', 'admins.lname', 'admins.salary_type', 'employees.*')
+                ->select('*')
+                ->join('employees', 'admin_id', '=', 'admins.id')
+                ->where('admins.id',$employeId)->get();
+
+            $attandance[] = DB::table('employees')
+                // ->select('admins.id', 'admins.fname', 'admins.lname', 'admins.salary_type', 'employees.*')
+                ->select('*')
+                ->join('admins', 'id', '=', 'employees.admin_id')
+                ->where('employees.id', $employeId)->get();
+
+
+        }
+                            //->where('employees.attandance', 'present')->count();
+        echo "<pre>"; print_r($attandance); die;
+        $array = (array)$employeData;
+        foreach ($array as $newArray) {
+            if (!empty($newArray)) {
+                $data = ['title' => 'CRM'];
+                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData','attandance'));
+                return $pdf->download('payroll.pdf');
+            } else {
+                return back()->withError(' Data not found for ' . $errorMonth . '!');
+            }
+        }
+    }
+
+    public function payrollPDF(Request $request)
+    {
+        $employeData = $request->validate([
+            'month' => 'required',
+        ]);
+        $month = date('m', strtotime($request->get('month') . '-01'));
+        $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
+        $year =  date("Y", strtotime($request->get('month') . '-01'));
+        $userData['user'] = DB::table('admins')->select('id','fname', 'lname', 'salary_amount')->get();
+        foreach($userData['user'] as $emp){
+            $userData['attend'][] = DB::table('employees')->where('admin_id', $emp->id)->get();
+
+        }
+
+        echo "<pre>"; print_r($userData); die;
+        $array = (array)$employeData;
+        foreach ($array as $newArray) {
+            if (!empty($newArray)) {
+                $data = ['title' => 'CRM'];
+                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData', 'attandance'));
+                return $pdf->download('payroll.pdf');
+            } else {
+                return back()->withError(' Data not found for ' . $errorMonth . '!');
+            }
+        }
+    }
 }

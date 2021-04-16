@@ -4,25 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
-
-    public function index()
-    {
-        $profile['profile'] = Role::paginate(5);
-        return view('admin.roles.index',$profile);
-    }
 
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $profile = Role::paginate(5);
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.index',compact('profile','config'));
+    }
+
+    public function getRoles(Request $request)
+    {
+        $roles = Role::all();
+        return datatables()->of($roles)
+            ->addColumn('action', function ($row) {
+                $html = '<a href="viewrole' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
+                $html .= '<a href="editrole' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
+                $html .= '<a href="deleterole' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                return $html;
+            })->toJson();
+    }
 
     public function create()
     {
-        return view('admin.roles.addrole');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.addrole',compact('config'));
     }
 
 
@@ -42,7 +56,8 @@ class RoleController extends Controller
 
     public function view(Role $role,$id){
         $profile = Role::find($id);
-        return view('admin.roles.viewrole',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.viewrole',compact('profile','config'));
     }
     public function show(Role $role)
     {
@@ -52,7 +67,8 @@ class RoleController extends Controller
     public function edit(Role $role,$id)
     {
         $profile = Role::find($id);
-        return view('admin.roles.editrole',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.roles.editrole',compact('profile','config'));
     }
 
 

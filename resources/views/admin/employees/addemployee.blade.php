@@ -48,7 +48,7 @@
                                     placeholder="Select Employee">
                                     <option>Select Employee</option>
                                     @foreach($employee as $profile)
-                                    <option>{{$profile->fname}}</option>
+                                    <option value="{{ $profile->id  }}">{{$profile->fname}} {{ $profile->lname }}</option>
                                     @endforeach
                                 </select>
                                 @error('employee')

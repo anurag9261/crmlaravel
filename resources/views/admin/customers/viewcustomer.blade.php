@@ -42,27 +42,42 @@
                         <tr>
                             <th>First Name</th>
                             <td>{{$profile->fname}}</td>
-                            
+
                         </tr>
                         <tr>
                             <th>Last Name</th>
                             <td>{{$profile->lname}}</td>
-                            
+
                         </tr>
                         <tr>
                             <th>Mobile No</th>
                             <td>{{$profile->mobno}}</td>
-                            
+
                         </tr>
                         <tr>
                             <th>Email</th>
                             <td>{{$profile->email}}</td>
-                            
+
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            @if($profile->gender == 1)
+                            <td>Male</td>
+                            @elseif($profile->gender == 2)
+                            <td>Female</td>
+                            @else
+                            <td>Other</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>Birth Date</th>
+                            <td>{{$profile->birthdate}}</td>
+
                         </tr>
                         <tr>
                             <th>Image</th>
                             <td><img src="{{asset('images/'. $profile->image)}}" width="60px", height="auto",></td>
-                            
+
                         </tr>
                         <tr>
                             <th>Status</th>
@@ -72,10 +87,6 @@
                             <th>Created At</th>
                             <td>{{$profile->created_at->format('Y-m-d')}}</td>
                         </tr>
-                        <tr>
-                            <th>Updated At</th>
-                            <td>{{$profile->updated_at->format('Y-m-d')}}</td>
-                        </tr>                        
                     </table>
                 </div>
             </div>

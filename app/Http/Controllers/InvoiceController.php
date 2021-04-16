@@ -11,10 +11,28 @@ use Carbon;
 class InvoiceController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $profile['profile'] = DB::table('invoices')->orderBy('created_at','desc')->paginate(5);
-        return view('admin.invoices.index',$profile);
+        $profile = DB::table('invoices');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.invoices.index',compact('profile','config'));
+    }
+
+    public function getInvoices(Request $request)
+    {
+        $invoices = Invoice::all();
+        return datatables()->of($invoices)
+            ->addColumn('action', function ($row) {
+                $html = '<a href="viewinvoice' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
+                $html .= '<a href="editinvoice' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
+                $html .= '<a href="deleteinvoice' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                return $html;
+            })->toJson();
     }
 
 
@@ -22,6 +40,7 @@ class InvoiceController extends Controller
     {
         $invoiceDatas = DB::table('invoices')->orderBy('id','desc')->limit(1)->get();
         $customers = DB::table('customers')->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
         $invoiceData = (array) $invoiceDatas;
        foreach($invoiceData as $invoiced){
         if(empty($invoiced)){
@@ -37,7 +56,7 @@ class InvoiceController extends Controller
     }
         $mytime = Carbon\Carbon::now();
         $currentDate =  $mytime->toDateString();
-        return view('admin.invoices.addinvoice',compact('invoiceId','currentDate','customers'));
+        return view('admin.invoices.addinvoice',compact('invoiceId','currentDate','customers','config'));
     }
 
 
@@ -93,7 +112,8 @@ class InvoiceController extends Controller
     public function view($id){
         $profile = Invoice::find($id);
         $pr = Product::find($id);
-        return view('admin.invoices.viewinvoice',compact('profile','pr'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.invoices.viewinvoice',compact('profile','pr','config'));
     }
 
     public function edit(Invoice $invoice,$id)
@@ -104,7 +124,8 @@ class InvoiceController extends Controller
             ->where('invoice_id', $id)
             ->orWhere('id',$id)
             ->get();
-        return view('admin.invoices.editinvoice', compact('profile','products','customers'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.invoices.editinvoice', compact('profile','products','customers','config'));
     }
 
     public function update(Request $request, Invoice $invoice,$id)

@@ -43,7 +43,7 @@
                             <select class="form-control @error('emp') is-invalid @enderror" name="emp">
                                 <option value="">Select Employee</option>
                                 @foreach($employee as $profile)
-                                    <option>{{ $profile->fname }}</option>
+                                    <option value="{{ $profile->id }}">{{ $profile->fname }} {{ $profile->lname }}</option>
                                 @endforeach
                             </select>
                             @error('emp')

@@ -20,6 +20,8 @@ class CreateCustomersTable extends Migration
             $table->string('mobno');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->int('gender');
+            $table->date('birthdate');
             $table->string('address');
             $table->string('image');
             $table->enum('status',['Active','InActive']);

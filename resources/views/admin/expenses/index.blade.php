@@ -39,40 +39,37 @@
                     </div>
                     @endif
                     <table id="data" class="table table-bordered table-striped">
-                        <tr class="">
-                            <th>No</th>
-                            <th>Category Name</th>
-                            <th>Entry Date</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                        </tr>
-                        @foreach($profile as $data)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$data->category}}</td>
-                            <td>{{$data->entry_date}}</td>
-                            <td>{{$data->amount}}</td>
-                            <td>
-                                <button type="button" class="btn btn-secondary"><a href="viewexpense{{$data->id}}"
-                                        style="color:white"><i class="far fa-eye"></i></a></button>
-                                <button type="button" class="btn btn-secondary"><a
-                                        href="editexpense{{$data->id}}" style="color:white"><i
-                                            class="far fa-edit"></i></a></button>
-                                <button type="button" class="btn btn-secondary" onclick="alert('Are you sure!')"><a
-                                        href="deleteexpense{{$data->id}}" style="color:white"><i
-                                            class="far fa-trash-alt"></i></a></button>
-                            </td>
-                        </tr>
-                        @endforeach
+                        <thead>
+                            <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
+                                <th>No</th>
+                                <th>Category Name</th>
+                                <th>Entry Date</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
                     </table>
-                    <br>
-                    <span style="float:right">
-                        {{$profile->links()}}
-                    </span>
-                    <br>
                 </div>
             </div>
         </section>
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $('#data').DataTable({
+             processing:true,
+             serverSide:true,
+             ajax:"{{ route('admin.getexpenses') }}",
+            columns:[
+            {data: 'id', name: 'id'},
+            {data: 'category', name: 'category'},
+            {data: 'entry_date', name: 'entry_date'},
+            {data: 'amount', name: 'amount'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
+        })
+    });
+</script>
+@endpush

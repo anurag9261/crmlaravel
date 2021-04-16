@@ -73,6 +73,7 @@
             <th>Last Name</th>
             <th>Mob No</th>
             <th>Email</th>
+            <th>Joining Date</th>
             <th>image</th>
         </tr>
         <?php //echo "<pre>"; print_r($employeData); die;?>
@@ -83,6 +84,7 @@
             <td>{{$data->lname}}</td>
             <td>{{$data->mobno}}</td>
             <td>{{$data->email}}</td>
+            <td>{{ $data->joining_date }}</td>
             <td><img src="{{ public_path('/images/'.$data->image) }}" style="width: 30px; height:auto"></td>
         </tr>
         @endforeach

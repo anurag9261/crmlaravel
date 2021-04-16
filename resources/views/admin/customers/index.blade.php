@@ -34,7 +34,7 @@
             <div class="card">
                 <div class="card-body">
                 <div class="container mt-3 mb-3">
-                     @if(session()->has('error'))
+                    @if(session()->has('error'))
                     <div class="alert alert-danger">
                         {{ session()->get('error') }}
                     </div>
@@ -46,7 +46,7 @@
                     @endif
                     <table id="empTable" class="table table-bordered table-striped">
                         <thead>
-                        <tr class="">
+                        <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
                             <th>No</td>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -54,6 +54,7 @@
                             <th>Mob No</th>
                             <th>Image</th>
                             <th>Stauts</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                     </table>
@@ -72,14 +73,27 @@
              serverSide:true,
              ajax:"{{ route('admin.getcustomers') }}",
             columns:[
-                {data:'id'},
-                {data:'fname'},
-                {data:'lname'},
-                {data:'email'},
-                {data:'mobno'},
-                {data:'image'},
-                {data:'status'},
-            ]
+            {data: 'id', name: 'id'},
+            {data: 'fname', name: 'fname'},
+            {data: 'lname', name: 'lname'},
+            {data: 'email', name: 'email'},
+            {data: 'mobno', name: 'mobno'},
+            {
+                name: "image",
+                data: "image",
+                render: function (data, type, full, meta) {
+                    return "<img src=\"/images/" + data + "\" width=\"50\" height=\"50\"/ >";
+                },
+                title: "Image",
+                orderable: true,
+                searchable: true
+            },
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
+
+
+
         })
     });
 </script>

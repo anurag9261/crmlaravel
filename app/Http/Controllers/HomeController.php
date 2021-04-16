@@ -14,24 +14,21 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // public function index()
-    // {
-    //     $user = DB::table('admins')->count();
-    //     $profile = Admin::orderBy('id', 'desc')->take(3)->get();
-    //     $customers = Customer::orderBy('id', 'desc')->take(3)->get();
-    //     $customer = DB::table('customers')->count();
-    //     return view('admin.dashboard',compact('customer','user','profile','customers'));
-    // }
+    public function index()
+    {
+        $config = DB::table('configurations')->where('id','1')->get();
+        return view('admin.master',compact('config'));
+    }
 
     public function logout(){
         Auth::logout();

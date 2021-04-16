@@ -8,16 +8,34 @@ use Illuminate\Support\Facades\DB;
 
 class ExpenseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
-        $profile['profile'] = DB::table('expenses')->orderBy('created_at','desc')->paginate(5);
-        return view('admin.expenses.index',$profile);
+        $profile = DB::table('expenses');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.index',compact('config','profile'));
+    }
+
+    public function getExpenses(Request $request)
+    {
+        $expenses = Expense::all();
+        return datatables()->of($expenses)
+            ->addColumn('action', function ($row) {
+                $html = '<a href="viewexpense' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
+                $html .= '<a href="editexpense' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
+                $html .= '<a href="deleteexpense' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                return $html;
+            })->toJson();
     }
 
     public function create()
     {
-        return view('admin.expenses.addexpense');
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.addexpense',compact('config'));
     }
 
     public function store(Request $request)
@@ -27,6 +45,7 @@ class ExpenseController extends Controller
             'entry_date' => 'required',
             'amount' => 'required',
             'description' => 'required',
+            'attach_bill' => 'required|image|mimes:jpeg,png,jpg,pdf|max:5120',
         ]);
         $profile=new Expense();
         $profile->category = $request->get('category');
@@ -34,7 +53,7 @@ class ExpenseController extends Controller
         $profile->amount = $request->get('amount');
         $profile->description = $request->get('description');
         $imageName = time() . '.' . $request->attach_bill->extension();
-        $request->attach_bill->move(public_path('images'), $imageName);
+        $request->attach_bill->move(public_path('bills'), $imageName);
         $profile->attach_bill = $imageName;
         $profile->save();
         return redirect('expenses')->with('message', 'Record saved successfully!');
@@ -43,7 +62,8 @@ class ExpenseController extends Controller
     public function edit(Expense $expense,$id)
     {
         $profile = Expense::find($id);
-        return view('admin.expenses.editexpense',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.editexpense',compact('profile','config'));
     }
 
 
@@ -64,7 +84,7 @@ class ExpenseController extends Controller
             $imageName = $profile->attach_bill;
         } else {
             $imageName = time() . '.' . $request->attach_bill->extension();
-            $request->attach_bill->move(public_path('images'), $imageName);
+            $request->attach_bill->move(public_path('bills'), $imageName);
             $profile->attach_bill = $imageName;
         }
         $profile->save();
@@ -79,6 +99,7 @@ class ExpenseController extends Controller
 
     public function view($id){
         $profile = Expense::find($id);
-        return view('admin.expenses.viewexpense',compact('profile'));
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.expenses.viewexpense',compact('profile','config'));
     }
 }
