@@ -52,7 +52,7 @@
 </head>
 <body>
     <header class="header">
-        <img src="{{ public_path('/images/profile/crm.png') }}">
+        <img src="{{ public_path('/images/profile/'.$config[0]->site_logo) }}">
         <h2 class="">Payslip</h2>
     </header>
     <br>
@@ -131,15 +131,36 @@
             <td>Total Present Days:</td>
             <td><b>{{ $attandance }}</b></td>
         </tr>
+        @if($employeData[0]->salary_type == 2)
         <tr>
             <td></td>
             <td></td>
             <td>Total Salary:</td>
             <td><b>{{ ($employeData[0]->salary_amount * $attandance)/30 }}</b></td>
         </tr>
+        @else
+        <tr>
+            <?php
+               $Hours= array_sum($totalTime);
+            ?>
+            <td></td>
+            <td></td>
+            <td>Total Salary:</td>
+            <td><b>{{ ($employeData[0]->salary_amount * $Hours ) }}</b></td>
+        </tr>
+        @endif
     </table>
 <footer>CRM-Admin Panel</footer>
+<?php
 
+$iCostPerHour = '100';
+$timespent = '03.30'; //i got this by converting from 08:15:00
+//echo number_format(($timespent * $iCostPerHour), 3, '.', ','); die;
+$timeparts=explode(':',$timespent);
+//dd($timeparts);
+$pay=$timeparts[0]*$iCostPerHour+$timeparts[0]/60*$iCostPerHour;
+echo $pay; die;
+?>
 </body>
 
 </html>

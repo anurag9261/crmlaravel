@@ -111,9 +111,9 @@ class InvoiceController extends Controller
 
     public function view($id){
         $profile = Invoice::find($id);
-        $pr = Product::find($id);
+        $product = Product::get()->where('invoice_id',$id);
         $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.invoices.viewinvoice',compact('profile','pr','config'));
+        return view('admin.invoices.viewinvoice',compact('profile','product','config'));
     }
 
     public function edit(Invoice $invoice,$id)

@@ -43,11 +43,11 @@
                         <thead>
                             <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
                                 <th>No</th>
+                                <th>Image</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Mobile No</th>
-                                <th>Image</th>
                                 <th>Role</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -67,22 +67,23 @@
              processing:true,
              serverSide:true,
              ajax:"{{ route('admin.getusers') }}",
+             "order": [[ 0, "desc" ]],
             columns:[
             {data: 'id', name: 'id'},
+            {
+            name: "image",
+            data: "image",
+            render: function (data, type, full, meta) {
+            return "<img src=\"/images/" + data + "\" width=\"50\" height=\"50\"/>";
+            },
+            title: "Image",
+            orderable: true,
+            searchable: true
+            },
             {data: 'fname', name: 'fname'},
             {data: 'lname', name: 'lname'},
             {data: 'email', name: 'email'},
             {data: 'mobno', name: 'mobno'},
-            {
-                name: "image",
-                data: "image",
-                render: function (data, type, full, meta) {
-                    return "<img src=\"/images/" + data + "\" width=\"50\" height=\"50\"/ >";
-                },
-                title: "Image",
-                orderable: true,
-                searchable: true
-            },
             {data: 'role', name: 'role'},
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false}

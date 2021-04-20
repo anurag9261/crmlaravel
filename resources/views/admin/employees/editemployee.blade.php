@@ -43,8 +43,8 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="employee">Employee Name</label>
-                                <input type="text" class="form-control"
-                                    name="employee" value="{{$admin->admin_id}}">
+                                    <input type ="hidden" name="admin_id" value={{ $employee[0]->admin_id }} />
+                                    <input type="text" class="form-control" name="employee" value="{{$employee[0]->fname}} {{ $employee[0]->lname }}" readonly>
                             </div>
                             <div class="col-md-5">
                                 <label for="date">Current Date</label>
@@ -102,9 +102,6 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="row">
-
                         </div>
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>

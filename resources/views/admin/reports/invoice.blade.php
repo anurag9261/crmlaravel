@@ -113,7 +113,7 @@
                                 <td>{{ $data->title }}</td>
                                 <td>{{ $data->bill_to }}</td>
                                 <td>{{ $data->due_date }}</td>
-                                <td>{{ $data->total }}</td>
+                                <td>{{ $data->total_amount }}</td>
                                 <td>{{ $data->status }}</td>
                                 <td><button class="btn btn-secondary" type="submit"><a href="invoicepdfprint{{$data->id}}" style="color:white"><i class="fas fa-print"></i></a></button></td>
                             </tr>

@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
-use Illuminate\Http\Request;
 use Session;
-use Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Customer;
+use App\Admin;
 use App\Invoice;
+use App\Customer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdminController extends Controller
 {
 
     public function index()
     {
-        $profile['profile'] = DB::table('admins')->orderBy('created_at','desc')->paginate(5);
         $config['config'] = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.users.index',$profile,$config);
+        return view('admin.users.index',$config);
     }
 
     public function __construct()
@@ -31,12 +31,20 @@ class AdminController extends Controller
     {
         $admins = Admin::all();
         return datatables()->of($admins)
-            ->addColumn('action', function ($row) {
+                ->addColumn('status',function ($admins) {
+                    if ($admins->status == 1) {
+                        return "Active";
+                    } else {
+                        return "In Active";
+                    }
+                })->addColumn('action', function ($row) {
+
                 $html = '<a href="viewuser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
                 $html .= '<a href="edituser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
                 $html .= '<a href="deleteuser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
                 return $html;
             })->toJson();
+
     }
 
     public function create()
@@ -65,6 +73,9 @@ class AdminController extends Controller
             'salary_amount' => 'required',
             'status'=>'required',
             'password' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
         ]);
         $profile=new Admin();
         $profile->fname = $request->get('fname');
@@ -75,6 +86,9 @@ class AdminController extends Controller
         $profile->gender = $request->get('gender');
         $profile->joining_date = $request->get('joining_date');
         $profile->address = $request->get('address');
+        $profile->city = $request->get('city');
+        $profile->state = $request->get('state');
+        $profile->country = $request->get('country');
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
         $profile->image = $imageName;
@@ -119,6 +133,9 @@ class AdminController extends Controller
             'status' => 'required',
             'salary_type' => 'required',
             'salary_amount' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
         ]);
         $profile=Admin::find($id);
         if( $request->image == ""){
@@ -136,6 +153,9 @@ class AdminController extends Controller
         $profile->joining_date = $request->get('joining_date');
         $profile->gender = $request->get('gender');
         $profile->address = $request->get('address');
+        $profile->city = $request->get('city');
+        $profile->state = $request->get('state');
+        $profile->country = $request->get('country');
         $profile->image = $imageName;
         $profile->role = $request->get('role');
         $profile->salary_type = $request->get('salary_type');
@@ -145,27 +165,27 @@ class AdminController extends Controller
         return redirect('users')->with('message', 'Record updated successfully!');
     }
 
-    public function editpassword(){
+    public function editpassword($id){
 
         //for master Controller
+        // $profile = Admin::find($id);
         $config = DB::table('configurations')->where('id', '1')->get();
         return view('admin.changepassword',compact('config'));
     }
 
-    public function updatepassword(Request $request,$id){
+    public function updatepassword(Request $request){
 
-        $profile=Admin::find($id);
         if(!(Hash::check($request->get('currentpassword'),Auth::user()->password))){
             return back()->with('error','Your current password does not match with what you provide');
         }
-
         if(strcmp($request->get('currentpassword'),$request->get('newpassword')) == 0){
             return back()->with('error','Your current password can not be same with new password');
         }
         $request->validate([
             'currentpassword'=>'required',
-            'confirmpassword'=>'required|confirmed'
+            'newpassword'=>'required|same:confirmpassword'
         ]);
+        $profile = Admin::find(auth()->user()->id);
         $profile->password = bcrypt($request->get('newpassword'));
         $profile->save();
         return redirect('admin')->with('message', 'Password is updated!');
@@ -186,8 +206,8 @@ class AdminController extends Controller
         $invoice_paid = DB::table('invoices')->where('status','Paid')->count();
 
         //for pie chart
-        $paid = DB::table('invoices')->where('status', 'Paid')->get();
-        $pending = DB::table('invoices')->where('status', 'Pending')->get();
+        $paid = Invoice::where('status', 'Paid')->get();
+        $pending = Invoice::where('status', 'Pending')->get();
         $paid_count = count($paid);
         $pending_count = count($pending);
         $total = Invoice::count();
@@ -195,11 +215,15 @@ class AdminController extends Controller
         $pending_1 = $pending_count / $total * 100;
         $config = DB::table('configurations')->where('id', '1')->get();
 
+        //for static chart
+        $employeeCount = Admin::where('role','Employee')->count();
+        $amount = Admin::where('role','Employee')->get();
+
         //for table display
         $profile = Admin::orderBy('created_at','desc')->where('role','employee')->take(3)->get();
         $customers = Customer::orderBy('created_at','desc')->take(3)->get();
         $invoice = Invoice::orderBy('created_at','desc')->take(3)->get();
-        return view('admin.dashboard',compact('paid_1','pending_1','customer','admin','profile','customers','employee','config','invoice','invoice_paid'));
+        return view('admin.dashboard',compact('paid_1','pending_1','customer','admin','profile','customers','employee','config','invoice','invoice_paid','employeeCount'));
     }
 
 }

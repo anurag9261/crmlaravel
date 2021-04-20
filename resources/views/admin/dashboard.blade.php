@@ -227,22 +227,15 @@ window.onload = function() {
         animationEnabled: true,
         theme: "light1", // "light2", "light2", "dark1", "dark2"
         axisY: {
-            title: "Reserves(MMbbl)"
+            title: "Number of Employee"
         },
         data: [{
             type: "column",
             showInLegend: true,
             legendMarkerColor: "grey",
-            legendText: "MMbbl = one million barrels",
+            legendText: "Salary per Hour",
             dataPoints: [
-                { y: 300878, label: "Venezuela" },
-                { y: 266455, label: "Saudi" },
-                { y: 169709, label: "Canada" },
-                { y: 158400, label: "Iran" },
-                { y: 142503, label: "Iraq" },
-                { y: 101500, label: "Kuwait" },
-                { y: 97800, label: "UAE" },
-                { y: 80000, label: "Russia" }
+                { y: {{ $employeeCount }}, label: "0-100" },
             ]
         }]
     });

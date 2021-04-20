@@ -40,6 +40,11 @@
                             <td>{{$profile->id}}</td>
                         </tr>
                         <tr>
+                            <th>Image</th>
+                            <td><img src="{{asset('images/'. $profile->image)}}" width="60px" , height="auto" ,></td>
+
+                        </tr>
+                        <tr>
                             <th>First Name</th>
                             <td>{{$profile->fname}}</td>
 
@@ -75,13 +80,12 @@
 
                         </tr>
                         <tr>
-                            <th>Image</th>
-                            <td><img src="{{asset('images/'. $profile->image)}}" width="60px", height="auto",></td>
-
-                        </tr>
-                        <tr>
                             <th>Status</th>
                             <td>{{$profile->status}}</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{{$profile->address}}</td>
                         </tr>
                         <tr>
                             <th>Created At</th>

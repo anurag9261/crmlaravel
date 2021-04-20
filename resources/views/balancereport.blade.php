@@ -58,7 +58,7 @@
 
 <body>
     <header class="header">
-        <img src="{{ public_path('/images/profile/crm.png') }}">
+        <img src="{{ public_path('/images/profile/'. ) }}">
         <h2 class="">Balancesheet Report</h2>
     </header>
     <br>

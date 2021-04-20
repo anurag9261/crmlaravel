@@ -56,6 +56,9 @@ class CustomerController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required',
             'password' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
         ]);
         $profile=new Customer();
         $profile->fname = $request->get('fname');
@@ -65,6 +68,9 @@ class CustomerController extends Controller
         $profile->gender = $request->get('gender');
         $profile->birthdate = $request->get('birthdate');
         $profile->address = $request->get('address');
+        $profile->city = $request->get('city');
+        $profile->state = $request->get('state');
+        $profile->country = $request->get('country');
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
         $profile->image = $imageName;
@@ -94,6 +100,9 @@ class CustomerController extends Controller
             //'password' => 'required',
             'address' => 'required',
             'gender' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
         ]);
         $profile=Customer::find($id);
         if( $request->image == ""){
@@ -110,6 +119,9 @@ class CustomerController extends Controller
         $profile->gender = $request->get('gender');
         $profile->birthdate = $request->get('birthdate');
         $profile->address = $request->get('address');
+        $profile->city = $request->get('city');
+        $profile->state = $request->get('state');
+        $profile->country = $request->get('country');
         $profile->status = $request->get('status');
         $profile->save();
         return redirect('customers')->with('message', 'Record updated successfully!');

@@ -62,7 +62,7 @@
 
 <body>
     <header class="header">
-        <img src="{{ public_path('/images/profile/crm.png') }}">
+        <img src="{{ public_path('/images/profile/'.$config[0]->site_logo) }}">
         <h2 class="">Invoice Report</h2>
     </header>
     <br>
@@ -108,13 +108,7 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td><b>Tax Percentage</b></td>
-                <td style="float:right">{{ $invoice->tax_percentage }} %</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><b>Tax Amount</b></td>
+                <td><b>Tax Amount ({{ $invoice->tax_percentage }}%)</b></td>
                 <td style="float: right">{{ $invoice->tax_amount }}</td>
             </tr>
             <tr>

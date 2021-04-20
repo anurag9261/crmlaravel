@@ -61,11 +61,18 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="{{route('admin.dashboard')}}" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item">
-
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li style="float:left">
+                   Company Name- <b>{{ $config[0]->company_name }}</b>
                 </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+            <li style="float:right">
+                Weight No- <b>{{ $config[0]->weight_number }}</b>
+            </li>
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
@@ -94,28 +101,33 @@
                         <img src="{{ asset('/images/'.Auth::user()->image)}}" class="img-circle elevation-2"
                             alt="User Image" style="width:60px">
                     </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
-                                    {{Auth::user()->fname}}
+                                    {{ Auth::user()->fname }}
                                 </p>
+                                <i class="right fas fa-angle-left"></i>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li class="nav-item has-treeview">
                                     <a href="{{URL::asset('edituser').Auth::user()->id}}" class="nav-link">
                                         <i class="nav-icon fas fa-user-edit"></i>
                                         <p style="font-size:14px;">Manage Profile</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item has-treeview">
                                     <a href="editPassword{{Auth::user()->id }}" class="nav-link">
                                         <i class="nav-icon fas fa-key"></i>
                                         <p style="font-size:14px;">Change Password</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item has-treeview">
                                     <a href="{{url('/logout')}}" class="nav-link">
                                         <i class="nav-icon fas fa-sign-out-alt"></i>
                                         <p style="font-size:14px;">Logout</p>
@@ -123,12 +135,6 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </div>
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
                         <li class="nav-item has-treeview menu-open">
                             <a href="{{url('/admin')}}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -137,6 +143,7 @@
                                 </p>
                             </a>
                         </li>
+                       @if(auth()->user()->role == 'Admin')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
@@ -166,6 +173,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
                         <li class="nav-item has-treeview">
                             <a href="{{route('admin.customers')}}" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
@@ -190,6 +198,7 @@
                                 </p>
                             </a>
                         </li>
+                        @if(auth()->user()->role == 'Admin')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-poll"></i>
@@ -245,6 +254,7 @@
                                 </p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

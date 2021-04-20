@@ -47,8 +47,7 @@
                                 <th>No</th>
                                 <th>Employee Name</th>
                                 <th>Attandance</th>
-                                <th>CurrentDate</th>
-                                {{--  <th>Total Time</th>  --}}
+                                <th>Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -65,13 +64,13 @@
         $('#employee').DataTable({
              processing:true,
              serverSide:true,
+             "order": [[ 0, "desc" ]],
              ajax:"{{ route('admin.getemployees') }}",
             columns:[
             {data: 'id', name: 'id'},
             {data: 'admin_id', name: 'admin_id'},
             {data: 'attandance', name: 'attandance'},
             {data: 'currentdate', name: 'currentdate'},
-            {{--  {data: 'totaltime', name: 'totaltime'},  --}}
             {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
         })

@@ -71,6 +71,7 @@
         $('#employee').DataTable({
             processing:true,
             serverSide:true,
+            "order": [[ 0, "desc" ]],
             ajax:"{{ route('admin.getroles') }}",
             columns:[
             {data: 'id', name: 'id'},

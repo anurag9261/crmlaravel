@@ -27,6 +27,9 @@ class CreateAdminsTable extends Migration
             $table->int('salary_type');
             $table->float('salary_amount');
             $table->string('address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('country');
             $table->string('image');
             $table->string('password');
             $table->rememberToken();

@@ -34,6 +34,7 @@ class ReportController extends Controller
             'emp' => 'required',
             'month' => 'required',
         ]);
+        $config = DB::table('configurations')->where('id', '1')->get();
         $month = date('m', strtotime($request->get('month').'-01'));
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month').'-01'));
@@ -49,7 +50,7 @@ class ReportController extends Controller
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM', $employeeId];
-                $pdf = PDF::loadView('myPDF', $data, compact('employeData', 'employeeId'));
+                $pdf = PDF::loadView('myPDF', $data, compact('employeData', 'employeeId','config'));
                 return $pdf->download('timesheetreport.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');
@@ -69,6 +70,7 @@ class ReportController extends Controller
         $employeData = $request->validate([
             'month' => 'required',
         ]);
+        $config = DB::table('configurations')->where('id', '1')->get();
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $month = date('m', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month') . '-01'));
@@ -85,7 +87,7 @@ class ReportController extends Controller
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM'];
-                $pdf = PDF::loadView('balancereport', $data, compact('invoiceRecord', 'expenseRecord'));
+                $pdf = PDF::loadView('balancereport', $data, compact('invoiceRecord', 'expenseRecord','config'));
                 return $pdf->download('balancereport.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');
@@ -106,6 +108,7 @@ class ReportController extends Controller
             'month' => 'required',
             'status' => 'required',
         ]);
+        $config = DB::table('configurations')->where('id', '1')->get();
         $month = date('m', strtotime($request->get('month') . '-01'));
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month') . '-01'));
@@ -120,7 +123,7 @@ class ReportController extends Controller
         foreach($array as $newArray){
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM', $employee = $request->get('employee')];
-                $pdf = PDF::loadView('employeereport', $data, compact('employeData', 'employee'));
+                $pdf = PDF::loadView('employeereport', $data, compact('employeData', 'employee','config'));
                 return $pdf->download('employeereport.pdf');
             } else {
                 return back()->withError(' Data not found for ' .$errorMonth. '!');
@@ -138,6 +141,7 @@ class ReportController extends Controller
             'status' => 'required',
             'customer' => 'required'
         ]);
+            $config = DB::table('configurations')->where('id', '1')->get();
             $month = date('m', strtotime($request->get('month') . '-01'));
             $year =  date("Y", strtotime($request->get('month') . '-01'));
             $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
@@ -163,12 +167,13 @@ class ReportController extends Controller
     {
 
         $invoice = Invoice::find($id);
+        $config = DB::table('configurations')->where('id', '1')->get();
         $productData =  DB::table('products')
                             ->where('invoice_id', $id)
                             ->get();
         //dd($productDatass);
         $data = ['title' => 'CRM'];
-        $pdf = PDF::loadView('invoicereport', $data, compact('invoice','productData'));
+        $pdf = PDF::loadView('invoicereport', $data, compact('invoice','productData','config'));
         return $pdf->download('invoicereport.pdf');
     }
 
@@ -184,15 +189,15 @@ class ReportController extends Controller
     public function payslipPDF(Request $request)
     {
         $employeData = $request->validate([
-            // 'employee' => 'required',
             'month' => 'required',
         ]);
+        $config = DB::table('configurations')->where('id', '1')->get();
         $month = date('m', strtotime($request->get('month') . '-01'));
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month') . '-01'));
         $employeeId = $request->get('employee');
         $employeData = DB::table('admins')
-                            ->select('admins.id', 'admins.fname', 'admins.lname','admins.salary_amount','employees.*')
+                            ->select('admins.id', 'admins.fname', 'admins.lname','admins.salary_amount','admins.salary_type','employees.*')
                             ->join('employees', 'admin_id', '=', 'admins.id')
                             ->whereMonth('employees.currentdate', $month)
                              ->whereYear('employees.currentdate', $year)
@@ -205,7 +210,7 @@ class ReportController extends Controller
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM', $employeeId];
-                $pdf = PDF::loadView('payslipPDF', $data, compact('employeData', 'employeeId','attandance'));
+                $pdf = PDF::loadView('payslipPDF', $data, compact('employeData', 'employeeId','attandance','config'));
                 return $pdf->download('payslip.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');
@@ -225,6 +230,8 @@ class ReportController extends Controller
         $employeData = $request->validate([
             'month' => 'required',
         ]);
+        $config = DB::table('configurations')->where('id', '1')->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
         $month = date('m', strtotime($request->get('month') . '-01'));
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month') . '-01'));
@@ -264,7 +271,7 @@ class ReportController extends Controller
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM'];
-                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData','attandance'));
+                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData','attandance','config'));
                 return $pdf->download('payroll.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');
@@ -277,6 +284,7 @@ class ReportController extends Controller
         $employeData = $request->validate([
             'month' => 'required',
         ]);
+        $config = DB::table('configurations')->where('id', '1')->get();
         $month = date('m', strtotime($request->get('month') . '-01'));
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month') . '-01'));
@@ -291,7 +299,7 @@ class ReportController extends Controller
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM'];
-                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData', 'attandance'));
+                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData', 'attandance','config'));
                 return $pdf->download('payroll.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');

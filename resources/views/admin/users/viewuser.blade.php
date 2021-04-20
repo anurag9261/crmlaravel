@@ -36,6 +36,11 @@
                             <td>{{$profile->id}}</td>
                         </tr>
                         <tr>
+                            <th>Image</th>
+                            <td><img src="{{asset('images/'. $profile->image)}}" width="60px" , height="60px" ,></td>
+
+                        </tr>
+                        <tr>
                             <th>First Name</th>
                             <td>{{$profile->fname}}</td>
 
@@ -88,13 +93,20 @@
                             <td>{{ $profile->salary_amount }}</td>
                         </tr>
                         <tr>
-                            <th>Image</th>
-                            <td><img src="{{asset('images/'. $profile->image)}}" width="60px", height="60px",></td>
-
-                        </tr>
-                        <tr>
                             <th>Role</th>
                             <td>{{$profile->role}}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            @if($profile->status == 1)
+                            <td>Active</td>
+                            @else
+                            <td>In Active</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{{$profile->address}}</td>
                         </tr>
                         <tr>
                             <th>Created At</th>

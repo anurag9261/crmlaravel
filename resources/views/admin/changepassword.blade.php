@@ -39,7 +39,8 @@
                             {{session('message')}}
                         </div>
                     @endif
-                    <form method="post" action="updatePassword{{Auth::user()->id}}">
+                    <?php //echo "<pre>"; print_r(Auth::user()->id); die;?>
+                    <form method="post" action="updatePassword/{{Auth::user()->id}}">
                         @csrf
                         <div class="row">
                             <div class="col-md-8">

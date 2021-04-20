@@ -47,10 +47,14 @@ class ConfigurationController extends Controller
             $request->favicon_icon->move(public_path('images/profile'), $imageName1);
             $profile->favicon_icon = $imageName1;
         }
+        $profile->company_name = $request->get('company_name');
+        $profile->weight_number = $request->get('weight_number');
+        $profile->city = $request->get('city');
+        $profile->state = $request->get('state');
+        $profile->country = $request->get('country');
         $profile->address = $request->get('address');
         $profile->site_name = $request->get('site_name');
         $profile->site_title = $request->get('site_title');
-
         $profile->save();
         return redirect('configuration1')->with('message', 'Record updated successfully!');
     }
