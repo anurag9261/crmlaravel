@@ -39,7 +39,6 @@
             @endif
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
-
                 <div class="card-body">
                     <form method="post" action="{{ route('report.employee') }}">
                     @csrf

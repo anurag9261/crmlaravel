@@ -127,7 +127,7 @@
                                 <br>
                                 <input type="radio" name="salary_type" value="1" {{ ($profile->salary_type) == '1' ? 'checked' : ''}}>
                                 <label>Hourly</label>
-                                <input type="radio" name="salary_type" value="0" {{ ($profile->salary_type) == '2' ? 'checked' : ''}}>
+                                <input type="radio" name="salary_type" value="2" {{ ($profile->salary_type) == '2' ? 'checked' : ''}}>
                                 <label>Monthly</label>
                             </div>
                         </div>
@@ -195,10 +195,73 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <img src="{{asset('images/'. $profile->image )}}" width="150px" , height="auto"></td>
+                                <label for="city">City</label>
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city"
+                                    value="{{ $profile->city }}">
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="state">State</label>
+                                <select name="state" class="form-control">
+                                    <option value="">Select State</option>
+                                    <option value="Alberta" {{ ($profile->state) == 'Alberta' ? 'selected' : '' }}>Alberta
+                                    </option>
+                                    <option value="British_Columbia" {{ ($profile->state) == 'British_Columbia' ? 'selected' : '' }}>
+                                        British Columbia</option>
+                                    <option value="Manitoba" {{ ($profile->state) == 'Manitoba' ? 'selected' : '' }}>
+                                        Manitoba</option>
+                                    <option value="New_Brunswick" {{ ($profile->state) == 'New_Brunswick' ? 'selected' : '' }}>
+                                        New Brunswick</option>
+                                    <option value="Newfoundland_and_Labrador"
+                                        {{ ($profile->state) == 'Newfoundland_and_Labrador' ? 'selected' : '' }}>
+                                        Newfoundland and Labrador</option>
+                                    <option value="Nova_Scotia" {{ ($profile->state) == 'Nova_Scotia' ? 'selected' : '' }}>
+                                        Nova Scotia</option>
+                                    <option value="Ontario" {{ ($profile->state) == 'Ontario' ? 'selected' : '' }}>
+                                        Ontario</option>
+                                    <option value="Prince_Edward_Island" {{ ($profile->state) == 'Prince_Edward_Island' ? 'selected' : '' }}>
+                                        Prince Edward Island</option>
+                                    <option value="Quebec" {{ ($profile->state) == 'Quebec' ? 'selected' : '' }}>
+                                        Quebec</option>
+                                    <option value="Saskatchewan" {{ ($profile->state) == 'Saskatchewan' ? 'selected' : '' }}>
+                                        Saskatchewan</option>
+                                    <option value="Yukon" {{ ($profile->state) == 'Yukon' ? 'selected' : '' }}>
+                                        Yukon</option>
+                                    <option value="Nunavaut" {{ ($profile->state) == 'Nunavaut' ? 'selected' : '' }}>
+                                        Nunavaut</option>
+                                    <option value="Northewst_Territories" {{ ($profile->state) == 'Northewst_Territories' ? 'selected' : '' }}>
+                                        Northewst Territories</option>
+                                </select>
+                                @error('state')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country"
+                                    value="{{ $profile->country }}" readonly>
+                                @error('country')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img src="{{asset('images/'. $profile->image )}}" width="150px" , height="auto"></td>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
                 </div>

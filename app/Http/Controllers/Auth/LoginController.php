@@ -45,6 +45,7 @@ class LoginController extends Controller
 
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
+            return redirect()->route('admin.dashboard')->with('message', 'Login Successfully');
             if (auth()->user()->role == 'Admin') {
                 return redirect()->route('admin.dashboard')->with('message','Login Successfully');
             }

@@ -135,11 +135,24 @@
                             </div>
                             <p style="color:red;font-size:12px">*Bill format must be jpeg,png,jpg,PDF with max-size:5mb.</p>
                         </div>
+
+                        <?php $string = substr($profile->attach_bill, -4);?>
+                        <?php //echo "<pre>"; print_r($string); die;?>
+                        @if($string == '.pdf')
                         <div class="row">
-                            <div class="col-md-5">
-                            <img src="{{asset('images/'. $profile->attach_bill)}}" width="80px" , height="auto" ,>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <a href="{{asset('bills/'.$profile->attach_bill)}}" download>
+                                    <img src="{{asset('images/profile/pdf1.png')}}" width="80px" , height="auto" ,>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+                        @else
+                        <div class="col-md-5">
+                            <img src="{{asset('bills/'. $profile->attach_bill)}}" width="80px" , height="auto" ,>
+                        </div>
+                        @endif
                         <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>

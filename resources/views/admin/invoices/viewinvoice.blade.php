@@ -36,21 +36,22 @@
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>Id</th>
+                            <td>{{$profile->id}}</td>
 
+                        </tr>
                         <tr>
                             <th>Title</th>
                             <td>{{$profile->title}}</td>
-
                         </tr>
                         <tr>
                             <th>Current Date</th>
                             <td>{{$profile->current_date}}</td>
-
                         </tr>
                         <tr>
                             <th>Due Date</th>
                             <td>{{$profile->due_date}}</td>
-
                         </tr>
                         <tr>
                             <th>Bill To</th>
@@ -84,6 +85,23 @@
                             <th>Updated At</th>
                             <td>{{$profile->updated_at}}</td>
                         </tr>
+                    </table>
+                    <br>
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                        @foreach ($product as $data)
+                            <tr>
+                                <td>{{ $data->product }}</td>
+                                <td>{{ $data->qty }}</td>
+                                <td>{{ $data->price }}</td>
+                                <td>{{ $data->total}}</td>
+                            </tr>
+                        @endforeach
                     </table>
                 </div>
             </div>

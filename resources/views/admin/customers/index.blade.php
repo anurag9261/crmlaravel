@@ -48,11 +48,11 @@
                         <thead>
                         <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
                             <th>No</td>
+                            <th>Image</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>Mob No</th>
-                            <th>Image</th>
                             <th>Stauts</th>
                             <th>Action</th>
                         </tr>
@@ -71,23 +71,24 @@
         $('#empTable').DataTable({
              processing:true,
              serverSide:true,
+             "order": [[ 0, "desc" ]],
              ajax:"{{ route('admin.getcustomers') }}",
             columns:[
             {data: 'id', name: 'id'},
+            {
+            name: "image",
+            data: "image",
+            render: function (data, type, full, meta) {
+            return "<img src=\"/images/" + data + "\" width=\"50\" height=\"50\"/>";
+            },
+            title: "Image",
+            orderable: true,
+            searchable: true
+            },
             {data: 'fname', name: 'fname'},
             {data: 'lname', name: 'lname'},
             {data: 'email', name: 'email'},
             {data: 'mobno', name: 'mobno'},
-            {
-                name: "image",
-                data: "image",
-                render: function (data, type, full, meta) {
-                    return "<img src=\"/images/" + data + "\" width=\"50\" height=\"50\"/ >";
-                },
-                title: "Image",
-                orderable: true,
-                searchable: true
-            },
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
             ],

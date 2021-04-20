@@ -61,6 +61,7 @@
         $('#data').DataTable({
              processing:true,
              serverSide:true,
+             "order": [[ 0, "desc" ]],
              ajax:"{{ route('admin.getexpenses') }}",
             columns:[
             {data: 'id', name: 'id'},

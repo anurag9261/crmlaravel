@@ -23,6 +23,9 @@ class CreateCustomersTable extends Migration
             $table->int('gender');
             $table->date('birthdate');
             $table->string('address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('country');
             $table->string('image');
             $table->enum('status',['Active','InActive']);
             $table->string('password');

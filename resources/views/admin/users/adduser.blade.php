@@ -202,6 +202,54 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" placeholder="Enter City">
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="state">State</label>
+                                <select name="state" class="form-control">
+                                    <option value="">Select State</option>
+                                    <option>Alberta</option>
+                                    <option>British Columbia</option>
+                                    <option>Manitoba</option>
+                                    <option>New Brunswick</option>
+                                    <option>Newfoundland and Labrador</option>
+                                    <option>Nova Scotia</option>
+                                    <option>Ontario</option>
+                                    <option>Prince Edward Island</option>
+                                    <option>Quebec</option>
+                                    <option>Saskatchewan</option>
+                                    <option>Yukon</option>
+                                    <option>Nunavaut</option>
+                                    <option>Northewst Territories</option>
+                                </select>
+                                @error('state')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country">
+                                @error('country')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
                                 <label for="password">password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
                                     placeholder="Enter Password Here">

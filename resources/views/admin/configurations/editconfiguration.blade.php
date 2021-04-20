@@ -30,6 +30,29 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
+                                <label for="company_name">Company Name</label>
+                                <input type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name"
+                                    value="{{ $profile->company_name }}" placeholder="Enter Company Name">
+                                @error('company_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="title">Weight Number</label>
+                                <input type="text" class="form-control @error('weight_number') is-invalid @enderror" name="weight_number"
+                                    value="{{ $profile->weight_number }}" placeholder="Enter Weight Number">
+                                @error('weight_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
                                 <label for="site_name">Site Name</label>
                                 <input type="text" class="form-control @error('site_name') is-invalid @enderror"
                                     name="site_name" value="{{$profile->site_name}}" placeholder="Enter Site Name">
@@ -83,10 +106,72 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-5">
                                 <label for="address">Address</label>
                                 <textarea class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Enter Address">{{ $profile->address }}</textarea>
                                 @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ $profile->city }}">
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="state">State</label>
+                                <select name="state" class="form-control">
+                                    <option value="">Select States</option>
+                                    <option value="Alberta" {{ ($profile->state) == 'Alberta' ? 'selected' : '' }}>Alberta
+                                    </option>
+                                    <option value="British_Columbia" {{ ($profile->state) == 'British_Columbia' ? 'selected' : '' }}>
+                                        British Columbia</option>
+                                    <option value="Manitoba" {{ ($profile->state) == 'Manitoba' ? 'selected' : '' }}>
+                                        Manitoba</option>
+                                    <option value="New_Brunswick" {{ ($profile->state) == 'New_Brunswick' ? 'selected' : '' }}>
+                                        New Brunswick</option>
+                                    <option value="Newfoundland_and_Labrador"
+                                        {{ ($profile->state) == 'Newfoundland_and_Labrador' ? 'selected' : '' }}>
+                                        Newfoundland and Labrador</option>
+                                    <option value="Nova_Scotia" {{ ($profile->state) == 'Nova_Scotia' ? 'selected' : '' }}>
+                                        Nova Scotia</option>
+                                    <option value="Ontario" {{ ($profile->state) == 'Ontario' ? 'selected' : '' }}>
+                                        Ontario</option>
+                                    <option value="Prince_Edward_Island"
+                                        {{ ($profile->state) == 'Prince_Edward_Island' ? 'selected' : '' }}>
+                                        Prince Edward Island</option>
+                                    <option value="Quebec" {{ ($profile->state) == 'Quebec' ? 'selected' : '' }}>
+                                        Quebec</option>
+                                    <option value="Saskatchewan" {{ ($profile->state) == 'Saskatchewan' ? 'selected' : '' }}>
+                                        Saskatchewan</option>
+                                    <option value="Yukon" {{ ($profile->state) == 'Yukon' ? 'selected' : '' }}>
+                                        Yukon</option>
+                                    <option value="Nunavaut" {{ ($profile->state) == 'Nunavaut' ? 'selected' : '' }}>
+                                        Nunavaut</option>
+                                    <option value="Northewst_Territories"
+                                        {{ ($profile->state) == 'Northewst_Territories' ? 'selected' : '' }}>
+                                        Northewst Territories</option>
+                                </select>
+                                @error('state')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ $profile->country }}"
+                                    readonly>
+                                @error('country')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
