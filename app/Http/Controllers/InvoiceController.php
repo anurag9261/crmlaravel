@@ -120,10 +120,7 @@ class InvoiceController extends Controller
     {
         $profile = Invoice::find($id);
         $customers = DB::table('customers')->get();
-        $products = DB::table('products')
-            ->where('invoice_id', $id)
-            ->orWhere('id',$id)
-            ->get();
+        $products = DB::table('products')->where('invoice_id',$id)->get();
         $config = DB::table('configurations')->where('id', '1')->get();
         return view('admin.invoices.editinvoice', compact('profile','products','customers','config'));
     }
@@ -196,13 +193,21 @@ class InvoiceController extends Controller
         return redirect('invoices')->with('error', 'Invoice deleted successfully!');
     }
 
-    public function deleteProduct($product_ids = array())
+    public function deleteProduct($id)
     {
-        $product_ids = $this->input->post('product_ids');
-        foreach ($product_ids as $userid) {
-            $this->db->delete('prodcuts', array('id' => $userid));
-        }
-        return 1;
+        $product = Product::find($id);
+        $product->delete($id);
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+        // Product::destroy(array('id', $id));
+        // return redirect('admin.editinvoice')->with('error', 'product deleted successfully!');
+    }
+    public function deleteAll($id)
+
+    {
+        DB::table("products")->delete($id);
+        return back();
     }
 
 

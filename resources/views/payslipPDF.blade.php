@@ -141,26 +141,20 @@
         @else
         <tr>
             <?php
-               $Hours= array_sum($totalTime);
+                $iCostPerHour = $employeData[0]->salary_amount;
+                $timespent = $totalHours;
+                $timeparts = explode(':', $timespent);
+                $pay = $timeparts[0] * $iCostPerHour + $timeparts[1] / 60 * $iCostPerHour;
+                $payAmount['salaryTotal'] = round($pay);
             ?>
             <td></td>
             <td></td>
             <td>Total Salary:</td>
-            <td><b>{{ ($employeData[0]->salary_amount * $Hours ) }}</b></td>
+            <td><b>{{ $payAmount['salaryTotal'] }}</b></td>
         </tr>
         @endif
     </table>
 <footer>CRM-Admin Panel</footer>
-<?php
-
-$iCostPerHour = '100';
-$timespent = '03.30'; //i got this by converting from 08:15:00
-//echo number_format(($timespent * $iCostPerHour), 3, '.', ','); die;
-$timeparts=explode(':',$timespent);
-//dd($timeparts);
-$pay=$timeparts[0]*$iCostPerHour+$timeparts[0]/60*$iCostPerHour;
-echo $pay; die;
-?>
 </body>
 
 </html>

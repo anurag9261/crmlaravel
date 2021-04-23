@@ -25,7 +25,6 @@ Auth::routes();
 Route::get('/logout','HomeController@logout');
 Route::get('/admin', [AdminController::class, 'adminHome'])->name('admin.dashboard')->middleware('role');
 Route::get('/', 'AdminController@adminHome');
-// Route::get('/')
 
 
 /*---------------------Change password Route---------------------------*/
@@ -87,7 +86,8 @@ Route::get('viewinvoice{id}', 'InvoiceController@view')->name('admin.viewinvoice
 Route::get('editinvoice{id}', 'InvoiceController@edit')->name('admin.editinvoice');
 Route::post('updateinvoice{id}', 'InvoiceController@update')->name('admin.updateinvoice');
 Route::get('deleteinvoice{id}', 'InvoiceController@destroy')->name('admin.deleteinvoice');
-
+Route::get('deleteproduct{id}', 'InvoiceController@deleteProduct')->name('admin.deleteproduct');
+Route::get('deleteproduct/{id}', 'InvoiceController@deleteAll')->name('admin.deleteproduct');
 
 
 /*---------------------ExpenseController Route---------------------------*/
@@ -117,7 +117,6 @@ Route::post('/payrollreportPDF', 'ReportController@payrollPDF')->name('report.pa
 
 
 /*---------------------ConfigurationController Route---------------------------*/
-// Route::get('/configuration', 'ConfigurationController@index')->name('admin.configuration');
 Route::get('configuration{id}', 'ConfigurationController@edit')->name('admin.editconfiguration');
 Route::post('updateconfiguration{id}', 'ConfigurationController@update')->name('admin.updateconfiguration');
 
