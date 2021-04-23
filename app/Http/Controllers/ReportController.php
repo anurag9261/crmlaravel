@@ -224,61 +224,6 @@ class ReportController extends Controller
         return view('admin.reports.payroll',compact('config'));
     }
 
-
-    public function payroldlPDF(Request $request)
-    {
-        $employeData = $request->validate([
-            'month' => 'required',
-        ]);
-        $config = DB::table('configurations')->where('id', '1')->get();
-        $config = DB::table('configurations')->where('id', '1')->get();
-        $month = date('m', strtotime($request->get('month') . '-01'));
-        $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
-        $year =  date("Y", strtotime($request->get('month') . '-01'));
-        // $employeeId = $request->get('employee');
-        // $employeData = DB::table('employees')
-        //                     ->select('admin_id', 'employees.intime','employees.outtime','employees.currentdate','admins.*')
-        //                     ->join('admins', 'admins.id', '=', 'admin_id')
-        //                     ->whereMonth('employees.currentdate', $month)
-        //                     ->whereYear('employees.currentdate', $year)
-        //                     ->get();
-        $employeData = DB::table('admins')->where('role','Employee')
-        //                     ->whereMonth('employees.currentdate', $month)
-        //                     ->whereYear('employees.currentdate', $year)
-                                ->get();
-        // dd($employeData[0]);
-
-        foreach($employeData as $employe){
-            $employeId = $employe->id;
-
-            $attandance[] = DB::table('admins')
-                // ->select('admins.id', 'admins.fname', 'admins.lname', 'admins.salary_type', 'employees.*')
-                ->select('*')
-                ->join('employees', 'admin_id', '=', 'admins.id')
-                ->where('admins.id',$employeId)->get();
-
-            $attandance[] = DB::table('employees')
-                // ->select('admins.id', 'admins.fname', 'admins.lname', 'admins.salary_type', 'employees.*')
-                ->select('*')
-                ->join('admins', 'id', '=', 'employees.admin_id')
-                ->where('employees.id', $employeId)->get();
-
-
-        }
-                            //->where('employees.attandance', 'present')->count();
-        echo "<pre>"; print_r($attandance); die;
-        $array = (array)$employeData;
-        foreach ($array as $newArray) {
-            if (!empty($newArray)) {
-                $data = ['title' => 'CRM'];
-                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData','attandance','config'));
-                return $pdf->download('payroll.pdf');
-            } else {
-                return back()->withError(' Data not found for ' . $errorMonth . '!');
-            }
-        }
-    }
-
     public function payrollPDF(Request $request)
     {
         $employeData = $request->validate([
@@ -288,18 +233,54 @@ class ReportController extends Controller
         $month = date('m', strtotime($request->get('month') . '-01'));
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month') . '-01'));
-        $userData['user'] = DB::table('admins')->select('id','fname', 'lname', 'salary_amount')->get();
-        foreach($userData['user'] as $emp){
-            $userData['attend'][] = DB::table('employees')->where('admin_id', $emp->id)->get();
+        $userData = DB::table('admins')->select('id','fname', 'lname', 'salary_amount','salary_type')->where('role','Employee')->get();
 
+        foreach($userData as $emp){
+            $userDataAttend = DB::table('employees')->where('admin_id',$emp->id)->where('attandance','present')->get();
+            $userPresentDay = count($userDataAttend);
+
+            foreach ($userDataAttend as $employee) {
+                $inTimeResult = $employee->intime;
+                $outTimeResult = $employee->outtime;
+                if($inTimeResult == '' || $outTimeResult == ''){
+                    $dailyHours[] = '00:00:00';
+                }else{
+                    $time1 = new DateTime($inTimeResult);
+                    $time2 = new DateTime($outTimeResult);
+                    $interval = $time1->diff($time2);
+                    $dailyHours[] = $interval->format('%H:%I:%S');
+                }
+            }
+            $time = [$dailyHours];
+            $sum = strtotime('00:00:00');
+            $totaltime = 0;
+            foreach ($time[0] as $element) {
+                $timeinsec = strtotime($element) - $sum;
+                $totaltime = $totaltime + $timeinsec;
+            }
+            $h = intval($totaltime / 3600);
+            $totaltime = $totaltime - ($h * 3600);
+            $m = intval($totaltime / 60);
+            //$s = $totaltime - ($m * 60);
+            $totalHours['hours'] = ("$h:$m:00");
+            $arrayEmp = (array)$emp;
+            $userPresentDaycount['presentDay'] = $userPresentDay;
+            if($arrayEmp['salary_type'] == 2){
+                $payAmount['salaryTotal'] = ($userPresentDaycount['presentDay'] * $arrayEmp['salary_amount']) / 30;
+            }else{
+                $iCostPerHour = $arrayEmp['salary_amount'];
+                $timespent = $totalHours['hours'];
+                $timeparts = explode(':', $timespent);
+                $pay = $timeparts[0] * $iCostPerHour + $timeparts[1] / 60 * $iCostPerHour;
+                $payAmount['salaryTotal'] = round($pay);
+            }
+            $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount,$payAmount);
         }
-
-        echo "<pre>"; print_r($userData); die;
         $array = (array)$employeData;
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM'];
-                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData', 'attandance','config'));
+                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData','config','employeSalaryData'));
                 return $pdf->download('payroll.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');

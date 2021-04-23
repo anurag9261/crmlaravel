@@ -61,7 +61,7 @@ class AdminController extends Controller
         $profile = $request->validate([
             'fname' => 'required',
             'lname' => 'required',
-            'mobno' => 'required',
+            'mobno' => 'required|min:10',
             'email' => 'required',
             'birthdate' => 'required',
             'joining_date' => 'required',
@@ -72,7 +72,7 @@ class AdminController extends Controller
             'role' => 'required',
             'salary_amount' => 'required',
             'status'=>'required',
-            'password' => 'required',
+            'password' => 'required|min:6',
             'city' => 'required',
             'state' => 'required',
             'country' => 'required',
@@ -182,8 +182,8 @@ class AdminController extends Controller
             return back()->with('error','Your current password can not be same with new password');
         }
         $request->validate([
-            'currentpassword'=>'required',
-            'newpassword'=>'required|same:confirmpassword'
+            'currentpassword'=>'required|min:6',
+            'newpassword'=>'required|min:6|same:confirmpassword'
         ]);
         $profile = Admin::find(auth()->user()->id);
         $profile->password = bcrypt($request->get('newpassword'));

@@ -236,6 +236,9 @@ window.onload = function() {
             legendText: "Salary per Hour",
             dataPoints: [
                 { y: {{ $employeeCount }}, label: "0-100" },
+                { y: 450, label: "100-500" },
+                { y: 712, label: "600-1000" },
+                { y: 1500, label: "1000-1200" },
             ]
         }]
     });
