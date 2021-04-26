@@ -159,9 +159,13 @@ class InvoiceController extends Controller
 
         $count = count($request->get('product'));
         for ($i = 0; $i < $count; $i++) {
+            // echo "<pre>";
+            // print_r($request->all());
+            // die;
             $product = Product::find($request->get('id')[$i]);
             if ($product == null) {
                 $productP = new Product();
+                //echo "<pre>"; print_r($request->all()); die;
                 $productP->invoice_id = $request->get('invoice_no');
                 $productP->product = $request->get('product')[$i];
                 $productP->qty = $request->get('qty')[$i];

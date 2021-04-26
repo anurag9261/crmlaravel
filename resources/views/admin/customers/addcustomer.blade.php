@@ -157,19 +157,19 @@
                                 <label for="state">State</label>
                                 <select name="state" class="form-control">
                                     <option value="">Select State</option>
-                                    <option>Alberta</option>
-                                    <option>British Columbia</option>
-                                    <option>Manitoba</option>
-                                    <option>New Brunswick</option>
-                                    <option>Newfoundland and Labrador</option>
-                                    <option>Nova Scotia</option>
-                                    <option>Ontario</option>
-                                    <option>Prince Edward Island</option>
-                                    <option>Quebec</option>
-                                    <option>Saskatchewan</option>
-                                    <option>Yukon</option>
-                                    <option>Nunavaut</option>
-                                    <option>Northewst Territories</option>
+                                    <option value="Alberta">Alberta</option>
+                                    <option value="British_Columbia">British Columbia</option>
+                                    <option value="Manitoba">Manitoba</option>
+                                    <option value="New_Brunswick">New Brunswick</option>
+                                    <option value="Newfoundland_and_Labrador">Newfoundland and Labrador</option>
+                                    <option value="Nova_Scotia">Nova Scotia</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Prince_Edward_Island">Prince Edward Island</option>
+                                    <option value="Quebec">Quebec</option>
+                                    <option value="Saskatchewan">Saskatchewan</option>
+                                    <option value="Yukon">Yukon</option>
+                                    <option value="Nunavaut">Nunavaut</option>
+                                    <option value="Northewst_Territories">Northewst Territories</option>
                                 </select>
                                 @error('state')
                                 <span class="invalid-feedback" role="alert">

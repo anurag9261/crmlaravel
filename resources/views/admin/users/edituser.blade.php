@@ -1,6 +1,11 @@
 @extends('admin.master')
 @push('styles')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        select[readonly] {
+            pointer-events: none;
+        }
+    </style>
 @endpush
 @section('content')
 <div class="content-wrapper">
@@ -338,13 +343,13 @@
                                 <label for="gender">Gender</label>
                                 <br>
                                 <input type="radio" class="@error('gender') is-invalid @enderror" name="gender" value="1"
-                                    {{ ($profile->gender) == '1' ? 'checked' : '' }} disabled>
+                                    {{ ($profile->gender) == '1' ? 'checked' : '' }} >
                                 <label>Male</label>
                                 <input type="radio" class="@error('gender') is-invalid @enderror" name="gender" value="2"
-                                    {{ ($profile->gender) == '2' ? 'checked' : '' }} disabled>
+                                    {{ ($profile->gender) == '2' ? 'checked' : '' }}>
                                 <label>Female</label>
                                 <input type="radio" class="@error('gender') is-invalid @enderror" name="gender" value="0"
-                                    {{ ($profile->gender) == '0' ? 'checked' : '' }} disabled>
+                                    {{ ($profile->gender) == '0' ? 'checked' : '' }}>
                                 <label>Other</lable>
                                     @error('gender')
                                     <span class="invalid-feedback" role="alert">
@@ -352,12 +357,12 @@
                                     </span>
                                     @enderror
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5" style="display:none">
                                 <label for="salarytype">Salary Type</label>
                                 <br>
-                                <input type="radio" name="salary_type" value="1" {{ ($profile->salary_type) == '1' ? 'checked' : ''}} disabled>
+                                <input type="radio" name="salary_type" value="1" {{ ($profile->salary_type) == '1' ? 'checked' : ''}}>
                                 <label>Hourly</label>
-                                <input type="radio" name="salary_type" value="2" {{ ($profile->salary_type) == '2' ? 'checked' : ''}} disabled>
+                                <input type="radio" name="salary_type" value="2" {{ ($profile->salary_type) == '2' ? 'checked' : ''}}>
                                 <label>Monthly</label>
                             </div>
                         </div>
@@ -365,9 +370,9 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="role">Role</label>
-                                <select class="form-control  @error('role') is-invalid @enderror" name="role">
+                                <select class="form-control  @error('role') is-invalid @enderror" name="role" readonly>
                                     @foreach($roles as $roleSingle)
-                                    <option value="{{ $roleSingle->title }}" {{ ($roleSingle->title) == $roleSingle->title ? 'selected' : '' }} disabled>{{ $roleSingle->title }}</option>
+                                    <option value="{{ $roleSingle->title }}" {{ ($roleSingle->title) == $roleSingle->title ? 'selected' : '' }}>{{ $roleSingle->title }}</option>
                                     @endforeach
                                 </select>
                                 @error('role')
@@ -402,10 +407,10 @@
                             </div>
                             <div class="col-md-5">
                                 <label for="status">Staus</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="">Select Status</option>
-                                    <option value="1" {{ ($profile->status) == '1' ? 'selected' : '' }} disabled>Active</option>
-                                    <option value="0" {{ ($profile->status) == '0' ? 'selected' : '' }} disabled>In Active</option>
+                                <select name="status" id="status" class="form-control" readonly>
+                                    <option value="" >Select Status</option>
+                                    <option value="1" {{ ($profile->status) == '1' ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ ($profile->status) == '0' ? 'selected' : '' }}>In Active</option>
                                 </select>
                                 @error('status')
                                 <span class="invalid-feedback" role="alert">

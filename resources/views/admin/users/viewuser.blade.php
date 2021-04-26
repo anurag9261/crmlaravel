@@ -106,7 +106,7 @@
                         </tr>
                         <tr>
                             <th>Address</th>
-                            <td>{{$profile->address}}</td>
+                            <td>{{$profile->address}}, {{ $profile->city }}, {{ $profile->state }}, {{ $profile->country }}</td>
                         </tr>
                         <tr>
                             <th>Created At</th>

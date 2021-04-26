@@ -123,8 +123,8 @@ class ReportController extends Controller
         $year =  date("Y", strtotime($request->get('month') . '-01'));
 
         $employeData =  DB::table('admins')
-                        ->whereMonth('created_at', $month)
-                        ->whereYear('created_at', $year)
+                        ->whereMonth('joining_date', $month)
+                        ->whereYear('joining_date', $year)
                         ->where('admins.role', 'employee')
                         ->where('admins.status', $request->get('status'))
                         ->get();
@@ -287,6 +287,9 @@ class ReportController extends Controller
             }
             $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount,$payAmount);
         }
+        // echo "<pre>";
+        // print_r($employeSalaryData);
+        // die;
         $array = (array)$employeData;
         foreach ($array as $newArray) {
             if (!empty($newArray)) {

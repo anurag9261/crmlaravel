@@ -135,7 +135,7 @@
             <td></td>
             <td></td>
             <td>Total Salary:</td>
-            <td><b>{{ ($employeData[0]->salary_amount * $attandance)/30 }}</b></td>
+            <td style="text-align: right"><b>{{ ($employeData[0]->salary_amount * $attandance)/30 }}</b></td>
         </tr>
         @else
         <tr>

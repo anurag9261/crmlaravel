@@ -32,50 +32,50 @@
                 <table class="table table-bordered table-striped">
                         <tr>
                             <th>Id</th>
-                            <td>{{$profile->id}}</td>
+                            <td>{{$profile[0]->id}}</td>
                         </tr>
                         <tr>
                             <th>Employee</th>
-                            <td>{{$profile->employee}}</td>
+                            <td>{{ $profile[0]->fname }} {{ $profile[0]->lname }}</td>
 
                         </tr>
                         <tr>
                             <th>Attandance</th>
-                            <td>{{$profile->attandance}}</td>
+                            <td>{{$profile[0]->attandance}}</td>
 
                         </tr>
                         <tr>
                             <th>CurrentDate</th>
-                            <td>{{$profile->currentdate}}</td>
+                            <td>{{$profile[0]->currentdate}}</td>
 
                         </tr>
                         <tr>
-                        @if($profile->intime == "")
+                        @if($profile[0]->intime == "")
                             <tr>
                                 <th>InTime</th>
                                 <td>NA</td>
                             </tr>
                         @else
                             <th>InTime</th>
-                            <td>{{$profile->intime}}</td>
+                            <td>{{$profile[0]->intime}}</td>
                             @endif
                         </tr>
                         <tr>
-                        @if($profile->outtime == "")
+                        @if($profile[0]->outtime == "")
                             <th>InTime</th>
                             <td>NA</td>
                         @else
                             <th>InTime</th>
-                            <td>{{$profile->outtime}}</td>
+                            <td>{{$profile[0]->outtime}}</td>
                         @endif
                         </tr>
                         <tr>
                             <th>Created At</th>
-                            <td>{{$profile->created_at->format('Y-m-d')}}</td>
+                            <td>{{$profile[0]->created_at->format('Y-m-d')}}</td>
                         </tr>
                         <tr>
                             <th>Updated At</th>
-                            <td>{{$profile->updated_at->format('Y-m-d')}}</td>
+                            <td>{{$profile[0]->updated_at->format('Y-m-d')}}</td>
                         </tr>
                     </table>
                 </div>

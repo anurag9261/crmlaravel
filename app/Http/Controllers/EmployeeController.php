@@ -84,6 +84,7 @@ class EmployeeController extends Controller
     {
         $profile = $request->validate([
             'currentdate' => 'required',
+            'employee' =>'required',
         ]);
         $profile=new Employee();
         $profile->admin_id = $request->get('employee');
@@ -140,8 +141,15 @@ class EmployeeController extends Controller
 
     public function view(Employee $employee,$id){
         if (Auth::user()->role == 'Admin') {
-            $profile = Employee::find($id);
+            $admin = Employee::find($id);
+
+            $profile = Admin::select('admins.id', 'admins.fname', 'admins.lname', 'employees.*')
+                ->join('employees', 'admin_id', '=', 'admins.id')
+                ->where('admins.id', '=', $admin->admin_id)->get();
             $config = DB::table('configurations')->where('id', '1')->get();
+            // echo "<pre>";
+            // print_r($profile[0]->fname);
+            // die;
             return view('admin.employees.viewemployee',compact('profile','config'));
         }else {
             return Redirect('/admin');
