@@ -139,7 +139,6 @@ class AdminController extends Controller
 
     public function update(Request $request, Admin $admin,$id)
     {
-
         $profile = $request->validate([
             'fname' => 'required',
             'lname' => 'required',

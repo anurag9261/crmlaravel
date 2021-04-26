@@ -1,6 +1,11 @@
 @extends('admin.master')
 @push('styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    <style>
+        select[readonly] {
+            pointer-events: none;
+        }
+    </style>
 @endpush
 @section('content')
 <div class="content-wrapper">
@@ -54,9 +59,10 @@
                         </div>
                         @else
                         <div class="col-md-5">
-                            <label for="employee">Employee</label>
-                                <input type="text" class="form-control @error('month') is-invalid @enderror"
-                                    value="{{Auth::user()->fname}} {{ Auth::user()->lname }}" readonly/>
+                            <label for="employee">Select Employee</label>
+                            <select class="form-control @error('emp') is-invalid @enderror" name="emp" readonly>
+                                <option value="{{ Auth::user()->id }}">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</option>
+                            </select>
                             @error('emp')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

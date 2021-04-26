@@ -270,6 +270,8 @@ $(document).ready(function () {
         var newRow = $("<tr>");
         var cols = "";
 
+        cols += '<td hidden><input type="hidden" class="form-control id" name="id[]' + counter + '" /></td>';
+        cols += '<td hidden><input type="hidden" class="form-control invoice_id" name="invoice_id[]' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control product" name="product[]' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control qty" name="qty[]' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control price" name="price[]' + counter + '" /></td>';

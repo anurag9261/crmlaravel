@@ -40,7 +40,7 @@
                                 <label for="role">Employee Name</label>
                                 <select class="form-control  @error('employee') is-invalid @enderror" name="employee"
                                     placeholder="Select Employee">
-                                    <option>Select Employee</option>
+                                    <option value="">Select Employee</option>
                                     @foreach($employee as $profile)
                                     <option value="{{ $profile->id  }}">{{$profile->fname}} {{ $profile->lname }}</option>
                                     @endforeach

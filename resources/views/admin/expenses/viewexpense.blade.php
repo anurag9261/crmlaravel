@@ -52,10 +52,18 @@
                             <th>Description</th>
                             <td>{{$profile->description}}</td>
                         </tr>
+                        <?php $string = substr($profile->attach_bill, -4);?>
+                        @if($string == '.pdf')
+                            <th>Attach Bill</th>
+                            <td><img src="{{asset('images/profile/pdf1.png')}}" width="80px" , height="auto" ,></td>
+                        </div>
+                        @else
                         <tr>
                             <th>Attach Bill</th>
-                            <td><img src="{{asset('images/'. $profile->attach_bill)}}" width="60px" , height="auto" ,></td>
+                            <td><img src="{{asset('bills/'. $profile->attach_bill)}}" width="60px" , height="auto" ,></td>
                         </tr>
+                        @endif
+
                         <tr>
                             <th>Created At</th>
                             <td>{{$profile->created_at}}</td>
