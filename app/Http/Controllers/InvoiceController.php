@@ -86,12 +86,10 @@ class InvoiceController extends Controller
             $profile->current_date = $request->get('currentdate');
             $profile->due_date = $request->get('duedate');
             $profile->total = 0;
-            // $profile->total = $request->get('total');
             $profile->sub_total = $request->get('sub_total');
             $profile->tax_percentage = $request->get('tax_percentage');
             $profile->tax_amount = $request->get('tax_amount');
             $profile->total_amount = $request->get('total_amount');
-            // echo "<pre>";print_r($profile);die;
             $profile->save();
 
             $count = count($request->get('product'));
@@ -104,7 +102,6 @@ class InvoiceController extends Controller
                 $product->total = $request->get('total')[$i];
                 $product->save();
             }
-         //echo'<pre>';print_r($product);die;
          return redirect('invoices')->with('message', 'Invoice added successfully!');
 
     }
@@ -163,10 +160,8 @@ class InvoiceController extends Controller
         $count = count($request->get('product'));
         for ($i = 0; $i < $count; $i++) {
             $product = Product::find($request->get('id')[$i]);
-             //echo'<pre>';print_r($request->all());die;
             if ($product == null) {
                 $productP = new Product();
-                //$productP->id = $request->get('id');
                 $productP->invoice_id = $request->get('invoice_no');
                 $productP->product = $request->get('product')[$i];
                 $productP->qty = $request->get('qty')[$i];
@@ -201,15 +196,10 @@ class InvoiceController extends Controller
         return response()->json([
             'success' => 'Record has been deleted successfully!'
         ]);
-        // Product::destroy(array('id', $id));
-        // return redirect('admin.editinvoice')->with('error', 'product deleted successfully!');
     }
     public function deleteAll($id)
-
     {
         DB::table("products")->delete($id);
         return back();
     }
-
-
 }

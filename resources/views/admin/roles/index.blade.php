@@ -3,9 +3,7 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 @endpush
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -27,16 +25,11 @@
                                     </i> Add Role</a></button>
                     </ol>
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-12 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
                     @if(session()->has('error'))

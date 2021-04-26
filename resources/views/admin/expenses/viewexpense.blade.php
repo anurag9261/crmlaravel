@@ -1,14 +1,12 @@
 @extends('admin.master')
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">View Expense</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
@@ -27,9 +25,7 @@
             </div>
         </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-9 connectedSortable">
             <div class="card">
                 <div class="card-body">
@@ -51,7 +47,6 @@
                         <tr>
                             <th>Amount</th>
                             <td>{{$profile->amount}}</td>
-
                         </tr>
                         <tr>
                             <th>Description</th>
@@ -69,7 +64,6 @@
                             <th>Updated At</th>
                             <td>{{$profile->updated_at}}</td>
                         </tr>
-
                     </table>
                 </div>
             </div>

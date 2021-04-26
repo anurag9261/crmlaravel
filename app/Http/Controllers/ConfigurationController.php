@@ -34,7 +34,6 @@ class ConfigurationController extends Controller
             'site_name' => 'required'
         ]);
         $profile = Configuration::find($id);
-
         if ($request->site_logo == "") {
             $imageName = $profile->site_logo;
         } else {

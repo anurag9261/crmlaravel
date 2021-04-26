@@ -180,7 +180,6 @@ class ReportController extends Controller
         $productData =  DB::table('products')
                             ->where('invoice_id', $id)
                             ->get();
-        //dd($productDatass);
         $data = ['title' => 'CRM'];
         $pdf = PDF::loadView('invoicereport', $data, compact('invoice','productData','config'));
         return $pdf->download('invoicereport.pdf');
@@ -274,7 +273,6 @@ class ReportController extends Controller
             $h = intval($totaltime / 3600);
             $totaltime = $totaltime - ($h * 3600);
             $m = intval($totaltime / 60);
-            //$s = $totaltime - ($m * 60);
             $totalHours['hours'] = ("$h:$m:00");
             $arrayEmp = (array)$emp;
             $userPresentDaycount['presentDay'] = $userPresentDay;

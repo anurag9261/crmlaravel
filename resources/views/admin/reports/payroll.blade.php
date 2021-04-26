@@ -22,8 +22,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
-                        {{--  <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.roles')}}"
-                        style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button> --}}
+                    </ol>
                 </div>
             </div>
         </div>

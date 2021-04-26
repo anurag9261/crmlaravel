@@ -76,7 +76,6 @@
             <th>Joining Date</th>
             <th>image</th>
         </tr>
-        <?php //echo "<pre>"; print_r($employeData); die;?>
         @foreach($employeData as $data)
         <tr>
             <td>{{$loop->iteration}}</td>

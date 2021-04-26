@@ -94,7 +94,6 @@
             <td></td>
             <td><b>TotalAmount</b></td>
             <td style="text-align:right"><b>{{ $totalAmount }}</b></td>
-
         </tr>
     </table>
     <footer>CRM-Admin Panel</footer>

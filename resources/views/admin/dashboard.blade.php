@@ -150,7 +150,6 @@
                             <th>Email</th>
                             <th>Image</th>
                             <th>Status</th>
-                            {{--   <th>Action</th>   --}}
                         </tr>
 
                      @foreach($customers as $data)

@@ -3,39 +3,34 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endpush
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">Add Attandance</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
                         <li class="breadcrumb-item active">Timesheet Management</li>
                         <li class="breadcrumb-item active">Add Attandance</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.employee')}}"
                                 style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-9 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
                     <form action="{{route('admin.employeesubmit')}}" method="post" enctype="multipart/form-data">
@@ -43,7 +38,6 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="role">Employee Name</label>
-                                <?php //echo"<pre>"; print_r($employee); die; ?>
                                 <select class="form-control  @error('employee') is-invalid @enderror" name="employee"
                                     placeholder="Select Employee">
                                     <option>Select Employee</option>

@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
-// Route::get('/admin','HomeController@index')->name('admin');
 Route::get('/logout','HomeController@logout');
 Route::get('/admin', [AdminController::class, 'adminHome'])->name('admin.dashboard')->middleware('role');
 Route::get('/', 'AdminController@adminHome');
@@ -42,7 +41,6 @@ Route::get('edituser{id}', 'AdminController@edit')->name('admin.edituser');
 Route::post('updateuser{id}', 'AdminController@update')->name('admin.update');
 Route::get('deleteuser{id}', 'AdminController@destroy')->name('admin.deleteuser');
 
-
 /*---------------------CustomerController Route---------------------------*/
 Route::get('/customers','CustomerController@index')->name('admin.customers');
 Route::get('customers/getCustomers','CustomerController@getCustomers')->name('admin.getcustomers');
@@ -52,7 +50,6 @@ Route::get('viewcustomer{id}', 'CustomerController@view')->name('admin.viewcusto
 Route::get('editcustomer{id}', 'CustomerController@edit')->name('admin.editcustomer');
 Route::post('updatecustomer{id}', 'CustomerController@update')->name('admin.updatecustomer');
 Route::get('deletecustomer{id}', 'CustomerController@destroy')->name('admin.deletecustomer');
-
 
 /*---------------------RoleController Route---------------------------*/
 Route::get('roles','RoleController@index')->name('admin.roles');
@@ -64,7 +61,6 @@ Route::get('editrole{id}', 'RoleController@edit')->name('admin.editrole');
 Route::post('updaterole{id}', 'RoleController@update')->name('admin.updaterole');
 Route::get('deleterole{id}', 'RoleController@destroy')->name('admin.deleterole');
 
-
 /*---------------------EmployeeController Route---------------------------*/
 Route::get('/employees','EmployeeController@index')->name('admin.employee');
 Route::get('employees/getEmployees', 'EmployeeController@getEmployees')->name('admin.getemployees');
@@ -75,7 +71,6 @@ Route::get('editemployee{id}', 'EmployeeController@edit')->name('admin.editemplo
 Route::post('updateemployee{id}', 'EmployeeController@update')->name('admin.updateemployee');
 Route::get('/Employee', 'EmployeeController@exportCsv');
 Route::get('deleteemployee{id}', 'EmployeeController@destroy')->name('admin.deleteemployee');
-
 
 /*---------------------InvoiceController Route---------------------------*/
 Route::get('/invoices','InvoiceController@index')->name('admin.invoices');
@@ -89,7 +84,6 @@ Route::get('deleteinvoice{id}', 'InvoiceController@destroy')->name('admin.delete
 Route::get('deleteproduct{id}', 'InvoiceController@deleteProduct')->name('admin.deleteproduct');
 Route::get('deleteproduct/{id}', 'InvoiceController@deleteAll')->name('admin.deleteproduct');
 
-
 /*---------------------ExpenseController Route---------------------------*/
 Route::get('/expenses','ExpenseController@index')->name('admin.expenses');
 Route::get('invoices/getExpenses', 'ExpenseController@getExpenses')->name('admin.getexpenses');
@@ -99,7 +93,6 @@ Route::get('viewexpense{id}', 'ExpenseController@view')->name('admin.viewexpense
 Route::get('editexpense{id}', 'ExpenseController@edit')->name('admin.editexpense');
 Route::post('updateexpense{id}', 'ExpenseController@update')->name('admin.updateexpense');
 Route::get('deleteexpense{id}', 'ExpenseController@destroy')->name('admin.deleteexpense');
-
 
 /*---------------------ReportsController Route---------------------------*/
 Route::get('/employeereport','ReportController@employee')->name('admin.employeereport');
@@ -114,7 +107,6 @@ Route::get('/generatepayslip', 'ReportController@generatepayslip')->name('admin.
 Route::post('/payslipPDF', 'ReportController@payslipPDF')->name('report.payslip');
 Route::get('/payrollreport', 'ReportController@payrollreport')->name('admin.payrollreport');
 Route::post('/payrollreportPDF', 'ReportController@payrollPDF')->name('report.payroll');
-
 
 /*---------------------ConfigurationController Route---------------------------*/
 Route::get('configuration{id}', 'ConfigurationController@edit')->name('admin.editconfiguration');

@@ -22,15 +22,12 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
-                        {{--  <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.roles')}}"
-                        style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button> --}}
+                    </ol>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-9 connectedSortable">
             @if (session('error'))
             <div class="alert alert-warning">{{ session('error') }}</div>

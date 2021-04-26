@@ -104,25 +104,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{--  <div class="row clearfix" style="margin-top:20px">
-                                <div class="col-md-4">
-                                    <label for="address">Address</label>
-                                    <textarea class="form-control  @error('address') is-invalid @enderror" id="" rows="3"
-                                        placeholder="who is this invoice from?(required)" name="address">{{ $customer->address }}</textarea>
-                                    @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>  --}}
                             <br>
                             <br>
                             <div class="row clearfix">
                                 <table id="tab_logic" class="table table-border table-hover table order-list">
                                     <thead>
                                         <tr>
-                                            {{-- <th class="text-center">No</th> --}}
                                             <th class="text-center">Product</th>
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">Price</th>
@@ -132,9 +119,7 @@
                                     <tbody>
                                         @foreach($products as $key=>$pr)
                                         <tr id="tr_{{$pr->id}}">
-                                            {{-- <td>{{ $loop->iteration }}</td> --}}
                                             <td hidden><input type="text" name='id[]' value="{{$pr->id}}" class="form-control" hidden/></td>
-                                            <?php //echo "<pre>"; print_r($pr->invoice_id); die;?>
                                             <td hidden><input type="text" name='invoice_id[]' value="{{$pr->invoice_id}}" class="form-control" hidden/></td>
                                             <td>
                                                 <input type="text" name="product[]" placeholder="Enter Product Name" class="form-control" value="{{ $pr->product }}" />

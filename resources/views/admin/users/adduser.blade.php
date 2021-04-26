@@ -30,10 +30,8 @@
             </div>
         </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
         <section class="col-lg-9 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.usersubmit') }}" method="post" enctype="multipart/form-data">
