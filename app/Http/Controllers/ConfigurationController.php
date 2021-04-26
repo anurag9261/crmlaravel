@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Configuration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigurationController extends Controller
 {
@@ -15,14 +16,17 @@ class ConfigurationController extends Controller
     }
     public function edit(Configuration $configuration,$id)
     {
-        $profile = Configuration::find($id);
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.configurations.editconfiguration', compact('profile','config'));
+        if (Auth::user()->role == 'Admin') {
+            $profile = Configuration::find($id);
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.configurations.editconfiguration', compact('profile','config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function update(Request $request,$id)
     {
-        //dd($request->site_logo);
         $request->validate([
 
             'address' => 'required',
@@ -48,7 +52,7 @@ class ConfigurationController extends Controller
             $profile->favicon_icon = $imageName1;
         }
         $profile->company_name = $request->get('company_name');
-        $profile->weight_number = $request->get('weight_number');
+        $profile->vat_number = $request->get('vat_number');
         $profile->city = $request->get('city');
         $profile->state = $request->get('state');
         $profile->country = $request->get('country');

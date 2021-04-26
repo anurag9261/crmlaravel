@@ -10,6 +10,7 @@ use App\Invoice;
 use App\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReportController extends Controller
@@ -61,8 +62,12 @@ class ReportController extends Controller
 
     public function balancesheet()
     {
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.reports.balance',compact('config'));
+        if (Auth::user()->role == 'Admin') {
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.reports.balance',compact('config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function balancesheetPDF(Request $request)
@@ -98,8 +103,12 @@ class ReportController extends Controller
 
     public function employee(Request $request)
     {
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.reports.employee',compact('config'));
+        if (Auth::user()->role == 'Admin') {
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.reports.employee',compact('config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function employeePDF(Request $request)
@@ -220,8 +229,12 @@ class ReportController extends Controller
 
     public function payrollreport()
     {
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.reports.payroll',compact('config'));
+        if (Auth::user()->role == 'Admin') {
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.reports.payroll',compact('config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function payrollPDF(Request $request)

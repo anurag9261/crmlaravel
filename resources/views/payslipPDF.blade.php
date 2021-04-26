@@ -83,7 +83,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$data->currentdate}}</td>
             <td>{{$data->attandance}}</td>
-            <td>{{ $hours }}</td>
+            <td style="text-align: right">{{ $hours }}</td>
         </tr>
         @endforeach
         <tr>
@@ -123,13 +123,13 @@
             <td></td>
             <td></td>
             <td>Total Hours:</td>
-            <td><b>{{ $totalHours }}</b></td>
+            <td style="text-align: right"><b>{{ $totalHours }}</b></td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>Total Present Days:</td>
-            <td><b>{{ $attandance }}</b></td>
+            <td style="text-align: right"><b>{{ $attandance }}</b></td>
         </tr>
         @if($employeData[0]->salary_type == 2)
         <tr>
@@ -150,7 +150,7 @@
             <td></td>
             <td></td>
             <td>Total Salary:</td>
-            <td><b>{{ $payAmount['salaryTotal'] }}</b></td>
+            <td style="text-align: right"><b>{{ $payAmount['salaryTotal'] }}</b></td>
         </tr>
         @endif
     </table>

@@ -82,7 +82,13 @@
             Ship To: {{ $invoice->ship_to }}
             <p style="float: right">Due Date: {{ $invoice->due_date }}</p>
         </div>
+        <br>
+        <div class="col-md-5">
+            Bill From:<br> {{ $config[0]->address}},<br> {{ $config[0]->city }}, {{ $config[0]->state }}, {{ $config[0]->country }}
+        </div>
     </div>
+    <br>
+    <br>
     <div>
         <table class="table table-bordered">
             <tr class="tr-bg-color">
@@ -96,31 +102,30 @@
                     <td>{{ $product->product }}</td>
                     <td>{{ $product->qty }}</td>
                     <td>{{ $product->price }}</td>
-                    <td>{{ $product->total }}</td>
+                    <td style="text-align: right">{{ $product->total }}</td>
                 </tr>
             @endforeach
             <tr>
                 <td></td>
                 <td></td>
                 <td><b>SubTotal</b></td>
-                <td style="float: right">{{ $invoice->sub_total }}</td>
+                <td style="text-align:right">{{ $invoice->sub_total }}</td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td><b>Tax Amount ({{ $invoice->tax_percentage }}%)</b></td>
-                <td style="float: right">{{ $invoice->tax_amount }}</td>
+                <td style="text-align:right">{{ $invoice->tax_amount }}</td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td><b>Total Amount</b></td>
-                <td>{{ $invoice->total_amount }}</td>
+                <td style="text-align: right">{{ $invoice->total_amount }}</td>
             </tr>
         </table>
         </div>
     {{--  <?php echo "<pre>"; print_r($invoice); die;?>  --}}
     <footer>CRM-Admin Panel</footer>
 </body>
-
 </html>

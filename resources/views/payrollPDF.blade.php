@@ -83,7 +83,7 @@
                 @else
                 <td>Hourly</td>
                 @endif
-                <td>{{ $data['salaryTotal'] }}</td>
+                <td style="text-align:right">{{ $data['salaryTotal'] }}</td>
             </tr>
         @endforeach
         <?php $totalAmount = array_sum($totalAmountSalary);?>
@@ -93,7 +93,7 @@
             <td></td>
             <td></td>
             <td><b>TotalAmount</b></td>
-            <td><b>{{ $totalAmount }}</b></td>
+            <td style="text-align:right"><b>{{ $totalAmount }}</b></td>
 
         </tr>
     </table>

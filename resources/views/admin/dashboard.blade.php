@@ -118,7 +118,6 @@
                             <th>Image</th>
                             <th>Status</th>
                         </tr>
-
                       @foreach($profile as $data)
                         <tr>
                             <td>{{$loop->iteration}}</td>
@@ -197,7 +196,6 @@
                         @endforeach
                     </table>
                     <br>
-
                 </div>
             </div>
     </section>
@@ -225,7 +223,7 @@ window.onload = function() {
     });
     var chart2 = new CanvasJS.Chart("chart2", {
         animationEnabled: true,
-        theme: "light1", // "light2", "light2", "dark1", "dark2"
+        theme: "light2", // "light2", "light2", "dark1", "dark2"
         axisY: {
             title: "Number of Employee"
         },
@@ -235,10 +233,8 @@ window.onload = function() {
             legendMarkerColor: "grey",
             legendText: "Salary per Hour",
             dataPoints: [
-                { y: {{ $employeeCount }}, label: "0-100" },
-                { y: 450, label: "100-500" },
-                { y: 712, label: "600-1000" },
-                { y: 1500, label: "1000-1200" },
+                { y: {{ $Hourly }}, label: "Hourly Salary" },
+                { y: {{ $Monthly }}, label: "Monthly Salary" },
             ]
         }]
     });

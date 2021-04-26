@@ -38,6 +38,7 @@
                     <form method="post" action="{{ route('report.timesheet') }}">
                     @csrf
                     <div class="row">
+                        @if(auth()->user()->role == 'Admin')
                         <div class="col-md-5">
                             <label for="employee">Select Employee</label>
                             <select class="form-control @error('emp') is-invalid @enderror" name="emp">
@@ -52,6 +53,18 @@
                             </span>
                             @enderror
                         </div>
+                        @else
+                        <div class="col-md-5">
+                            <label for="employee">Employee</label>
+                                <input type="text" class="form-control @error('month') is-invalid @enderror"
+                                    value="{{Auth::user()->fname}} {{ Auth::user()->lname }}" readonly/>
+                            @error('emp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        @endif
                         <div class="col-md-5">
                             <label for="month">Select Month</label>
                             <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker" placeholder="Select Month" />

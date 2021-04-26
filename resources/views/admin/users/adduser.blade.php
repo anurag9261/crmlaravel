@@ -239,7 +239,7 @@
                             </div>
                             <div class="col-md-5">
                                 <label for="country">Country</label>
-                                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country">
+                                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="Canada" readonly>
                                 @error('country')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
