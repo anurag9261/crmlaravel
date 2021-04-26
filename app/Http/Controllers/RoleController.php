@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -16,9 +17,13 @@ class RoleController extends Controller
 
     public function index()
     {
-        $profile = Role::paginate(5);
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.roles.index',compact('profile','config'));
+        if (Auth::user()->role == 'Admin') {
+            $profile = Role::paginate(5);
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.roles.index',compact('profile','config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function getRoles(Request $request)
@@ -35,8 +40,12 @@ class RoleController extends Controller
 
     public function create()
     {
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.roles.addrole',compact('config'));
+        if (Auth::user()->role == 'Admin') {
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.roles.addrole',compact('config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
 
@@ -46,11 +55,11 @@ class RoleController extends Controller
             'title' => 'required',
             'status' => 'required',
         ]);
-            $profile=new Role();
-            $profile->title = $request->get('title');
-            $profile->status = $request->get('status');
-            $profile->save();
-            return redirect('roles')->with('message', 'Role added successfully!');
+        $profile=new Role();
+        $profile->title = $request->get('title');
+        $profile->status = $request->get('status');
+        $profile->save();
+        return redirect('roles')->with('message', 'Role added successfully!');
     }
 
 
@@ -66,9 +75,13 @@ class RoleController extends Controller
 
     public function edit(Role $role,$id)
     {
-        $profile = Role::find($id);
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.roles.editrole',compact('profile','config'));
+        if (Auth::user()->role == 'Admin') {
+            $profile = Role::find($id);
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.roles.editrole',compact('profile','config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
 

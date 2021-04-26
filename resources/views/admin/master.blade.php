@@ -71,7 +71,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
             <li style="float:right">
-                Weight No- <b>{{ $config[0]->weight_number }}</b>
+                Vat No- <b>{{ $config[0]->vat_number }}</b>
             </li>
             </ul>
             <!-- Right navbar links -->
@@ -253,6 +253,36 @@
                                     Site Configuration
                                 </p>
                             </a>
+                        </li>
+                        @else
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-poll"></i>
+                                <p>
+                                    Report Managment
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.timesheetreport')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-calendar-alt"></i>
+                                        <p>Timesheet Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.invoicereport')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-receipt"></i>
+                                        <p>Invoice Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.generatepayslip')}}" class="nav-link">
+                                        <i class="nav-icon fas fa-print"></i>
+                                        <p>Generate Payslip</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         @endif
                     </ul>

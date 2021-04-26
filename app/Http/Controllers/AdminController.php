@@ -17,8 +17,12 @@ class AdminController extends Controller
 
     public function index()
     {
-        $config['config'] = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.users.index',$config);
+        if (Auth::user()->role == 'Admin') {
+            $config['config'] = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.users.index', $config);
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function __construct()
@@ -49,10 +53,13 @@ class AdminController extends Controller
 
     public function create()
     {
-        $roles = DB::table('roles')->where('status', 'Active')->get();
-        //for master Controller
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.users.adduser', compact('roles','config'));
+        if (Auth::user()->role == 'Admin') {
+            $roles = DB::table('roles')->where('status', 'Active')->get();
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.users.adduser', compact('roles','config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function store(Request $request)
@@ -62,7 +69,7 @@ class AdminController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             'mobno' => 'required|min:10',
-            'email' => 'required',
+            'email' => 'required|string|email|max:255|unique:admins',
             'birthdate' => 'required',
             'joining_date' => 'required',
             'gender'=> 'in:1,2,3',
@@ -103,17 +110,26 @@ class AdminController extends Controller
     }
 
     public function view(Admin $admin,$id){
-        $profile = Admin::find($id);
-        $config = DB::table('configurations')->where('id', '1')->get();
-        return view('admin.users.viewuser',compact('profile','config'));
+
+        if (Auth::user()->role == 'Admin') {
+            $profile = Admin::find($id);
+            $config = DB::table('configurations')->where('id', '1')->get();
+            return view('admin.users.viewuser',compact('profile','config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function edit(Admin $admin,$id)
     {
-        $profile = Admin::find($id);
-        $config = DB::table('configurations')->where('id', '1')->get();
-        $roles = DB::table('roles')->where('status', 'Active')->get();
-        return view('admin.users.edituser', compact('roles','profile','config'));
+        if (Auth::user()->role == 'Admin') {
+            $profile = Admin::find($id);
+            $config = DB::table('configurations')->where('id', '1')->get();
+            $roles = DB::table('roles')->where('status', 'Active')->get();
+            return view('admin.users.edituser', compact('roles','profile','config'));
+        } else {
+            return Redirect('/admin');
+        }
     }
 
     public function update(Request $request, Admin $admin,$id)
@@ -128,7 +144,6 @@ class AdminController extends Controller
             'joining_date' => 'required',
             'gender' => 'required',
             'address' => 'required',
-            // 'image' => 'required',
             'role' => 'required',
             'status' => 'required',
             'salary_type' => 'required',
@@ -166,9 +181,6 @@ class AdminController extends Controller
     }
 
     public function editpassword($id){
-
-        //for master Controller
-        // $profile = Admin::find($id);
         $config = DB::table('configurations')->where('id', '1')->get();
         return view('admin.changepassword',compact('config'));
     }
@@ -211,19 +223,27 @@ class AdminController extends Controller
         $paid_count = count($paid);
         $pending_count = count($pending);
         $total = Invoice::count();
-        $paid_1 = $paid_count / $total * 100;
-        $pending_1 = $pending_count / $total * 100;
+        if($paid_count == 0){
+            $paid_1 = 0;
+        }else{
+            $paid_1 = $paid_count / $total * 100;
+        }
+        if($pending_count == 0){
+            $pending_1 = 0;
+        }else{
+            $pending_1 = $pending_count / $total * 100;
+        }
         $config = DB::table('configurations')->where('id', '1')->get();
 
         //for static chart
-        $employeeCount = Admin::where('role','Employee')->count();
-        $amount = Admin::where('role','Employee')->get();
+        $Hourly = Admin::where('salary_type','1')->where('role','Employee')->count();
+        $Monthly = Admin::where('salary_type', '2')->where('role','Employee')->count();
 
         //for table display
         $profile = Admin::orderBy('created_at','desc')->where('role','employee')->take(3)->get();
         $customers = Customer::orderBy('created_at','desc')->take(3)->get();
         $invoice = Invoice::orderBy('created_at','desc')->take(3)->get();
-        return view('admin.dashboard',compact('paid_1','pending_1','customer','admin','profile','customers','employee','config','invoice','invoice_paid','employeeCount'));
+        return view('admin.dashboard',compact('paid_1','pending_1','customer','admin','profile','customers','employee','config','invoice','invoice_paid','Monthly','Hourly'));
     }
 
 }

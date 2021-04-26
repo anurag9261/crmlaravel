@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <style>
         table {
             border-collapse: collapse;
@@ -81,7 +79,7 @@
             <td>{{$data->title}}</td>
             <td>{{$data->bill_to}}</td>
             <td>{{$data->due_date}}</td>
-            <td>{{$data->total_amount}}</td>
+            <td style="text-align: right">{{$data->total_amount}}</td>
         </tr>
         <?php
             $totalPaidAmount[] = $data->total_amount;
@@ -110,7 +108,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$data->category}}</td>
             <td>{{$data->entry_date}}</td>
-            <td>{{$data->amount}}</td>
+            <td style="text-align: right">{{$data->amount}}</td>
         </tr>
 <?php
 $totalExpences[] = $data->amount;
@@ -127,7 +125,5 @@ $totalExpences[] = $data->amount;
     </div>
     <?php //echo "<pre>"; print_r("HEllo"); die; ?>
     <footer>CRM-Admin Panel</footer>
-
 </body>
-
 </html>

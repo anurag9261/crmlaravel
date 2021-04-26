@@ -45,7 +45,7 @@ class ExpenseController extends Controller
             'entry_date' => 'required',
             'amount' => 'required',
             'description' => 'required',
-            'attach_bill' => 'required|image|mimes:jpeg,png,jpg,pdf|max:5120',
+            'attach_bill' => 'required|mimes:jpeg,png,jpg,pdf|max:5120',
         ]);
         $profile=new Expense();
         $profile->category = $request->get('category');

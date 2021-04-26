@@ -70,7 +70,7 @@
                                     <label for="billto">Bill To</label>
                                     <select class="form-control  @error('bill_to') is-invalid @enderror" name="billto">
                                         @foreach($customers as $customer)
-                                        <option>{{$customer->fname}}</option>
+                                        <option>{{$customer->fname}} {{ $customer->lname }}</option>
                                         @endforeach
                                     </select>
                                     @error('bill_to')
@@ -193,8 +193,8 @@
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
-                                                        @enderror
-                                                    </td>
+                                                    @enderror
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th class="text-center">Grand Total</th>
@@ -205,13 +205,12 @@
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
-                                                        @enderror
-                                                    </td>
+                                                    @enderror
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                             <div class="row clearfix">
                                 <div class="col-md-10"></div>
@@ -241,8 +240,9 @@
             if(i>1){
                 $("#addr"+(i-1)).html('');
             i--;
-            }
             calc();
+            }
+
         });
 
         $('#tab_logic tbody').on('keyup change',function(){

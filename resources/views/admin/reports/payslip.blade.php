@@ -42,6 +42,7 @@
                     <form method="post" action="{{ route('report.payslip') }}">
                         @csrf
                         <div class="row">
+                            @if(auth()->user()->role == 'Admin')
                             <div class="col-md-5">
                                 <label for="employee">Select Employee</label>
                                 <select class="form-control @error('employee') is-invalid @enderror" name="employee">
@@ -56,6 +57,18 @@
                                 </span>
                                 @enderror
                             </div>
+                            @else
+                            <div class="col-md-5">
+                            <label for="employee">Employee</label>
+                            <input type="text" class="form-control @error('employee') is-invalid @enderror" name="employee"
+                                value="{{Auth::user()->fname}} {{ Auth::user()->lname }}" readonly/>
+                            @error('month')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            </div>
+                            @endif
                             <div class="col-md-5">
                                 <label for="month">Select Month</label>
                                 <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker"

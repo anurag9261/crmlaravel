@@ -46,12 +46,12 @@ class LoginController extends Controller
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
             return redirect()->route('admin.dashboard')->with('message', 'Login Successfully');
-            if (auth()->user()->role == 'Admin') {
-                return redirect()->route('admin.dashboard')->with('message','Login Successfully');
-            }
-            else{
-                return redirect()->route('logout');
-            }
+            // if (auth()->user()->role == 'Admin') {
+            //     return redirect()->route('admin.dashboard')->with('message','Login Successfully');
+            // }
+            // else{
+            //     return redirect()->route('logout');
+            // }
         }else{
             return redirect()->route('login')
                 ->with('error','Email-Address And Password is not match!.');

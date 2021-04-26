@@ -40,10 +40,10 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="title">Weight Number</label>
-                                <input type="text" class="form-control @error('weight_number') is-invalid @enderror" name="weight_number"
-                                    value="{{ $profile->weight_number }}" placeholder="Enter Weight Number">
-                                @error('weight_number')
+                                <label for="title">Vat Number</label>
+                                <input type="number" class="form-control @error('vat_number') is-invalid @enderror" name="vat_number"
+                                    value="{{ $profile->vat_number }}" placeholder="Enter Weight Number">
+                                @error('vat_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
