@@ -45,7 +45,7 @@ class AdminController extends Controller
 
                 $html = '<a href="viewuser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
                 $html .= '<a href="edituser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
-                $html .= '<a href="deleteuser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                $html .= '<a href="deleteuser' . $row->id . '" class="btn btn-sm btn-secondary" onclick="myFunction()"><i class="far fa-trash-alt"></i></a>';
                 return $html;
             })->toJson();
 
@@ -127,7 +127,12 @@ class AdminController extends Controller
             $config = DB::table('configurations')->where('id', '1')->get();
             $roles = DB::table('roles')->where('status', 'Active')->get();
             return view('admin.users.edituser', compact('roles','profile','config'));
-        } else {
+        } elseif(Auth::user()->id == $id) {
+            $profile = Admin::find($id);
+            $config = DB::table('configurations')->where('id', '1')->get();
+            $roles = DB::table('roles')->where('status', 'Active')->get();
+            return view('admin.users.edituser', compact('roles','profile','config'));
+        }else{
             return Redirect('/admin');
         }
     }

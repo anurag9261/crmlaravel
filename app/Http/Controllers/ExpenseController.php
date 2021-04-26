@@ -27,7 +27,7 @@ class ExpenseController extends Controller
             ->addColumn('action', function ($row) {
                 $html = '<a href="viewexpense' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
                 $html .= '<a href="editexpense' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
-                $html .= '<a href="deleteexpense' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-trash-alt"></i></a>';
+                $html .= '<a href="deleteexpense' . $row->id . '" class="btn btn-sm btn-secondary" onclick="myFunction()"><i class="far fa-trash-alt"></i></a>';
                 return $html;
             })->toJson();
     }

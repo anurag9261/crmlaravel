@@ -98,6 +98,11 @@
         })
     });
 </script>
+<script>
+    function myFunction() {
+  alert("Are you sure want to delete!");
+}
+</script>
 @endpush
 
 
