@@ -44,39 +44,34 @@
 </style>
 @endpush
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">Add Expense</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
                         <li class="breadcrumb-item active">Expense Management</li>
                         <li class="breadcrumb-item active">Add Expense</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.expenses')}}"
                                 style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-9 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-body">
                     <form action="{{route('admin.expensesubmit')}}" method="post" enctype="multipart/form-data">
@@ -160,5 +155,3 @@
 });
 </script>
 @endpush
-
-

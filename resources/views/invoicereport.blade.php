@@ -125,7 +125,6 @@
             </tr>
         </table>
         </div>
-    {{--  <?php echo "<pre>"; print_r($invoice); die;?>  --}}
     <footer>CRM-Admin Panel</footer>
 </body>
 </html>

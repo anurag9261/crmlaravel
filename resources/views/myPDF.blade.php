@@ -72,7 +72,6 @@
             <th>Attendance</th>
             <th>Total Time</th>
         </tr>
-        <?php //echo "<pre>"; print_r($employeData); die;?>
         @foreach($employeData as $data)
         <?php
         $time1 = new DateTime($data->intime);
@@ -90,13 +89,13 @@
         @endforeach
         <tr>
 <?php
-    function explode_time($time) { //explode time and convert into seconds
+    function explode_time($time) {
         $time = explode(':', $time);
         $time = $time[0] * 3600 + $time[1] * 60;
         return $time;
 }
 
-function second_to_hhmm($time) { //convert seconds to hh:mm
+function second_to_hhmm($time) {
         $hour = floor($time / 3600);
         $minute = strval(floor(($time % 3600) / 60));
          $second = strval(floor(($minute % 3600) / 60));
@@ -117,7 +116,7 @@ function second_to_hhmm($time) { //convert seconds to hh:mm
 $time = 0;
 $time_arr = $totalTime;
  foreach ($time_arr as $time_val) {
-    $time +=explode_time($time_val); // this fucntion will convert all hh:mm to seconds
+    $time +=explode_time($time_val);
 }
 
 $totalHours = second_to_hhmm($time);

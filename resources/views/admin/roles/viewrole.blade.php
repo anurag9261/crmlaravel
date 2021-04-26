@@ -39,22 +39,18 @@
                         <tr>
                             <th>Title</th>
                             <td>{{$profile->title}}</td>
-
                         </tr>
                         <tr>
                             <th>Status</th>
                             <td>{{$profile->status}}</td>
-
                         </tr>
                         <tr>
                             <th>Created At</th>
                             <td>{{$profile->created_at->format('Y-m-d')}}</td>
-
                         </tr>
                         <tr>
                             <th>Updated At</th>
                             <td>{{$profile->updated_at->format('Y-m-d')}}</td>
-
                         </tr>
                     </table>
                 </div>

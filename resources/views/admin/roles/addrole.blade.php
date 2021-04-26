@@ -25,9 +25,7 @@
             </div>
         </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-9 connectedSortable">
             <div class="card">
                 <div class="card-body">

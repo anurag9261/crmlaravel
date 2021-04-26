@@ -30,7 +30,6 @@
             </div>
         </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
         <section class="col-lg-11 connectedSortable">
             <div class="card">
@@ -62,7 +61,6 @@
                                 <div class="input-group col-md-2">
                                     <input type="text" class="form-control" name="invoice_no" value="{{$invoiceId}}"
                                         readonly>
-
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
@@ -180,7 +178,7 @@
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
-                                                            @enderror
+                                                        @enderror
                                                     </div>
                                                 </td>
                                             </tr>

@@ -3,36 +3,31 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 @endpush
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">Invoice Report</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
                         <li class="breadcrumb-item active">Invoice Report</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <ol class="breadcrumb float-sm-right">
-                        {{--  <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.roles')}}"
-                        style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button> --}}
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
     <div class="content">
-        <!-- Left col -->
         <section class="col-lg-9 connectedSortable">
             @if (session('error'))
             <div class="alert alert-warning">{{ session('error') }}</div>
@@ -104,9 +99,7 @@
                             <th>Status</th>
                             <th>Print</th>
                         </tr>
-                        <?php //echo "<pre>"; print_r($dataTable); die; ?>
                         @if($dataTable != "no_data_found")
-                        <?php //echo "<pre>"; print_r($dataTable); die; ?>
                         @foreach ($dataTable as $data)
                             <tr>
                                 <td>{{ $data->id}}</td>

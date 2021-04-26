@@ -72,7 +72,6 @@
             <th>Due Date</th>
             <th>Total</th>
         </tr>
-        <?php //echo "<pre>"; print_r($employeData); die;?>
         @foreach($invoiceRecord as $data)
         <tr>
             <td>{{$data->id}}</td>
@@ -85,13 +84,6 @@
             $totalPaidAmount[] = $data->total_amount;
         ?>
         @endforeach
-        {{--  <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total Amount</td>
-            <td></td>
-        </tr>  --}}
     </table>
     <br>
     <h3>Expense</h3>
@@ -123,7 +115,6 @@ $totalExpences[] = $data->amount;
         <h3>Total expence amount: {{ $totalExpenceAmounts }}</h3>
         <h3>Available Balance: {{ $totalPaidAmounts-$totalExpenceAmounts }}</h3>
     </div>
-    <?php //echo "<pre>"; print_r("HEllo"); die; ?>
     <footer>CRM-Admin Panel</footer>
 </body>
 </html>

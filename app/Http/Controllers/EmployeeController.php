@@ -46,7 +46,7 @@ class EmployeeController extends Controller
 
     public function getEmployees(Request $request)
     {
-        //$employees = Employee::all();
+
         $employees = Employee::join('admins', 'admins.id', '=', 'employees.admin_id')
                                 ->select('employees.*', 'admins.fname', 'admins.lname')
                                 ->get();
@@ -83,8 +83,6 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $profile = $request->validate([
-            // 'employee' => 'required',
-            // 'attandance' => 'required',
             'currentdate' => 'required',
         ]);
         $profile=new Employee();
@@ -120,7 +118,7 @@ class EmployeeController extends Controller
 
     public function update(Request $request, Employee $employee,$id)
     {
-        // dd($request->all());
+
         $profile = $request->validate([
             'currentdate' => 'required',
         ]);
