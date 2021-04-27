@@ -250,30 +250,31 @@ class ReportController extends Controller
         foreach($userData as $emp){
             $userDataAttend = DB::table('employees')->where('admin_id',$emp->id)->where('attandance','present')->get();
             $userPresentDay = count($userDataAttend);
-
+            $dailyHours = array();
             foreach ($userDataAttend as $employee) {
                 $inTimeResult = $employee->intime;
                 $outTimeResult = $employee->outtime;
-                if($inTimeResult == '' || $outTimeResult == ''){
-                    $dailyHours[] = '00:00:00';
-                }else{
-                    $time1 = new DateTime($inTimeResult);
-                    $time2 = new DateTime($outTimeResult);
-                    $interval = $time1->diff($time2);
-                    $dailyHours[] = $interval->format('%H:%I:%S');
-                }
+                $time1 = new DateTime($inTimeResult);
+                $time2 = new DateTime($outTimeResult);
+                $interval = $time1->diff($time2);
+                $dailyHours[] = $interval->format('%H:%I:%S');
+
             }
-            $time = [$dailyHours];
-            $sum = strtotime('00:00:00');
-            $totaltime = 0;
-            foreach ($time[0] as $element) {
-                $timeinsec = strtotime($element) - $sum;
-                $totaltime = $totaltime + $timeinsec;
-            }
-            $h = intval($totaltime / 3600);
-            $totaltime = $totaltime - ($h * 3600);
-            $m = intval($totaltime / 60);
-            $totalHours['hours'] = ("$h:$m:00");
+            $time = $dailyHours;
+            $total = 0;
+            foreach ($time as $element) :
+                $temp = explode(":", $element);
+                $total += (int) $temp[0] * 3600;
+                $total += (int) $temp[1] * 60;
+                $total += (int) $temp[2];
+            endforeach;
+            $totalHours['hours'] = sprintf(
+                '%02d:%02d:%02d',
+                ($total / 3600),
+                ($total / 60 % 60),
+                $total % 60
+            );
+
             $arrayEmp = (array)$emp;
             $userPresentDaycount['presentDay'] = $userPresentDay;
             if($arrayEmp['salary_type'] == 2){
@@ -287,9 +288,7 @@ class ReportController extends Controller
             }
             $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount,$payAmount);
         }
-        // echo "<pre>";
-        // print_r($employeSalaryData);
-        // die;
+
         $array = (array)$employeData;
         foreach ($array as $newArray) {
             if (!empty($newArray)) {

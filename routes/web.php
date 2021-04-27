@@ -111,5 +111,3 @@ Route::post('/payrollreportPDF', 'ReportController@payrollPDF')->name('report.pa
 /*---------------------ConfigurationController Route---------------------------*/
 Route::get('configuration{id}', 'ConfigurationController@edit')->name('admin.editconfiguration');
 Route::post('updateconfiguration{id}', 'ConfigurationController@update')->name('admin.updateconfiguration');
-
-

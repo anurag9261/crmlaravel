@@ -87,37 +87,20 @@
         @endforeach
         <tr>
             <?php
-                function explode_time($time) {
-                    $time = explode(':', $time);
-                    $time = $time[0] * 3600 + $time[1] * 60;
-                    return $time;
-                }
-
-                function second_to_hhmm($time) {
-                        $hour = floor($time / 3600);
-                        $minute = strval(floor(($time % 3600) / 60));
-                        $second = strval(floor(($minute % 3600) / 60));
-                        if ($minute == 0) {
-                            $minute = "00";
-                        }elseif($second == 0) {
-                            $second = "00";
-                        }
-                        else {
-                            $minute = $minute;
-                            $second = $second;
-                        }
-
-                        $time = $hour . ":" . $minute. ":" . $second;
-                        return $time;
-                }
-
-                $time = 0;
-                $time_arr = $totalTime;
-                foreach ($time_arr as $time_val) {
-                    $time +=explode_time($time_val);
-                }
-
-                $totalHours = second_to_hhmm($time);
+            $time = $totalTime;
+            $total = 0;
+            foreach ($time as $element) :
+                $temp = explode(":", $element);
+                $total += (int) $temp[0] * 3600;
+                $total += (int) $temp[1] * 60;
+                $total += (int) $temp[2];
+            endforeach;
+            $totalHours = sprintf(
+                '%02d:%02d:%02d',
+                ($total / 3600),
+                ($total / 60 % 60),
+                $total % 60
+            );
             ?>
             <td></td>
             <td></td>

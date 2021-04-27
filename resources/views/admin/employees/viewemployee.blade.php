@@ -56,16 +56,16 @@
                                 <td>NA</td>
                             </tr>
                         @else
-                            <th>InTime</th>
+                            <th>In Time</th>
                             <td>{{$profile[0]->intime}}</td>
                             @endif
                         </tr>
                         <tr>
                         @if($profile[0]->outtime == "")
-                            <th>InTime</th>
+                            <th>OutTime</th>
                             <td>NA</td>
                         @else
-                            <th>InTime</th>
+                            <th>Out Time</th>
                             <td>{{$profile[0]->outtime}}</td>
                         @endif
                         </tr>
