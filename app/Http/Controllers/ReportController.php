@@ -292,7 +292,7 @@ class ReportController extends Controller
             $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount,$payAmount);
         }
 
-        $array = (array)$employeSalaryData;
+        $array = (array)$userDataAttend;
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM'];
