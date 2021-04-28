@@ -86,6 +86,8 @@ class EmployeeController extends Controller
             'currentdate' => 'required',
             'employee' =>'required',
             'attandance' => 'required',
+            'intime' => 'required_if:attandance, ==,present',
+            'outtime' => 'required_if:attandance, == ,present',
         ]);
         $profile=new Employee();
         $profile->admin_id = $request->get('employee');
