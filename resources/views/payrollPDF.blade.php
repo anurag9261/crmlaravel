@@ -70,7 +70,6 @@
             <th>Salary Type</th>
             <th>Total Salary</th>
         </tr>
-
         @foreach ($employeSalaryData as $data)
             <?php $totalAmountSalary[] = $data['salaryTotal']; ?>
             <tr>
@@ -83,10 +82,17 @@
                 @else
                 <td>Hourly</td>
                 @endif
-                <td style="text-align:right">{{ $data['salaryTotal'] }}</td>
+                <?php
+                $amount = $data['salaryTotal'];
+                $data['total'] =  number_format((float)$amount, 2, '.', '');
+                ?>
+                <td style="text-align:right">{{ $data['total'] }}</td>
             </tr>
         @endforeach
-        <?php $totalAmount = array_sum($totalAmountSalary);?>
+        <?php $Amount = array_sum($totalAmountSalary);
+            $totalSalary = $Amount;
+            $totalAmount =  number_format((float)$totalSalary, 2, '.', '');
+        ?>
         <tr>
             <td></td>
             <td></td>

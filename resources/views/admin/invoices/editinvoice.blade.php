@@ -64,11 +64,7 @@
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4">
                                     <label for="billto">Bill To</label>
-                                    <select class="form-control  @error('bill_to') is-invalid @enderror" name="billto">
-                                        @foreach($customers as $customer)
-                                        <option>{{$customer->fname}} {{ $customer->lname }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control @error('bill_to') is-invalid @enderror" name="billto" value="{{ $profile->bill_to }}" readonly>
                                     @error('bill_to')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
