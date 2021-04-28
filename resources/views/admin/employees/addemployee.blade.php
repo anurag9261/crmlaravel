@@ -85,7 +85,7 @@
                                     value="present"> <label>Present</label>
                                 <input class="b @error('attandance') is-invalid
                                      @enderror" type="radio" name="attandance" id="absent" onclick="hide()"
-                                    value="present"> <label>Absent</label>
+                                    value="absent"> <label>Absent</label>
                                 <br>
                                 @error('attandance')
                                 <span class="span" role="alert">
@@ -94,9 +94,9 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row" style="display: none;" id="toggle">
+                        <div class="row mt-3" style="display: none;" id="toggle">
                             <div class="col-md-5">
-                                <label for="fname">In Time</label>
+                                <label for="intime">In Time</label>
                                 <input type="time" class="form-control @error('intime') is-invalid @enderror" name="intime">
                                 @error('intime')
                                     <span class="invalid-feedback" role="alert">
@@ -104,7 +104,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 mt-3">
                                 <label for="lname">Out Time</label>
                                 <input type="time" class="form-control @error('outtime') is-invalid @enderror" name="outtime">
                                 @error('outtime')

@@ -125,6 +125,9 @@ class EmployeeController extends Controller
 
         $profile = $request->validate([
             'currentdate' => 'required',
+            'intime' => 'required_if:attandance, ==,present',
+            'outtime' => 'required_if:attandance, == ,present',
+            'attandance' => 'required',
         ]);
         $profile=Employee::find($id);
         $profile->admin_id = $request->get('admin_id');
