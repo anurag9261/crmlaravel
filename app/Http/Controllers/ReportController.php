@@ -249,8 +249,8 @@ class ReportController extends Controller
         foreach($userData as $emp){
             $userDataAttend = DB::table('employees')->where('admin_id',$emp->id)
                                 ->where('attandance','present')
-                                 ->whereMonth('employees.currentdate', $month)
-                                ->whereYear('employees.currentdate', $year)
+                                ->whereMonth('currentdate', $month)
+                                ->whereYear('currentdate', $year)
                                 ->get();
             $userPresentDay = count($userDataAttend);
             $dailyHours = array();
@@ -291,12 +291,11 @@ class ReportController extends Controller
             }
             $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount,$payAmount);
         }
-
-        $array = (array)$userDataAttend;
+        $array = (array)$employeSalaryData;
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM'];
-                $pdf = PDF::loadView('payrollPDF', $data, compact('employeData','config','employeSalaryData'));
+                $pdf = PDF::loadView('payrollPDF', $data, compact('userDataAttend','config','employeSalaryData'));
                 return $pdf->download('payroll.pdf');
             } else {
                 return back()->withError(' Data not found for ' . $errorMonth . '!');
