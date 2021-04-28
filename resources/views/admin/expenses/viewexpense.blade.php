@@ -170,7 +170,8 @@
                         <?php $string = substr($profile->attach_bill, -4);?>
                         @if($string == '.pdf')
                             <th>Attach Bill</th>
-                            <td><img src="{{asset('images/profile/pdf1.png')}}" width="80px" , height="auto" ,></td>
+
+                            <td><a href="{{asset('bills/'.$profile->attach_bill)}}" download><img src="{{asset('images/profile/pdf1.png')}}" width="80px" , height="auto" ,></td>
                         </div>
                         @else
                         <tr>
