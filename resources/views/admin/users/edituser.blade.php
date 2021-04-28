@@ -499,6 +499,7 @@
                             </div>
                         </div>
                         @endif
+                        <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
                 </div>
