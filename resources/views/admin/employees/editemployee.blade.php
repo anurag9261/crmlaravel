@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="display: none;" id="toggle">
+                        <div class="row mt-3" style="display: none;" id="toggle">
                             <div class="col-md-5">
                                 <label for="intime">In Time</label>
                                 <input type="time" class="form-control @error('intime') is-invalid @enderror" name="intime" value="{{$admin->intime}}">
@@ -88,7 +88,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 mt-3">
                                 <label for="outtime">Out Time</label>
                                 <input type="time" class="form-control @error('outtime') is-invalid @enderror" name="outtime" value="{{$admin->outtime}}">
                                 @error('outtime')

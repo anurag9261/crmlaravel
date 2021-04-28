@@ -73,7 +73,7 @@
             </li>
             </ul>
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto mr-2">
                 <li>
                     Welcome {{Auth::user()->fname}}
                     <a href="{{route('logout')}}">Logout</a>
@@ -292,8 +292,9 @@
         @yield('content')
 
         <footer class="main-footer">
-            <strong>CRM-<a href="https://www.webcreta.com/">Webcreta Techonologies</a>&copy; 2021.</strong>
-            All rights reserved.
+            <strong>&copy; 2021 CRM. All rights reserved. Designed with <i class="fa fa-heart"></i> by <a title="webcreta" target="_blank" href="http://www.webcreta.com"
+                rel="noopener noreferrer">Webcreta</a></strong>
+
             <div class="float-right d-none d-sm-inline-block">
             </div>
         </footer>
