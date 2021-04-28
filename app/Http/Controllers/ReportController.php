@@ -246,9 +246,12 @@ class ReportController extends Controller
         $errorMonth = date('F-Y', strtotime($request->get('month') . '-01'));
         $year =  date("Y", strtotime($request->get('month') . '-01'));
         $userData = DB::table('admins')->select('id','fname', 'lname', 'salary_amount','salary_type')->where('role','Employee')->get();
-
         foreach($userData as $emp){
-            $userDataAttend = DB::table('employees')->where('admin_id',$emp->id)->where('attandance','present')->get();
+            $userDataAttend = DB::table('employees')->where('admin_id',$emp->id)
+                                ->where('attandance','present')
+                                 ->whereMonth('employees.currentdate', $month)
+                                ->whereYear('employees.currentdate', $year)
+                                ->get();
             $userPresentDay = count($userDataAttend);
             $dailyHours = array();
             foreach ($userDataAttend as $employee) {
@@ -289,7 +292,7 @@ class ReportController extends Controller
             $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount,$payAmount);
         }
 
-        $array = (array)$employeData;
+        $array = (array)$employeSalaryData;
         foreach ($array as $newArray) {
             if (!empty($newArray)) {
                 $data = ['title' => 'CRM'];

@@ -1,6 +1,20 @@
 @extends('admin.master')
 @push('styles')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .span {
+        width: 100%;
+        margin-top: .25rem;
+        font-size: 80%;
+        color: #dc3545;
+        }
+        .a{
+            margin-left: 45px;
+        }
+        .b{
+            margin-left:150px
+        }
+    </style>
 @endpush
 @section('content')
 <div class="content-wrapper">
@@ -64,28 +78,20 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-5">
-                                <label for="attandance">Attandance:</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="attandance"
-                                        id="present" onclick="show()" value="present">
-                                    <label class="form-check-label" for="present">
-                                        Present
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="attandance"
-                                        id="absent" onclick="hide()" value="absent">
-                                    <label class="form-check-label" for="absent">
-                                        Absent
-                                    </label>
-                                </div>
+                            <div class="col-md-10">
+                                <label for="attendance">Attendance</label><br>
+                                <input class="a @error('attandance') is-invalid
+                                     @enderror" type="radio" name="attandance" id="present" onclick="show()"
+                                    value="present"> <label>Present</label>
+                                <input class="b @error('attandance') is-invalid
+                                     @enderror" type="radio" name="attandance" id="absent" onclick="hide()"
+                                    value="present"> <label>Absent</label>
+                                <br>
+                                @error('attandance')
+                                <span class="span" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row" style="display: none;" id="toggle">

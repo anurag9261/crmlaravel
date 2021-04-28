@@ -211,6 +211,7 @@
                                     <img src="{{asset('images/'. $profile->image )}}" width="150px" , height="auto"></td>
                                 </div>
                             </div>
+                            <br>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
                 </div>

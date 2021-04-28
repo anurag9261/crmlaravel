@@ -85,6 +85,7 @@ class EmployeeController extends Controller
         $profile = $request->validate([
             'currentdate' => 'required',
             'employee' =>'required',
+            'attandance' => 'required',
         ]);
         $profile=new Employee();
         $profile->admin_id = $request->get('employee');

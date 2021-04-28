@@ -1,6 +1,14 @@
 @extends('admin.master')
 @push('styles')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .span {
+            width: 100%;
+            margin-top: .25rem;
+            font-size: 80%;
+            color: #dc3545;
+        }
+    </style>
 @endpush
 @section('content')
 <div class="content-wrapper">
@@ -85,12 +93,17 @@
                             <div class="col-md-5">
                                 <label for="gender">Gender</label>
                                 <br>
-                                <input type="radio" name="gender" value="1">
+                                <input type="radio" name="gender" value="1" class=" @error('gender') is-invalid @enderror">
                                 <label>Male</label>
-                                <input type="radio" name="gender" value="2">
+                                <input type="radio" name="gender" value="2" class=" @error('gender') is-invalid @enderror">
                                 <label>Female</label>
-                                <input type="radio" name="gender" value="0">
+                                <input type="radio" name="gender" value="0" class=" @error('gender') is-invalid @enderror">
                                 <label>Other</lable>
+                                @error('gender')
+                                <span class="span" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="col-md-5">
                                 <label for="birthdate">Birth Date</label>
@@ -155,7 +168,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="state">State</label>
-                                <select name="state" class="form-control">
+                                <select name="state" class="form-control @error('state') is-invalid @enderror">
                                     <option value="">Select State</option>
                                     <option value="Alberta">Alberta</option>
                                     <option value="British_Columbia">British Columbia</option>

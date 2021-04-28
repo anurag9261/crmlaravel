@@ -65,6 +65,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
+
         $profile = $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -72,7 +73,7 @@ class AdminController extends Controller
             'email' => 'required|string|email|max:255|unique:admins',
             'birthdate' => 'required',
             'joining_date' => 'required',
-            'gender'=> 'in:1,2,3',
+            'gender'=> 'required',
             'salary_type' => 'required',
             'address' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -83,6 +84,7 @@ class AdminController extends Controller
             'city' => 'required',
             'state' => 'required',
             'country' => 'required',
+            'gender' => 'required',
         ]);
         $profile=new Admin();
         $profile->fname = $request->get('fname');

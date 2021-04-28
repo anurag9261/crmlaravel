@@ -1,6 +1,14 @@
 @extends('admin.master')
 @push('styles')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .span {
+            width: 100%;
+            margin-top: .25rem;
+            font-size: 80%;
+            color: #dc3545;
+        }
+    </style>
 @endpush
 @section('content')
 <div class="content-wrapper">
@@ -114,9 +122,10 @@
                                 <input type="radio" class="@error('gender') is-invalid @enderror" name="gender" value="2">
                                 <label>Female</label>
                                 <input type="radio" class="@error('gender') is-invalid @enderror" name="gender" value="3">
-                                <label>Other</lable>
+                                <label>Other</label>
+                                <br>
                                 @error('gender')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="span" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -124,12 +133,13 @@
                             <div class="col-md-5">
                                 <label for="salarytype">Salary Type</label>
                                 <br>
-                                <input type="radio" name="salary_type" value="1">
+                                <input type="radio" name="salary_type" class="@error('salary_type') is-invalid @enderror" value="1">
                                 <label>Hourly</label>
-                                <input type="radio" name="salary_type" value="2">
+                                <input type="radio" name="salary_type" class="@error('salary_type') is-invalid @enderror" value="2">
                                 <label>Monthly</label>
+                                <br>
                                 @error('salary_type')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="span" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -213,7 +223,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="state">State</label>
-                                <select name="state" class="form-control">
+                                <select name="state" class="form-control @error('state') is-invalid @enderror">
                                     <option value="">Select State</option>
                                     <option value="Alberta">Alberta</option>
                                     <option value="British_Columbia">British Columbia</option>
