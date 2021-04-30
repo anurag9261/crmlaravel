@@ -18,7 +18,12 @@
         </div>
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-left">
+                        <button class="btn btn-secondary" style="float:right"><a href="invoicePrint{{$profile->id}}" style="color:white">Download</a></button>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.invoices')}}"
                                 style="color:white"><i class="fas fa-arrow-left"></i> Back</a></button>

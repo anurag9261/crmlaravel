@@ -117,6 +117,10 @@
     .login-form a {
         color: #0080ff;
     }
+
+    .invalid-feedback{
+        color:rgba(224, 37, 37, 0.972);
+    }
     </style>
 </head>
 <body>
@@ -124,10 +128,16 @@
         <form action="{{ route('login') }}" method="post">
             @csrf
             <div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
-            <h4 class="modal-title">Welcome to Admin Panel</h4>
+            <h4 class="modal-title">Welcome to CRM</h4>
+            @if(session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+            @endif
             <div class="form-group">
+                <label>Email</label>
                 <input type="email" class="@error('email') is-invalid @enderror form-control"
-                    placeholder="Enter Email here" name="email" required="required">
+                    placeholder="Enter Email here" name="email">
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -135,25 +145,22 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label>Password</label>
                 <input type="password" class="@error('password') is-invalid @enderror form-control"
-                    placeholder="Enter Password here" name="password" required="required">
+                    placeholder="Enter Password here" name="password">
                 @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
             </div>
+
             <div class="form-group small clearfix">
                 <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
                 <a href="{{ route('password.request') }}" class="forgot-link">Forgot Password?</a>
             </div>
             <input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
             <br>
-            @if(session()->has('error'))
-                <div class="alert alert-danger">
-                    {{ session()->get('error') }}
-                </div>
-            @endif
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}

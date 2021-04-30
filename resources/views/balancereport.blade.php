@@ -10,7 +10,7 @@
 
         th,
         td {
-            text-align: left;
+            text-align: center;
             padding: 8px;
             border: 1px solid #525252;
         }
@@ -72,7 +72,12 @@
             <th>Due Date</th>
             <th>Total</th>
         </tr>
-        @foreach($invoiceRecord as $data)
+
+        <?php
+        $arrayInvoice = (array)$invoiceRecord; ?>
+        @foreach ($arrayInvoice as $Invoice)
+        @if(!empty($Invoice))
+        @foreach($Invoice as $data)
         <tr>
             <td>{{$data->id}}</td>
             <td>{{$data->title}}</td>
@@ -83,6 +88,13 @@
         <?php
             $totalPaidAmount[] = $data->total_amount;
         ?>
+        @endforeach
+        @else
+            <tr>
+                <td colspan="5">No record found!</td>
+            </tr>
+            <?php $totalPaidAmount[] = '0'; ?>
+        @endif
         @endforeach
     </table>
     <br>
@@ -95,19 +107,30 @@
             <th>Amount</th>
         </tr>
 
-        @foreach($expenseRecord as $data)
-        <tr>
-            <td>{{$loop->iteration}}</td>
-            <td>{{$data->category}}</td>
-            <td>{{$data->entry_date}}</td>
-            <td style="text-align: right">{{$data->amount}}</td>
-        </tr>
-<?php
-$totalExpences[] = $data->amount;
-?>
+        <?php $arrayEmp = (array)$expenseRecord;
+
+        ?>
+        @foreach($arrayEmp as $expenceDetails)
+            @if(!empty($expenceDetails))
+            @foreach($expenceDetails as $data)
+
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$data->category}}</td>
+                    <td>{{$data->entry_date}}</td>
+                    <td style="text-align: right">{{$data->amount}}</td>
+                </tr>
+                <?php $totalExpences[] = $data->amount; ?>
+        @endforeach
+        @else
+            <tr>
+                <td colspan="4">No record found!</td>
+            </tr>
+            <?php $totalExpences[] = '0'; ?>
+        @endif
         @endforeach
     </table>
-<?php
+        <?php
         $totalPaidAmounts = array_sum($totalPaidAmount);
         $totalExpenceAmounts = array_sum($totalExpences); ?>
     <div class="" style="margin-top:50px">

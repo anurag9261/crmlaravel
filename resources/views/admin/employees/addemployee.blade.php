@@ -52,6 +52,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="role">Employee Name</label>
+                                @if(Auth::user()->role == 'Admin')
                                 <select class="form-control  @error('employee') is-invalid @enderror" name="employee"
                                     placeholder="Select Employee">
                                     <option value="">Select Employee</option>
@@ -59,6 +60,10 @@
                                     <option value="{{ $profile->id  }}">{{$profile->fname}} {{ $profile->lname }}</option>
                                     @endforeach
                                 </select>
+                                @else
+                                <input type="text" value="{{ Auth::user()->id }}" class="form-control" name="employee" hidden>
+                                <input type="text" value="{{ Auth::user()->fname }} {{ Auth::user()->lname }}" class="form-control" readonly>
+                                @endif
                                 @error('employee')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

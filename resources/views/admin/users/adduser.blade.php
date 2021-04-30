@@ -222,33 +222,34 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="state">State</label>
-                                <select name="state" class="form-control @error('state') is-invalid @enderror">
-                                    <option value="">Select State</option>
-                                    <option value="Alberta">Alberta</option>
-                                    <option value="British_Columbia">British Columbia</option>
-                                    <option value="Manitoba">Manitoba</option>
-                                    <option value="New_Brunswick">New Brunswick</option>
-                                    <option value="Newfoundland_and_Labrador">Newfoundland and Labrador</option>
-                                    <option value="Nova_Scotia">Nova Scotia</option>
-                                    <option value="Ontario">Ontario</option>
-                                    <option value="Prince_Edward_Island">Prince Edward Island</option>
-                                    <option value="Quebec">Quebec</option>
-                                    <option value="Saskatchewan">Saskatchewan</option>
-                                    <option value="Yukon">Yukon</option>
-                                    <option value="Nunavaut">Nunavaut</option>
-                                    <option value="Northewst_Territories">Northewst Territories</option>
-                                </select>
-                                @error('state')
+                                <label for="zipcode">Zip Code</label>
+                                <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode"
+                                    placeholder="Enter Zip">
+                                @error('zipcode')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="country">Country</label>
-                                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="Canada" readonly>
-                                @error('country')
+                                <label for="state">State</label>
+                                <select name="state" class="form-control @error('state') is-invalid @enderror">
+                                    <option value="">Select State</option>
+                                    <option value="Alberta">Alberta</option>
+                                    <option value="British Columbia">British Columbia</option>
+                                    <option value="Manitoba">Manitoba</option>
+                                    <option value="New Brunswick">New Brunswick</option>
+                                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                    <option value="Nova Scotia">Nova Scotia</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Prince Edward Island">Prince Edward Island</option>
+                                    <option value="Quebec">Quebec</option>
+                                    <option value="Saskatchewan">Saskatchewan</option>
+                                    <option value="Yukon">Yukon</option>
+                                    <option value="Nunavaut">Nunavaut</option>
+                                    <option value="Northewst Territories">Northewst Territories</option>
+                                </select>
+                                @error('state')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -257,6 +258,16 @@
                         </div>
                         <br>
                         <div class="row">
+                            <div class="col-md-5">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="Canada"
+                                    readonly>
+                                @error('country')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                             <div class="col-md-5">
                                 <label for="password">password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"

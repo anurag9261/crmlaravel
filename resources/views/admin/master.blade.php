@@ -170,6 +170,13 @@
                                 </li>
                             </ul>
                         </li>
+                        @else
+                        <li class="nav-item">
+                            <a href="{{route('admin.employee')}}" class="nav-link">
+                                <i class="nav-icon fas fa-calendar-alt"></i>
+                                <p>Timesheet Management</p>
+                            </a>
+                        </li>
                         @endif
                         <li class="nav-item has-treeview">
                             <a href="{{route('admin.customers')}}" class="nav-link">
@@ -179,6 +186,7 @@
                                 </p>
                             </a>
                         </li>
+                        @if(Auth::user()->role == 'Admin')
                         <li class="nav-item has-treeview">
                             <a href="{{route('admin.invoices')}}" class="nav-link">
                                 <i class="nav-icon fas fa-receipt"></i>
@@ -187,6 +195,7 @@
                                 </p>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item has-treeview">
                             <a href="{{route('admin.expenses')}}" class="nav-link">
                                 <i class="nav-icon fas fa-money-bill-alt"></i>
@@ -265,12 +274,6 @@
                                     <a href="{{route('admin.timesheetreport')}}" class="nav-link">
                                         <i class="nav-icon fas fa-calendar-alt"></i>
                                         <p>Timesheet Report</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin.invoicereport')}}" class="nav-link">
-                                        <i class="nav-icon fas fa-receipt"></i>
-                                        <p>Invoice Report</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

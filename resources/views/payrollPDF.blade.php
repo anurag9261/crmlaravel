@@ -71,23 +71,26 @@
             <th>Total Salary</th>
         </tr>
         @foreach ($employeSalaryData as $data)
-            <?php $totalAmountSalary[] = $data['salaryTotal']; ?>
-            <tr>
-                <td>{{ $data['id'] }}</td>
-                <td>{{ $data['fname'] }} {{$data['lname']}}</td>
-                <td>{{ $data['presentDay']}}</td>
-                <td>{{ $data['hours']}}</td>
-                @if($data['salary_type'] == 2)
-                <td>Monthly</td>
-                @else
-                <td>Hourly</td>
-                @endif
-                <?php
-                $amount = $data['salaryTotal'];
-                $data['total'] =  number_format((float)$amount, 2, '.', '');
-                ?>
-                <td style="text-align:right">{{ $data['total'] }}</td>
-            </tr>
+            @if($data != '')
+               <?php $totalAmountSalary[] = $data['salaryTotal']; ?>
+                <tr>
+                    <td>{{ $data['id'] }}</td>
+                    <td>{{ $data['fname'] }} {{$data['lname']}}</td>
+                    <td>{{ $data['presentDay']}}</td>
+                    <td>{{ $data['hours']}}</td>
+                    @if($data['salary_type'] == 2)
+                    <td>Monthly</td>
+                    @else
+                    <td>Hourly</td>
+                    @endif
+                    <?php
+                        $amount = $data['salaryTotal'];
+                        $data['total'] =  number_format((float)$amount, 2, '.', '');
+                    ?>
+                    <td style="text-align:right">{{ $data['total'] }}</td>
+                </tr>
+            @endif
+
         @endforeach
         <?php $Amount = array_sum($totalAmountSalary);
             $totalSalary = $Amount;

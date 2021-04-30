@@ -85,6 +85,7 @@ class AdminController extends Controller
             'state' => 'required',
             'country' => 'required',
             'gender' => 'required',
+            'zipcode' => 'required'
         ]);
         $profile=new Admin();
         $profile->fname = $request->get('fname');
@@ -96,6 +97,7 @@ class AdminController extends Controller
         $profile->joining_date = $request->get('joining_date');
         $profile->address = $request->get('address');
         $profile->city = $request->get('city');
+        $profile->zipcode = $request->get('zipcode');
         $profile->state = $request->get('state');
         $profile->country = $request->get('country');
         $imageName = time().'.'.$request->image->extension();
@@ -157,6 +159,7 @@ class AdminController extends Controller
             'city' => 'required',
             'state' => 'required',
             'country' => 'required',
+            'zipcode' => 'required',
         ]);
         $profile=Admin::find($id);
         if( $request->image == ""){
@@ -175,6 +178,7 @@ class AdminController extends Controller
         $profile->gender = $request->get('gender');
         $profile->address = $request->get('address');
         $profile->city = $request->get('city');
+        $profile->zipcode = $request->get('zipcode');
         $profile->state = $request->get('state');
         $profile->country = $request->get('country');
         $profile->image = $imageName;

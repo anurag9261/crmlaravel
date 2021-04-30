@@ -59,6 +59,7 @@ class CustomerController extends Controller
             'city' => 'required',
             'state' => 'required',
             'country' => 'required',
+            'zipcode' => 'required'
         ]);
         $profile=new Customer();
         $profile->fname = $request->get('fname');
@@ -69,6 +70,7 @@ class CustomerController extends Controller
         $profile->birthdate = $request->get('birthdate');
         $profile->address = $request->get('address');
         $profile->city = $request->get('city');
+        $profile->zipcode = $request->get('zipcode');
         $profile->state = $request->get('state');
         $profile->country = $request->get('country');
         $imageName = time().'.'.$request->image->extension();
@@ -101,6 +103,7 @@ class CustomerController extends Controller
             'city' => 'required',
             'state' => 'required',
             'country' => 'required',
+            'zipcode' => 'required'
         ]);
         $profile=Customer::find($id);
         if( $request->image == ""){
@@ -118,6 +121,7 @@ class CustomerController extends Controller
         $profile->birthdate = $request->get('birthdate');
         $profile->address = $request->get('address');
         $profile->city = $request->get('city');
+        $profile->zipcode = $request->get('zipcode');
         $profile->state = $request->get('state');
         $profile->country = $request->get('country');
         $profile->status = $request->get('status');
