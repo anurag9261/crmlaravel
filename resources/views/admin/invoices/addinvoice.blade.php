@@ -48,6 +48,18 @@
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-6">
+                                    <b>Bill From:</b><br>{{ $config[0]->company_name }}, <br>
+                                    {{ $config[0]->address}},<br> {{ $config[0]->city }},{{ $config[0]->zipcode }},<br> {{ $config[0]->state }},
+                                    {{ $config[0]->country }}, <br>Mob no: {{ $config[0]->mobno }}, <br>Vat no: {{ $config[0]->vat_number }}.
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                               <div class="input-group col-md-2">
+                                    <input type="text" class="form-control" name="invoice_no" value="{{$invoiceId}}" readonly>
+                                </div>
+                            </div>
+                            <div class="row clearfix" style="margin-top:20px">
+                                <div class="col-md-6">
                                     <label for="title">Title</label>
                                     <textarea class="form-control  @error('title') is-invalid @enderror" id="" rows="3"
                                         placeholder="who is this invoice from?(required)" name="title"></textarea>
@@ -58,10 +70,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4"></div>
-                                <div class="input-group col-md-2">
-                                    <input type="text" class="form-control" name="invoice_no" value="{{$invoiceId}}"
-                                        readonly>
-                                </div>
+
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4">
@@ -116,24 +125,24 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center"> # </th>
-                                            <th class="text-center"> Product </th>
+                                            <th class="text-center"> Item Name </th>
                                             <th class="text-center"> Qty </th>
-                                            <th class="text-center"> Price </th>
-                                            <th class="text-center"> Total </th>
+                                            <th class="text-center"> Price(CAD) </th>
+                                            <th class="text-center"> Total(CAD) </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr id='addr0'>
                                             <td>1</td>
                                             <td><input type="text" name='product[]' placeholder='Enter Product Name'
-                                                    class="form-control @error('product[]') is-invalid @enderror"/>
+                                                    class="form-control @error('product[]') is-invalid @enderror" />
                                             </td>
                                             <td><input type="number" name='qty[]' placeholder='Enter Qty'
                                                     class="form-control qty" step="0" min="0" /></td>
                                             <td><input type="number" name='price[]' placeholder='Enter Unit Price'
-                                                    class="form-control price" step="0.00" min="0" /></td>
+                                                    class="form-control price" step="any" min="0" /></td>
                                             <td><input type="number" name='total[]' placeholder='0.00'
-                                                    class="form-control total" readonly/></td>
+                                                    class="form-control total" step="any" readonly /></td>
                                         </tr>
                                         <tr id='addr1'></tr>
                                     </tbody>
@@ -156,53 +165,57 @@
                                     <table class="table table-border table-hover" id="tab_logic_total">
                                         <tbody>
                                             <tr>
-                                                <th class="text-center">Sub Total</th>
+                                                <th class="text-center">Sub Total(CAD)</th>
                                                 <td class="text-center"><input type="number" name='sub_total'
-                                                placeholder='0.00' class="form-control @error('sub_total') is-invalid @enderror" id="sub_total"
-                                                readonly />
-                                                @error('sub_total')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                        placeholder='0.00'
+                                                        class="form-control @error('sub_total') is-invalid @enderror"
+                                                        id="sub_total" readonly />
+                                                    @error('sub_total')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Tax</th>
+                                                <th class="text-center">Tax(CAD)</th>
                                                 <td class="text-center">
                                                     <div class="input-group mb-2 mb-sm-0">
-                                                        <input type="number" class="form-control @error('tax_percentage') is-invalid @enderror" name="tax_percentage"
-                                                            id="tax" placeholder="0">
+                                                        <input type="number"
+                                                            class="form-control @error('tax_percentage') is-invalid @enderror"
+                                                            name="tax_percentage" id="tax" placeholder="0">
                                                         <div class="input-group-addon">%</div>
                                                         @error('tax_percentage')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
                                                         @enderror
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Tax Amount</th>
+                                                <th class="text-center">Tax Amount(CAD)</th>
                                                 <td class="text-center"><input type="number" name='tax_amount'
-                                                    id="tax_amount" placeholder='0.00' class="form-control @error('tax_amount') is-invalid @enderror"
-                                                    readonly />
+                                                        id="tax_amount" placeholder='0.00'
+                                                        class="form-control @error('tax_amount') is-invalid @enderror"
+                                                        readonly />
                                                     @error('tax_amount')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Grand Total</th>
+                                                <th class="text-center">Grand Total(CAD)</th>
                                                 <td class="text-center"><input type="number" name='total_amount'
-                                                    id="total_amount" placeholder='0.00' class="form-control form-control @error('total_amount') is-invalid @enderror"
-                                                    readonly />
+                                                        id="total_amount" placeholder='0.00'
+                                                        class="form-control form-control @error('total_amount') is-invalid @enderror"
+                                                        readonly />
                                                     @error('total_amount')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </td>
                                             </tr>

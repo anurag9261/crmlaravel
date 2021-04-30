@@ -17,12 +17,14 @@ class CreateConfigurationsTable extends Migration
             $table->id();
             $table->string('company_name');
             $table->integer('vat_number');
+            $table->string('mobno');
             $table->string('site_name');
             $table->string('site_title');
             $table->string('site_logo');
             $table->string('favicon_icon');
             $table->string('address');
             $table->string('city');
+            $table->integer('zipcode');
             $table->string('state');
             $table->string('country');
             $table->timestamps();

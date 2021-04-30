@@ -120,7 +120,7 @@
                         </tr>
                       @foreach($profile as $data)
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$data->id}}</td>
                             <td>{{$data->fname}}</td>
                             <td>{{$data->lname}}</td>
                             <td>{{$data->mobno}}</td>
@@ -154,7 +154,7 @@
 
                      @foreach($customers as $data)
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$data->id}}</td>
                             <td>{{$data->fname}}</td>
                             <td>{{$data->lname}}</td>
                             <td>{{$data->mobno}}</td>

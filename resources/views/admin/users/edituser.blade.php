@@ -214,25 +214,35 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
+                                <label for="zipcode">Zip Code</label>
+                                <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode"
+                                    value="{{ $profile->zipcode }}">
+                                @error('zipcode')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
                                 <label for="state">State</label>
                                 <select name="state" class="form-control">
                                     <option value="">Select State</option>
                                     <option value="Alberta" {{ ($profile->state) == 'Alberta' ? 'selected' : '' }}>Alberta
                                     </option>
-                                    <option value="British_Columbia" {{ ($profile->state) == 'British_Columbia' ? 'selected' : '' }}>
+                                    <option value="British Columbia" {{ ($profile->state) == 'British Columbia' ? 'selected' : '' }}>
                                         British Columbia</option>
                                     <option value="Manitoba" {{ ($profile->state) == 'Manitoba' ? 'selected' : '' }}>
                                         Manitoba</option>
-                                    <option value="New_Brunswick" {{ ($profile->state) == 'New_Brunswick' ? 'selected' : '' }}>
+                                    <option value="New Brunswick" {{ ($profile->state) == 'New Brunswick' ? 'selected' : '' }}>
                                         New Brunswick</option>
-                                    <option value="Newfoundland_and_Labrador"
-                                        {{ ($profile->state) == 'Newfoundland_and_Labrador' ? 'selected' : '' }}>
+                                    <option value="Newfoundland and Labrador"
+                                        {{ ($profile->state) == 'Newfoundland and Labrador' ? 'selected' : '' }}>
                                         Newfoundland and Labrador</option>
-                                    <option value="Nova_Scotia" {{ ($profile->state) == 'Nova_Scotia' ? 'selected' : '' }}>
+                                    <option value="Nova Scotia" {{ ($profile->state) == 'Nova Scotia' ? 'selected' : '' }}>
                                         Nova Scotia</option>
                                     <option value="Ontario" {{ ($profile->state) == 'Ontario' ? 'selected' : '' }}>
                                         Ontario</option>
-                                    <option value="Prince_Edward_Island" {{ ($profile->state) == 'Prince_Edward_Island' ? 'selected' : '' }}>
+                                    <option value="Prince Edward Island" {{ ($profile->state) == 'Prince Edward Island' ? 'selected' : '' }}>
                                         Prince Edward Island</option>
                                     <option value="Quebec" {{ ($profile->state) == 'Quebec' ? 'selected' : '' }}>
                                         Quebec</option>
@@ -242,7 +252,7 @@
                                         Yukon</option>
                                     <option value="Nunavaut" {{ ($profile->state) == 'Nunavaut' ? 'selected' : '' }}>
                                         Nunavaut</option>
-                                    <option value="Northewst_Territories" {{ ($profile->state) == 'Northewst_Territories' ? 'selected' : '' }}>
+                                    <option value="Northewst Territories" {{ ($profile->state) == 'Northewst Territories' ? 'selected' : '' }}>
                                         Northewst Territories</option>
                                 </select>
                                 @error('state')
@@ -251,6 +261,9 @@
                                 </span>
                                 @enderror
                             </div>
+                        </div>
+                        <br>
+                        <div class="row">
                             <div class="col-md-5">
                                 <label for="country">Country</label>
                                 <input type="text" class="form-control @error('country') is-invalid @enderror" name="country"
@@ -261,9 +274,6 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
                             <div class="col-md-5">
                                 <img src="{{asset('images/'. $profile->image )}}" width="150px" , height="auto"></td>
                             </div>
@@ -444,25 +454,35 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
+                                <label for="zipcode">Zip Code</label>
+                                <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode"
+                                    value="{{ $profile->zipcode }}">
+                                @error('zipcode')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-5">
                                 <label for="state">State</label>
                                 <select name="state" class="form-control">
                                     <option value="">Select State</option>
                                     <option value="Alberta" {{ ($profile->state) == 'Alberta' ? 'selected' : '' }}>Alberta
                                     </option>
-                                    <option value="British_Columbia" {{ ($profile->state) == 'British_Columbia' ? 'selected' : '' }}>
+                                    <option value="British Columbia" {{ ($profile->state) == 'British Columbia' ? 'selected' : '' }}>
                                         British Columbia</option>
                                     <option value="Manitoba" {{ ($profile->state) == 'Manitoba' ? 'selected' : '' }}>
                                         Manitoba</option>
-                                    <option value="New_Brunswick" {{ ($profile->state) == 'New_Brunswick' ? 'selected' : '' }}>
+                                    <option value="New Brunswick" {{ ($profile->state) == 'New Brunswick' ? 'selected' : '' }}>
                                         New Brunswick</option>
-                                    <option value="Newfoundland_and_Labrador"
-                                        {{ ($profile->state) == 'Newfoundland_and_Labrador' ? 'selected' : '' }}>
+                                    <option value="Newfoundland and Labrador"
+                                        {{ ($profile->state) == 'Newfoundland and Labrador' ? 'selected' : '' }}>
                                         Newfoundland and Labrador</option>
-                                    <option value="Nova_Scotia" {{ ($profile->state) == 'Nova_Scotia' ? 'selected' : '' }}>
+                                    <option value="Nova Scotia" {{ ($profile->state) == 'Nova Scotia' ? 'selected' : '' }}>
                                         Nova Scotia</option>
                                     <option value="Ontario" {{ ($profile->state) == 'Ontario' ? 'selected' : '' }}>
                                         Ontario</option>
-                                    <option value="Prince_Edward_Island" {{ ($profile->state) == 'Prince_Edward_Island' ? 'selected' : '' }}>
+                                    <option value="Prince Edward Island" {{ ($profile->state) == 'Prince Edward Island' ? 'selected' : '' }}>
                                         Prince Edward Island</option>
                                     <option value="Quebec" {{ ($profile->state) == 'Quebec' ? 'selected' : '' }}>
                                         Quebec</option>
@@ -472,7 +492,7 @@
                                         Yukon</option>
                                     <option value="Nunavaut" {{ ($profile->state) == 'Nunavaut' ? 'selected' : '' }}>
                                         Nunavaut</option>
-                                    <option value="Northewst_Territories" {{ ($profile->state) == 'Northewst_Territories' ? 'selected' : '' }}>
+                                    <option value="Northewst Territories" {{ ($profile->state) == 'Northewst Territories' ? 'selected' : '' }}>
                                         Northewst Territories</option>
                                 </select>
                                 @error('state')
@@ -481,6 +501,9 @@
                                 </span>
                                 @enderror
                             </div>
+                        </div>
+                        <br>
+                        <div class="row">
                             <div class="col-md-5">
                                 <label for="country">Country</label>
                                 <input type="text" class="form-control @error('country') is-invalid @enderror" name="country"
@@ -491,9 +514,6 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
                             <div class="col-md-5">
                                 <img src="{{asset('images/'. $profile->image )}}" width="150px" , height="auto"></td>
                             </div>

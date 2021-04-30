@@ -83,6 +83,8 @@ Route::post('updateinvoice{id}', 'InvoiceController@update')->name('admin.update
 Route::get('deleteinvoice{id}', 'InvoiceController@destroy')->name('admin.deleteinvoice');
 Route::get('deleteproduct{id}', 'InvoiceController@deleteProduct')->name('admin.deleteproduct');
 Route::get('deleteproduct/{id}', 'InvoiceController@deleteAll')->name('admin.deleteproduct');
+Route::get('invoicePrint{id}','InvoiceController@Invoiceprint')->name('submit.Invoice');
+Route::get('invoicepdfreport','InvoiceController@Invoiceprint')->name('invoice.pdf');
 
 /*---------------------ExpenseController Route---------------------------*/
 Route::get('/expenses','ExpenseController@index')->name('admin.expenses');

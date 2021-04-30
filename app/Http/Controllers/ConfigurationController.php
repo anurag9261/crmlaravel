@@ -28,10 +28,11 @@ class ConfigurationController extends Controller
     public function update(Request $request,$id)
     {
         $request->validate([
-
             'address' => 'required',
             'site_title' =>'required',
-            'site_name' => 'required'
+            'site_name' => 'required',
+            'zipcode' => 'required',
+            'mobno' => 'required'
         ]);
         $profile = Configuration::find($id);
         if ($request->site_logo == "") {
@@ -53,11 +54,13 @@ class ConfigurationController extends Controller
         $profile->company_name = $request->get('company_name');
         $profile->vat_number = $request->get('vat_number');
         $profile->city = $request->get('city');
+        $profile->mobno = $request->get('mobno');
         $profile->state = $request->get('state');
         $profile->country = $request->get('country');
         $profile->address = $request->get('address');
         $profile->site_name = $request->get('site_name');
         $profile->site_title = $request->get('site_title');
+        $profile->zipcode = $request->get('zipcode');
         $profile->save();
         return redirect('configuration1')->with('message', 'Record updated successfully!');
     }

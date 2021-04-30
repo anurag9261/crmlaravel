@@ -21,35 +21,38 @@ class EmployeeController extends Controller
 
     public function index(Request $request)
     {
-        if (Auth::user()->role == 'Admin') {
-            $admin = DB::table('admins')
-                ->select('admins.id', 'admins.fname', 'admins.lname','employees.*')
-                ->join('employees', 'admin_id', '=', 'admins.id')
-            ->get();
-            $employeData['emp'] =   Employee::get();
-            $row = 0;
-            foreach($employeData['emp'] as $employee){
-                $inTimeResult = $employee->intime;
-                $outTimeResult = $employee->outtime;
-                $time1 = new DateTime($inTimeResult);
-                $time2 = new DateTime($outTimeResult);
-                $interval = $time1->diff($time2);
-                $employeData['emp'][$row]['time'] = $interval->format('%H:%I:%S');
-                $row++;
-            }
-            $config = DB::table('configurations')->where('id', '1')->get();
-            return view('admin.employees.index',compact('employeData','admin','config'));
-        } else {
-            return Redirect('/admin');
+        $admin = DB::table('admins')
+            ->select('admins.id', 'admins.fname', 'admins.lname','employees.*')
+            ->join('employees', 'admin_id', '=', 'admins.id')
+        ->get();
+        $employeData['emp'] =   Employee::get();
+        $row = 0;
+        foreach($employeData['emp'] as $employee){
+            $inTimeResult = $employee->intime;
+            $outTimeResult = $employee->outtime;
+            $time1 = new DateTime($inTimeResult);
+            $time2 = new DateTime($outTimeResult);
+            $interval = $time1->diff($time2);
+            $employeData['emp'][$row]['time'] = $interval->format('%H:%I:%S');
+            $row++;
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.employees.index',compact('employeData','admin','config'));
         }
     }
 
-    public function getEmployees(Request $request)
+    public function getEmployees()
     {
-
-        $employees = Employee::join('admins', 'admins.id', '=', 'employees.admin_id')
-                                ->select('employees.*', 'admins.fname', 'admins.lname')
-                                ->get();
+        $loggedInId = Auth::user()->id ;
+        if(Auth::user()->role == 'Employee') {
+            $employees = Employee::join('admins', 'admins.id', '=', 'employees.admin_id')
+                            ->select('employees.*', 'admins.fname', 'admins.lname')
+                            ->where('employees.admin_id','=',$loggedInId)
+                            ->get();
+        }else{
+            $employees = Employee::join('admins', 'admins.id', '=', 'employees.admin_id')
+            ->select('employees.*', 'admins.fname', 'admins.lname')
+            ->get();
+        }
         return datatables()->of($employees)
             ->addColumn('admin_id', function ($admins) {
                 return $admins->fname.' '.$admins->lname;
@@ -71,13 +74,10 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        if (Auth::user()->role == 'Admin') {
-            $employee = DB::table('admins')->where('role', 'Employee')->get();
-            $config = DB::table('configurations')->where('id', '1')->get();
-            return view('admin.employees.addemployee', compact('employee','config'));
-        } else {
-            return Redirect('/admin');
-        }
+
+        $employee = DB::table('admins')->where('role', 'Employee')->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.employees.addemployee', compact('employee','config'));
     }
 
     public function store(Request $request)
@@ -108,16 +108,13 @@ class EmployeeController extends Controller
 
     public function edit(Employee $employee,$id)
     {
-        if (Auth::user()->role == 'Admin') {
-            $admin = Employee::find($id);
-            $employee = Admin::select('admins.id', 'admins.fname','admins.lname','employees.*')
-                                ->join('employees', 'admin_id', '=', 'admins.id')
-                                ->where('admins.id', '=', $admin->admin_id)->get();
-            $config = DB::table('configurations')->where('id', '1')->get();
-            return view('admin.employees.editemployee', compact('admin','employee','config','id'));
-        }else{
-            return Redirect('/admin');
-        }
+
+        $admin = Employee::find($id);
+        $employee = Admin::select('admins.id', 'admins.fname','admins.lname','employees.*')
+                            ->join('employees', 'admin_id', '=', 'admins.id')
+                            ->where('admins.id', '=', $admin->admin_id)->get();
+        $config = DB::table('configurations')->where('id', '1')->get();
+        return view('admin.employees.editemployee', compact('admin','employee','config','id'));
     }
 
     public function update(Request $request, Employee $employee,$id)
@@ -146,7 +143,7 @@ class EmployeeController extends Controller
     }
 
     public function view(Employee $employee,$id){
-        if (Auth::user()->role == 'Admin') {
+
             $admin = Employee::find($id);
 
             $profile = Admin::select('admins.id', 'admins.fname', 'admins.lname', 'employees.*')
@@ -157,9 +154,7 @@ class EmployeeController extends Controller
             // print_r($profile[0]->fname);
             // die;
             return view('admin.employees.viewemployee',compact('profile','config'));
-        }else {
-            return Redirect('/admin');
-        }
+
     }
 
     public function destroy(Employee $employee,$id)

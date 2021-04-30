@@ -103,7 +103,7 @@
                             <div class="col-md-5">
                                 <label for="amount">Amount</label>
                                 <input type="number" class="form-control @error('amount') is-invalid @enderror"
-                                    name="amount" placeholder="Enter Amount Here">
+                                    name="amount" step="any" placeholder="Enter Amount Here">
                                 @error('amount')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

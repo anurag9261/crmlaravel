@@ -89,16 +89,18 @@ class ReportController extends Controller
                         ->whereYear('entry_date', $year)
                         ->get();
         $array = (array)$invoiceRecord;
+        $expenceArray = (array)$expenseRecord;
         foreach ($array as $newArray) {
-            if (!empty($newArray)) {
-                $data = ['title' => 'CRM'];
-                $pdf = PDF::loadView('balancereport', $data, compact('invoiceRecord', 'expenseRecord','config'));
-                return $pdf->download('balancereport.pdf');
-            } else {
-                return back()->withError(' Data not found for ' . $errorMonth . '!');
+           foreach($expenceArray as $dataExpence){
+                if (!empty($newArray) || !empty($dataExpence)) {
+                    $data = ['title' => 'CRM'];
+                    $pdf = PDF::loadView('balancereport', $data, compact('invoiceRecord', 'expenseRecord', 'config'));
+                    return $pdf->download('balancereport.pdf');
+                } else {
+                    return back()->withError(' Data not found for ' . $errorMonth . '!');
+                }
             }
         }
-
     }
 
     public function employee(Request $request)
@@ -252,6 +254,7 @@ class ReportController extends Controller
                                 ->whereMonth('currentdate', $month)
                                 ->whereYear('currentdate', $year)
                                 ->get();
+
             $userPresentDay = count($userDataAttend);
             $dailyHours = array();
             foreach ($userDataAttend as $employee) {
@@ -289,7 +292,12 @@ class ReportController extends Controller
                 $pay = $timeparts[0] * $iCostPerHour + $timeparts[1] / 60 * $iCostPerHour;
                 $payAmount['salaryTotal'] = round($pay);
             }
-            $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount,$payAmount);
+
+            if($userPresentDaycount['presentDay'] == '0'){
+                $employeSalaryData[] = '';
+            }else{
+                $employeSalaryData[] = array_merge($arrayEmp, $totalHours, $userPresentDaycount, $payAmount);
+            }
         }
         $array = (array)$employeSalaryData;
         foreach ($array as $newArray) {

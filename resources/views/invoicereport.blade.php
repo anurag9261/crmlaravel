@@ -69,22 +69,24 @@
     <br>
     <hr>
     <div class="row">
-        <div class="col-md-4 mt-3 mb-3">
-            <h3>Title: {{ $invoice->title }}</h3>
-        </div>
-        <div class="row">
         <div class="col-md-5">
-            Bill To: {{ $invoice->bill_to }}
+            <b>Bill From:</b><br>{{ $config[0]->company_name }}, <br>
+            {{ $config[0]->address}},<br> {{ $config[0]->city }},{{ $config[0]->zipcode }},<br> {{ $config[0]->state }},
+            {{ $config[0]->country }}, <br>Mob no: {{ $config[0]->mobno }}, <br>Vat no: {{ $config[0]->vat_number }}.
+        </div>
+        <br>
+        <div class="col-md-4 mt-3 mb-3">
+            <b>Title:</b> {{ $invoice->title }}<br>
             <p style="float: right">Current Date: {{ $invoice->current_date }}</p>
         </div>
         <br>
+      <div class="col-md-5">
+        <b>Bill To:</b> {{ $invoice->bill_to }}<br>
+        <p style="float: right">Due Date: {{ $invoice->due_date }}</p>
+      </div>
+      <br>
         <div class="col-md-5">
-            Ship To: {{ $invoice->ship_to }}
-            <p style="float: right">Due Date: {{ $invoice->due_date }}</p>
-        </div>
-        <br>
-        <div class="col-md-5">
-            Bill From:<br> {{ $config[0]->address}},<br> {{ $config[0]->city }}, {{ $config[0]->state }}, {{ $config[0]->country }}
+            <b>Ship To:</b> {{ $invoice->ship_to }}
         </div>
     </div>
     <br>
@@ -92,10 +94,10 @@
     <div>
         <table class="table table-bordered">
             <tr class="tr-bg-color">
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+                <th style="text-align: center">Product</th>
+                <th style="text-align: center">Quantity</th>
+                <th style="text-align: center">Price(CAD)</th>
+                <th style="text-align: center">Total(CAD)</th>
             </tr>
             @foreach ($productData as $product)
                 <tr>
@@ -108,19 +110,19 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td><b>SubTotal</b></td>
+                <td><b>SubTotal(CAD)</b></td>
                 <td style="text-align:right">{{ $invoice->sub_total }}</td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
-                <td><b>Tax Amount ({{ $invoice->tax_percentage }}%)</b></td>
+                <td><b>Tax Amount(CAD) ({{ $invoice->tax_percentage }}%)</b></td>
                 <td style="text-align:right">{{ $invoice->tax_amount }}</td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
-                <td><b>Total Amount</b></td>
+                <td><b>Total Amount(CAD)</b></td>
                 <td style="text-align: right">{{ $invoice->total_amount }}</td>
             </tr>
         </table>

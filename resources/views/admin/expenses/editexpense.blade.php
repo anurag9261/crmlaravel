@@ -216,7 +216,7 @@
                             <div class="col-md-5">
                                 <label for="amount">Amount</label>
                                 <input type="number" class="form-control @error('amount') is-invalid @enderror"
-                                    name="amount" value="{{$profile->amount}}">
+                                    name="amount" value="{{$profile->amount}}" step="any">
                                 @error('amount')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

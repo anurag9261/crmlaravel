@@ -28,6 +28,7 @@ class CreateAdminsTable extends Migration
             $table->float('salary_amount');
             $table->string('address');
             $table->string('city');
+            $table->string('zipcode');
             $table->string('state');
             $table->string('country');
             $table->string('image');

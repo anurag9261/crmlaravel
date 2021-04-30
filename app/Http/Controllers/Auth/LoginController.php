@@ -48,7 +48,7 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard')->with('message', 'Login Successfully');
         }else{
             return redirect()->route('login')
-                ->with('error','Email-Address And Password is not match!.');
+                ->with('error','Email And Password is not match!.');
         }
 
     }
