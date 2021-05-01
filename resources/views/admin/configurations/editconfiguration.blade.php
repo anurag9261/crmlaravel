@@ -53,7 +53,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="mobno">Mob No</label>
+                                <label for="mobno">Mobile Number</label>
                                 <input type="text" class="form-control @error('mobno') is-invalid @enderror" name="mobno"
                                     value="{{$profile->mobno}}" placeholder="Enter Site Name">
                                 @error('mobno')

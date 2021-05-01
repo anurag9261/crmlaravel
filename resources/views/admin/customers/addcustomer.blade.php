@@ -68,7 +68,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="mobno">Phone Number</label>
+                                <label for="mobno">Mobile Number</label>
                                 <input type="number" class="form-control @error('mobno') is-invalid @enderror"
                                     name="mobno" placeholder="Enter Phone number">
                                 @error('mobno')
@@ -239,9 +239,6 @@
 <script>
     $(function() {
     $("#birthdate").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        min: '1911-01-01',
         dateFormat: "yy-mm-dd",
     });
 });
