@@ -72,7 +72,7 @@
         <div class="col-md-5">
             <b>Bill From:</b><br>{{ $config[0]->company_name }}, <br>
             {{ $config[0]->address}},<br> {{ $config[0]->city }},{{ $config[0]->zipcode }},<br> {{ $config[0]->state }},
-            {{ $config[0]->country }}, <br>Mob no: {{ $config[0]->mobno }}, <br>Vat no: {{ $config[0]->vat_number }}.
+            {{ $config[0]->country }}, <br>Mobile No: {{ $config[0]->mobno }}, <br>Vat No: {{ $config[0]->vat_number }}.
         </div>
         <br>
         <div class="col-md-4 mt-3 mb-3">

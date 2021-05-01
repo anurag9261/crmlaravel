@@ -41,7 +41,6 @@
                         <tr>
                             <th>Id</th>
                             <td>{{$profile->id}}</td>
-
                         </tr>
                         <tr>
                             <th>Title</th>

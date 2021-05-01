@@ -45,7 +45,7 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Mob No</th>
+                            <th>Mobile No</th>
                             <th>Stauts</th>
                             <th>Action</th>
                         </tr>
