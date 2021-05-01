@@ -239,9 +239,6 @@
 <script>
     $(function() {
     $("#birthdate").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        min: '1911-01-01',
         dateFormat: "yy-mm-dd",
     });
 });

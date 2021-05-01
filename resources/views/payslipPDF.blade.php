@@ -129,10 +129,14 @@
                 $pay = $timeparts[0] * $iCostPerHour + $timeparts[1] / 60 * $iCostPerHour;
                 $payAmount['salaryTotal'] = round($pay);
             ?>
+            <?php $Amount = array_sum($payAmount);
+                $totalSalary = $Amount;
+                $totalAmount =  number_format((float)$totalSalary, 2, '.', '');
+            ?>
             <td></td>
             <td></td>
             <td>Total Salary(CAD):</td>
-            <td style="text-align: right"><b>{{ $payAmount['salaryTotal'] }}</b></td>
+            <td style="text-align: right"><b>{{ $totalAmount }}</b></td>
         </tr>
         @endif
     </table>
