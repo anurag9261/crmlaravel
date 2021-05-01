@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="currentdate">Current Date</label><span style="color:rgb(245, 24, 24)">*</span>
-                                    <input type="text" id="datepicker" name="currentdate" class="form-control"
+                                    <input type="text" id="date2" name="currentdate" class="form-control"
                                         value="{{ $profile->current_date }}">
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="duedate">Due Date</label><span style="color:rgb(245, 24, 24)">*</span>
-                                    <input type="text" name="duedate" id="datepicker1"
+                                    <input type="text" name="duedate" id="date3"
                                         class="form-control @error('duedate') is-invalid @enderror"
                                         placeholder="yyyy-mm-dd" value="{{ $profile->due_date }}" autocomplete="off">
                                     @error('duedate')
@@ -285,14 +285,14 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $(function() {
-        $("#datepicker").datepicker({
+        $("#date2").datepicker({
             dateFormat: "yy-mm-dd"
         });
     });
 </script>
 <script>
     $(function() {
-        $("#datepicker1").datepicker({
+        $("#date3").datepicker({
             dateFormat: "yy-mm-dd"
         });
     });
