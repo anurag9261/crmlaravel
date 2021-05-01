@@ -68,7 +68,7 @@
             <th>Present Days</th>
             <th>Total Hours</th>
             <th>Salary Type</th>
-            <th>Total Salary</th>
+            <th>Total Salary(CAD)</th>
         </tr>
         @foreach ($employeSalaryData as $data)
             @if($data != '')
@@ -101,7 +101,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><b>TotalAmount</b></td>
+            <td><b>TotalAmount(CAD)</b></td>
             <td style="text-align:right"><b>{{ $totalAmount }}</b></td>
         </tr>
     </table>
