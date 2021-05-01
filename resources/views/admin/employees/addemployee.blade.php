@@ -26,8 +26,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Timesheet Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.employee') }}">Timesheet Management</a></li>
                         <li class="breadcrumb-item active">Add Attandance</li>
                     </ol>
                 </div>
@@ -51,11 +51,11 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="role">Employee Name</label>
+                                <label for="role">Employee Name</label><span style="color:rgb(245, 24, 24)">*</span>
                                 @if(Auth::user()->role == 'Admin')
                                 <select class="form-control  @error('employee') is-invalid @enderror" name="employee"
                                     placeholder="Select Employee">
-                                    <option value="">Select Employee</option>
+                                    <option value="">Select Employee</option><span style="color:rgb(245, 24, 24)">*</span>
                                     @foreach($employee as $profile)
                                     <option value="{{ $profile->id  }}">{{$profile->fname}} {{ $profile->lname }}</option>
                                     @endforeach
@@ -71,7 +71,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="currentdate">Current Date</label>
+                                <label for="currentdate">Current Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" id="datepicker2" class="form-control @error('currentdate') is-invalid @enderror"
                                     name="currentdate" placeholder="yyyy-mm-dd">
                                 @error('currentdate')
@@ -84,7 +84,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-10">
-                                <label for="attendance">Attendance</label><br>
+                                <label for="attendance">Attendance</label><span style="color:rgb(245, 24, 24)">*</span><br>
                                 <input class="a @error('attandance') is-invalid
                                      @enderror" type="radio" name="attandance" id="present" onclick="show()"
                                     value="present"> <label>Present</label>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="row mt-3" style="display: none;" id="toggle">
                             <div class="col-md-5">
-                                <label for="intime">In Time</label>
+                                <label for="intime">In Time</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="time" class="form-control @error('intime') is-invalid @enderror" name="intime">
                                 @error('intime')
                                     <span class="invalid-feedback" role="alert">
@@ -110,7 +110,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5 mt-3">
-                                <label for="lname">Out Time</label>
+                                <label for="lname">Out Time</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="time" class="form-control @error('outtime') is-invalid @enderror" name="outtime">
                                 @error('outtime')
                                     <span class="invalid-feedback" role="alert">

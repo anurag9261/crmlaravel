@@ -22,7 +22,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <button class="btn btn-secondary" style="float:right"><a href="{{route('admin.addrole')}}"
                                 style="color:white"><i class="fas fa-plus"></i>
-                                    </i> Add Role</a></button>
+                                    Add Role</a></button>
                     </ol>
                 </div>
             </div>

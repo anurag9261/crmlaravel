@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
     <style>
         table {
             border-collapse: collapse;
@@ -28,16 +27,6 @@
         body{
             border-collapse: collapse;
         }
-        footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color:#1f1f1f;
-        color: white;
-        padding:8px 0px;
-        text-align: center;
-        }
         .header img {
         float: left;
         width: 80px;
@@ -60,6 +49,7 @@
     <br>
     <br>
     <hr>
+    <h3>Timesheet Report: {{ $pdfReviewMonth }}</h3>
     <div class="row">
         <div class="col-md-4 mt-3 mb-3">
             <h3>Employee Name: {{ $employeData[0]->fname }} {{ $employeData[0]->lname }}</h3>
@@ -104,14 +94,11 @@
                 $total % 60
             );
         ?>
-<td></td>
-<td></td>
-<td>Total Hours:</td>
-<td><b>{{ $totalHours }}</b></td>
-</tr>
-</table>
-<footer>CRM-Admin Panel</footer>
-
+        <td></td>
+        <td></td>
+        <td>Total Hours:</td>
+        <td><b>{{ $totalHours }}</b></td>
+        </tr>
+    </table>
 </body>
-
 </html>

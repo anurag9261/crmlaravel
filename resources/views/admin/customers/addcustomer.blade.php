@@ -20,8 +20,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Customer Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.customers') }}">Customer Management</a></li>
                         <li class="breadcrumb-item active">Add Customer</li>
                     </ol>
                 </div>
@@ -45,7 +45,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="fname">First Name</label>
+                                <label for="fname">First Name</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('fname') is-invalid @enderror"
                                     name="fname" placeholder="Enter First Name">
                                 @error('fname')
@@ -55,7 +55,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="lname">Last Name</label>
+                                <label for="lname">Last Name</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('lname') is-invalid @enderror"
                                     name="lname" placeholder="Enter Last Name">
                                 @error('lname')
@@ -68,7 +68,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="mobno">Mobile Number</label>
+                                <label for="mobno">Mobile Number</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="number" class="form-control @error('mobno') is-invalid @enderror"
                                     name="mobno" placeholder="Enter Phone number">
                                 @error('mobno')
@@ -78,7 +78,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="email">Email</label>
+                                <label for="email">Email</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" placeholder="Enter Email Here">
                                 @error('email')
@@ -91,7 +91,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="gender">Gender</label>
+                                <label for="gender">Gender</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <br>
                                 <input type="radio" name="gender" value="1" class=" @error('gender') is-invalid @enderror">
                                 <label>Male</label>
@@ -106,9 +106,9 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="birthdate">Birth Date</label>
+                                <label for="birthdate">Birth Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" id="birthdate" class="form-control @error('birthdate') is-invalid @enderror"
-                                    name="birthdate" placeholder="yyyy-mm-dd">
+                                    name="birthdate" placeholder="yyyy-mm-dd" autocomplete="off">
                                 @error('birthdate')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -119,7 +119,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="image">Image</label>
+                                <label for="image">Image</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
                                 <p style="color:red;font-size:12px">*Image format must be jpeg,png,jpg</p>
                                 @error('image')
@@ -129,7 +129,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="status">Status</label>
+                                <label for="status">Status</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select class="form-control @error('status') is-invalid @enderror" name="status">
                                     <option value="">Select Status</option>
                                     <option>Active</option>
@@ -145,7 +145,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="address">Address</label>
+                                <label for="address">Address</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <textarea class="form-control @error('address') is-invalid @enderror" name="address"
                                     placeholder="Enter Address Here"></textarea>
                                 @error('address')
@@ -155,7 +155,7 @@
                                 @enderror
                             </div>
                            <div class="col-md-5">
-                            <label for="city">City</label>
+                            <label for="city">City</label><span style="color:rgb(245, 24, 24)">*</span>
                             <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" placeholder="Enter City">
                             @error('city')
                             <span class="invalid-feedback" role="alert">
@@ -167,7 +167,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="mobno">Zip Code</label>
+                                <label for="mobno">Zip Code</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode"
                                      placeholder="Enter Zip">
                                 @error('zipcode')
@@ -177,7 +177,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="state">State</label>
+                                <label for="state">State</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select name="state" class="form-control @error('state') is-invalid @enderror">
                                     <option value="">Select State</option>
                                     <option value="Alberta">Alberta</option>
@@ -204,7 +204,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="country">Country</label>
+                                <label for="country">Country</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="Canada"
                                     readonly>
                                 @error('country')
@@ -214,7 +214,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="password">password</label>
+                                <label for="password">password</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
                                     placeholder="Enter Password Here">
                                 @error('password')

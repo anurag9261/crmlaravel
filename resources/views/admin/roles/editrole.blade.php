@@ -9,8 +9,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Role Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.roles') }}">Role Management</a></li>
                         <li class="breadcrumb-item active">Edit Role</li>
                     </ol>
                 </div>
@@ -33,7 +33,7 @@
                     @csrf
                         <div class="row">
                             <div class="col-md-8">
-                                <label for="title">Title</label>
+                                <label for="title">Title</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$profile->title}}">
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -42,9 +42,10 @@
                                 @enderror
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-8">
-                                <label for="status">Staus</label>
+                                <label for="status">Staus</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select name="status" id="status" class="form-control">
                                     <option value="Active" {{ ($profile->status) == 'Active' ? 'selected' : '' }}>Active</option>
                                     <option value="InActive" {{ ($profile->status) == 'InActive' ? 'selected' : '' }}>Inactive</option>

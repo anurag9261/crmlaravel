@@ -29,18 +29,6 @@
         body {
             border-collapse: collapse;
         }
-
-        footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #1f1f1f;
-            color: white;
-            padding: 8px 0px;
-            text-align: center;
-        }
-
         .header img {
             float: left;
             width: 80px;
@@ -66,6 +54,7 @@
     <br>
     <hr>
     <br>
+    <h3>Employee Report: {{ $pdfReviewMonth }}</h3>
     <table class="table table-bordered">
         <tr class="tr-bg-color">
             <th>No</th>
@@ -88,8 +77,6 @@
         </tr>
         @endforeach
     </table>
-    <footer>CRM-Admin Panel</footer>
-
 </body>
 
 </html>

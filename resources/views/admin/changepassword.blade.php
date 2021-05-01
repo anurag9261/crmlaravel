@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
                         <li class="breadcrumb-item active">Edit Password</li>
                     </ol>
                 </div>
@@ -39,12 +39,11 @@
                             {{session('message')}}
                         </div>
                     @endif
-                    <?php //echo "<pre>"; print_r(Auth::user()->id); die;?>
                     <form method="post" action="updatePassword/{{Auth::user()->id}}">
                         @csrf
                         <div class="row">
                             <div class="col-md-8">
-                                <label for="oldPassword">Current Password</label>
+                                <label for="oldPassword">Current Password</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="currentpassword" placeholder="Enter Current Password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +55,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-8">
-                            <label for="newpassword">New Password</label>
+                            <label for="newpassword">New Password</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="password" name="newpassword" class="form-control @error('newpassword') is-invalid @enderror" placeholder="Enter New Password">
                                 @error('newpassword')
                                     <span class="invalid-feedback" role="alert">
@@ -68,7 +67,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-8">
-                            <label for="confirmpassword">Confirm Password</label>
+                            <label for="confirmpassword">Confirm Password</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="password" name="confirmpassword" class="form-control"
                                     placeholder="Enter Confirm Password">
                                 @error('confirmpassword')

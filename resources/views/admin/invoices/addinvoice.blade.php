@@ -12,8 +12,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Invoice Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.invoices') }}">Invoice Management</a></li>
                         <li class="breadcrumb-item active">Add Invoice</li>
                     </ol>
                 </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-6">
-                                    <label for="title">Title</label>
+                                    <label for="title">Title</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <textarea class="form-control  @error('title') is-invalid @enderror" id="" rows="3"
                                         placeholder="who is this invoice from?(required)" name="title"></textarea>
                                     @error('title')
@@ -74,7 +74,7 @@
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4">
-                                    <label for="billto">Bill To</label>
+                                    <label for="billto">Bill To</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <select class="form-control  @error('bill_to') is-invalid @enderror" name="billto">
                                         @foreach($customers as $customer)
                                         <option>{{$customer->fname}} {{ $customer->lname }}</option>
@@ -89,14 +89,14 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="currentdate">Current Date</label>
+                                    <label for="currentdate">Current Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type="text" id="datepicker" name="currentdate" class="form-control"
-                                        value="{{$currentDate}}">
+                                        value="{{$currentDate}}" autocomplete="off">
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4">
-                                    <label for="shipto">Ship To</label>
+                                    <label for="shipto">Ship To</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input class="form-control @error('shipto') is-invalid @enderror"
                                         placeholder="who is this invoice to?(required)" name="shipto">
                                     @error('shipto')
@@ -108,10 +108,10 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="duedate">Due Date</label>
+                                    <label for="duedate">Due Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type="text" name="duedate" id="datepicker1"
                                         class="form-control @error('duedate') is-invalid @enderror"
-                                        placeholder="yyyy-mm-dd">
+                                        placeholder="yyyy-mm-dd" autocomplete="off">
                                     @error('duedate')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -125,10 +125,10 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center"> # </th>
-                                            <th class="text-center"> Item Name </th>
-                                            <th class="text-center"> Qty </th>
-                                            <th class="text-center"> Price(CAD) </th>
-                                            <th class="text-center"> Total(CAD) </th>
+                                            <th class="text-center"> Item Name<span style="color:rgb(245, 24, 24)">*</span> </th>
+                                            <th class="text-center"> Qty.<span style="color:rgb(245, 24, 24)">*</span> </th>
+                                            <th class="text-center"> Price(CAD)<span style="color:rgb(245, 24, 24)">*</span> </th>
+                                            <th class="text-center"> Total(CAD)<span style="color:rgb(245, 24, 24)">*</span> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -165,7 +165,7 @@
                                     <table class="table table-border table-hover" id="tab_logic_total">
                                         <tbody>
                                             <tr>
-                                                <th class="text-center">Sub Total(CAD)</th>
+                                                <th class="text-center">Sub Total(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center"><input type="number" name='sub_total'
                                                         placeholder='0.00'
                                                         class="form-control @error('sub_total') is-invalid @enderror"
@@ -178,7 +178,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Tax(CAD)</th>
+                                                <th class="text-center">Tax<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center">
                                                     <div class="input-group mb-2 mb-sm-0">
                                                         <input type="number"
@@ -194,7 +194,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Tax Amount(CAD)</th>
+                                                <th class="text-center">Tax Amount(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center"><input type="number" name='tax_amount'
                                                         id="tax_amount" placeholder='0.00'
                                                         class="form-control @error('tax_amount') is-invalid @enderror"
@@ -207,7 +207,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Grand Total(CAD)</th>
+                                                <th class="text-center">Grand Total(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center"><input type="number" name='total_amount'
                                                         id="total_amount" placeholder='0.00'
                                                         class="form-control form-control @error('total_amount') is-invalid @enderror"

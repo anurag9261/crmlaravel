@@ -34,17 +34,6 @@
             border-collapse: collapse;
         }
 
-        footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #1f1f1f;
-            color: white;
-            padding: 8px 0px;
-            text-align: center;
-        }
-
         .header img {
             float: left;
             width: 80px;
@@ -68,6 +57,7 @@
     <br>
     <br>
     <hr>
+    <br>
     <div class="row">
         <div class="col-md-5">
             <b>Bill From:</b><br>{{ $config[0]->company_name }}, <br>
@@ -103,7 +93,7 @@
                 <tr>
                     <td>{{ $product->product }}</td>
                     <td>{{ $product->qty }}</td>
-                    <td>{{ $product->price }}</td>
+                    <td style="text-align: right">{{ $product->price }}</td>
                     <td style="text-align: right">{{ $product->total }}</td>
                 </tr>
             @endforeach
@@ -126,7 +116,6 @@
                 <td style="text-align: right">{{ $invoice->total_amount }}</td>
             </tr>
         </table>
-        </div>
-    <footer>CRM-Admin Panel</footer>
+    </div>
 </body>
 </html>

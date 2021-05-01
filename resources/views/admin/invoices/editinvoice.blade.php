@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Invoice Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.invoices') }}">Invoice Management</a></li>
                         <li class="breadcrumb-item active">Edit Invoice</li>
                     </ol>
                 </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-6">
-                                    <label for="title">Title</label>
+                                    <label for="title">Title</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <textarea class="form-control  @error('title') is-invalid @enderror" id="" rows="3"
                                         placeholder="who is this invoice from?(required)"
                                         name="title">{{ $profile->title }}</textarea>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4">
-                                    <label for="billto">Bill To</label>
+                                    <label for="billto">Bill To</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type="text" class="form-control @error('bill_to') is-invalid @enderror"
                                         name="billto" value="{{ $profile->bill_to }}" readonly>
                                     @error('bill_to')
@@ -86,17 +86,17 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="currentdate">Current Date</label>
+                                    <label for="currentdate">Current Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type="text" id="datepicker" name="currentdate" class="form-control"
                                         value="{{ $profile->current_date }}">
                                 </div>
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4">
-                                    <label for="shipto">Ship To</label>
+                                    <label for="shipto">Ship To</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input class="form-control @error('shipto') is-invalid @enderror"
                                         placeholder="who is this invoice to?(required)" name="shipto"
-                                        value="{{ $profile->ship_to }}">
+                                        value="{{ $profile->ship_to }}" autocomplete="off">
                                     @error('shipto')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -106,10 +106,10 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="duedate">Due Date</label>
+                                    <label for="duedate">Due Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type="text" name="duedate" id="datepicker1"
                                         class="form-control @error('duedate') is-invalid @enderror"
-                                        placeholder="yyyy-mm-dd" value="{{ $profile->due_date }}">
+                                        placeholder="yyyy-mm-dd" value="{{ $profile->due_date }}" autocomplete="off">
                                     @error('duedate')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -123,10 +123,10 @@
                                 <table id="tab_logic" class="table table-border table-hover table order-list">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Item Name</th>
-                                            <th class="text-center">Qty</th>
-                                            <th class="text-center">Price(CAD)</th>
-                                            <th class="text-center">Total(CAD)</th>
+                                            <th class="text-center">Item Name<span style="color:rgb(245, 24, 24)">*</span></th>
+                                            <th class="text-center">Qty.<span style="color:rgb(245, 24, 24)">*</span></th>
+                                            <th class="text-center">Price(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
+                                            <th class="text-center">Total(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -185,7 +185,7 @@
                             </div>
                             <div class="row clearfix" style="margin-top:20px">
                                 <div class="col-md-4">
-                                    <label for="status">Status</label>
+                                    <label for="status">Status</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <select name="status" id="status" class="form-control">
                                         <option value="Pending" {{ ($profile->status) == 'Pending' ? 'selected' : '' }}>
                                             Pending
@@ -202,7 +202,7 @@
                                     <table class="table table-border table-hover" id="tab_logic_total">
                                         <tbody>
                                             <tr>
-                                                <th class="text-center">Sub Total(CAD)</th>
+                                                <th class="text-center">Sub Total(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center">
                                                     <input type="number" name='sub_total' placeholder='0.00'
                                                         class="form-control @error('sub_total') is-invalid @enderror"
@@ -215,7 +215,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Tax</th>
+                                                <th class="text-center">Tax<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center">
                                                     <div class="input-group mb-2 mb-sm-0">
                                                         <input type="number"
@@ -232,7 +232,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Tax Amount(CAD)</th>
+                                                <th class="text-center">Tax Amount(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center">
 
                                                     <input type="number" name='tax_amount' id="tax_amount1"
@@ -248,7 +248,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="text-center">Grand Total(CAD)</th>
+                                                <th class="text-center">Grand Total(CAD)<span style="color:rgb(245, 24, 24)">*</span></th>
                                                 <td class="text-center">
                                                     <input type="number" name='total_amount' id="total_amount1"
                                                         placeholder='0.00'

@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
                         <li class="breadcrumb-item active">Expense Records</li>
                     </ol>
                 </div>
@@ -43,7 +43,7 @@
                                 <th>No</th>
                                 <th>Category Name</th>
                                 <th>Entry Date</th>
-                                <th>Amount</th>
+                                <th>Amount(CAD)</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

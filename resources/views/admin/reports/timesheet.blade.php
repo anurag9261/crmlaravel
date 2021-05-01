@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
                         <li class="breadcrumb-item active">Timesheet Report</li>
                     </ol>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="row">
                         @if(auth()->user()->role == 'Admin')
                         <div class="col-md-5">
-                            <label for="employee">Select Employee</label>
+                            <label for="employee">Select Employee</label><span style="color:rgb(245, 24, 24)">*</span>
                             <select class="form-control @error('emp') is-invalid @enderror" name="emp">
                                 <option value="">Select Employee</option>
                                 @foreach($employee as $profile)
@@ -59,7 +59,7 @@
                         </div>
                         @else
                         <div class="col-md-5">
-                            <label for="employee">Select Employee</label>
+                            <label for="employee">Select Employee</label><span style="color:rgb(245, 24, 24)">*</span>
                             <select class="form-control @error('emp') is-invalid @enderror" name="emp" readonly>
                                 <option value="{{ Auth::user()->id }}">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</option>
                             </select>
@@ -71,8 +71,8 @@
                         </div>
                         @endif
                         <div class="col-md-5">
-                            <label for="month">Select Month</label>
-                            <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker" placeholder="Select Month" />
+                            <label for="month">Select Month</label><span style="color:rgb(245, 24, 24)">*</span>
+                            <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker" placeholder="Select Month" autocomplete="off" />
                             @error('month')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

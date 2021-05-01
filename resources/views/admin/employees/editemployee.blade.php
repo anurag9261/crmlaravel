@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Timesheet Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.employee') }}">Timesheet Management</a></li>
                         <li class="breadcrumb-item active">Edit Attandance</li>
                     </ol>
                 </div>
@@ -37,12 +37,12 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="employee">Employee Name</label>
+                                <label for="employee">Employee Name</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type ="hidden" name="admin_id" value={{ $employee[0]->admin_id }} />
                                     <input type="text" class="form-control" name="employee" value="{{$employee[0]->fname}} {{ $employee[0]->lname }}" readonly>
                             </div>
                             <div class="col-md-5">
-                                <label for="date">Current Date</label>
+                                <label for="date">Current Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" id="datepicker2" class="form-control @error('currentdate') is-invalid @enderror" name="currentdate"
                                     value="{{$admin->currentdate}}">
                                 @error('currentdate')
@@ -55,7 +55,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="attandance">Attandance:</label>
+                                <label for="attandance">Attandance</label><span style="color:rgb(245, 24, 24)">*</span>
                             </div>
                         </div>
                         <div class="row">

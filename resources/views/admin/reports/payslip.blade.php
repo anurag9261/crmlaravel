@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
                         <li class="breadcrumb-item active">Generate Payslip</li>
                     </ol>
                 </div>
@@ -44,7 +44,7 @@
                         <div class="row">
                             @if(auth()->user()->role == 'Admin')
                             <div class="col-md-5">
-                                <label for="employee">Select Employee</label>
+                                <label for="employee">Select Employee</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select class="form-control @error('employee') is-invalid @enderror" name="employee">
                                     <option value="">Select Employee</option>
                                     @foreach($employee as $data)
@@ -59,7 +59,7 @@
                             </div>
                             @else
                             <div class="col-md-5">
-                                <label for="employee">Select Employee</label>
+                                <label for="employee">Select Employee</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select class="form-control @error('employee') is-invalid @enderror" name="employee" readonly>
                                     <option value="{{ Auth::user()->id }}">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</option>
                                 </select>
@@ -71,9 +71,9 @@
                             </div>
                             @endif
                             <div class="col-md-5">
-                                <label for="month">Select Month</label>
+                                <label for="month">Select Month</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker"
-                                    placeholder="Select Month" />
+                                    placeholder="Select Month" autocomplete="off"/>
                                 @error('month')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -166,8 +166,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Expense Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.expenses') }}">Expense Management</a></li>
                         <li class="breadcrumb-item active">Edit Expense</li>
                     </ol>
                 </div>
@@ -191,7 +191,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="category">Category Name</label>
+                                <label for="category">Category Name</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('category') is-invalid @enderror"
                                     name="category" value="{{$profile->category}}">
                                 @error('category')
@@ -201,9 +201,9 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="date">Entry Date</label>
+                                <label for="date">Entry Date</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" id="datepicker4" class="form-control @error('entry_date') is-invalid @enderror"
-                                    name="entry_date" value="{{$profile->entry_date}}">
+                                    name="entry_date" value="{{$profile->entry_date}}" autocomplete="off">
                                 @error('entry_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -214,7 +214,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="amount">Amount</label>
+                                <label for="amount">Amount</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="number" class="form-control @error('amount') is-invalid @enderror"
                                     name="amount" value="{{$profile->amount}}" step="any">
                                 @error('amount')
@@ -224,7 +224,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="description">Description</label>
+                                <label for="description">Description</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <textarea type="description" class="form-control @error('description') is-invalid @enderror"
                                     name="description">{{$profile->description}}</textarea>
                                 @error('description')

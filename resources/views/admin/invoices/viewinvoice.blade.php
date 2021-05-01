@@ -9,8 +9,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Invoice Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.invoices') }}">Invoice Management</a></li>
                         <li class="breadcrumb-item active">View Invoice</li>
                     </ol>
                 </div>
@@ -63,19 +63,19 @@
                             <td>{{$profile->ship_to}}</td>
                         </tr>
                         <tr>
-                            <th>Sub Total</th>
+                            <th>Sub Total(CAD)</th>
                             <td>{{$profile->sub_total}}</td>
                         </tr>
                         <tr>
-                            <th>Tax Percentage</th>
+                            <th>Tax Percentage(%)</th>
                             <td>{{$profile->tax_percentage}}</td>
                         </tr>
                         <tr>
-                            <th>Tax</th>
+                            <th>Tax(CAD)</th>
                             <td>{{$profile->tax_amount}}</td>
                         </tr>
                         <tr>
-                            <th>Grand Total</th>
+                            <th>Grand Total(CAD)</th>
                             <td>{{$profile->total_amount}}</td>
                         </tr>
                         <tr>
@@ -90,17 +90,17 @@
                     <br>
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>Product</th>
+                            <th>Item Name</th>
                             <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Total</th>
+                            <th style="text-align: right">Price(CAD)</th>
+                            <th style="text-align: right">Total(CAD)</th>
                         </tr>
                         @foreach ($product as $data)
                             <tr>
                                 <td>{{ $data->product }}</td>
                                 <td>{{ $data->qty }}</td>
-                                <td>{{ $data->price }}</td>
-                                <td>{{ $data->total}}</td>
+                                <td style="text-align: right">{{ $data->price }}</td>
+                                <td style="text-align: right">{{ $data->total}}</td>
                             </tr>
                         @endforeach
                     </table>
