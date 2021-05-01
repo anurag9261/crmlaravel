@@ -131,7 +131,7 @@
             ?>
             <td></td>
             <td></td>
-            <td>Total Salary:</td>
+            <td>Total Salary(CAD):</td>
             <td style="text-align: right"><b>{{ $payAmount['salaryTotal'] }}</b></td>
         </tr>
         @endif

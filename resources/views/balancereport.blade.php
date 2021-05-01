@@ -70,7 +70,7 @@
             <th>Title</th>
             <th>Bill To</th>
             <th>Due Date</th>
-            <th>Total</th>
+            <th>Total(CAD)</th>
         </tr>
 
         <?php
@@ -104,7 +104,7 @@
             <th>No</th>
             <th>Category Name</th>
             <th>Entry Date</th>
-            <th>Amount</th>
+            <th>Amount(CAD)</th>
         </tr>
 
         <?php $arrayEmp = (array)$expenseRecord;
@@ -134,9 +134,9 @@
         $totalPaidAmounts = array_sum($totalPaidAmount);
         $totalExpenceAmounts = array_sum($totalExpences); ?>
     <div class="" style="margin-top:50px">
-        <h3>Total paid invoice amount: {{ $totalPaidAmounts }} </h3>
-        <h3>Total expence amount: {{ $totalExpenceAmounts }}</h3>
-        <h3>Available Balance: {{ $totalPaidAmounts-$totalExpenceAmounts }}</h3>
+        <h3>Total paid invoice amount(CAD): {{ $totalPaidAmounts }} </h3>
+        <h3>Total expence amount(CAD): {{ $totalExpenceAmounts }}</h3>
+        <h3>Available Balance(CAD): {{ $totalPaidAmounts-$totalExpenceAmounts }}</h3>
     </div>
     <footer>CRM-Admin Panel</footer>
 </body>
