@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
                         <li class="breadcrumb-item active">Invoice Report</li>
                     </ol>
                 </div>
@@ -38,7 +38,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="customer">Select Customer</label>
+                                <label for="customer">Select Customer</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select class="form-control @error('customer') is-invalid @enderror" name="customer">
                                     <option value="">Select Customer</option>
                                     @foreach($customer as $title)
@@ -52,7 +52,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="status">Status</label>
+                                <label for="status">Status</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select class="form-control @error('status') is-invalid @enderror" name="status">
                                     <option value="">Select Status</option>
                                     <option>Paid</option>
@@ -68,9 +68,9 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="month">Select Month</label>
+                                <label for="month">Select Month</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker"
-                                    placeholder="Select Month"/>
+                                    placeholder="Select Month" autocomplete="off"/>
                                 @error('month')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@
                             <th>Title</th>
                             <th>Bill To</th>
                             <th>Due Date</th>
-                            <th>Total</th>
+                            <th>Total(CAD)</th>
                             <th>Status</th>
                             <th>Print</th>
                         </tr>
@@ -106,7 +106,7 @@
                                 <td>{{ $data->title }}</td>
                                 <td>{{ $data->bill_to }}</td>
                                 <td>{{ $data->due_date }}</td>
-                                <td>{{ $data->total_amount }}</td>
+                                <td style="text-align: right">{{ $data->total_amount }}</td>
                                 <td>{{ $data->status }}</td>
                                 <td><button class="btn btn-secondary" type="submit"><a href="invoicepdfprint{{$data->id}}" style="color:white"><i class="fas fa-print"></i></a></button></td>
                             </tr>

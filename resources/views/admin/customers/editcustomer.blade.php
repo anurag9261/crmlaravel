@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Customer Management</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('admin.customers') }}">Customer Management</a></li>
                         <li class="breadcrumb-item active">Edit Customer</li>
                     </ol>
                 </div>
@@ -38,7 +38,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="fname">First Name</label>
+                                <label for="fname">First Name</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('fname') is-invalid @enderror"
                                     name="fname" value="{{$profile->fname}}">
                                 @error('fname')
@@ -48,7 +48,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="lname">Last Name</label>
+                                <label for="lname">Last Name</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('lname') is-invalid @enderror"
                                     name="lname" value="{{$profile->lname}}">
                                 @error('lname')
@@ -61,7 +61,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="mobno">Mobile Number</label>
+                                <label for="mobno">Mobile Number</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="number" class="form-control @error('mobno') is-invalid @enderror"
                                     name="mobno" value="{{$profile->mobno}}">
                                 @error('mobno')
@@ -71,7 +71,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="email">Email</label>
+                                <label for="email">Email</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" value="{{$profile->email}}">
                                 @error('email')
@@ -85,7 +85,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="gender">Select Gender</label>
+                                <label for="gender">Select Gender</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <br>
                                 <input type="radio" name="gender" name="gender" value="1" {{ ($profile->gender) == '1' ? 'checked' : '' }}>
                                 <label>Male</label>
@@ -95,9 +95,9 @@
                                 <label>Other</lable>
                             </div>
                            <div class="col-md-5">
-                            <label for="birthdate">Birth Date</label>
+                            <label for="birthdate">Birth Date</label><span style="color:rgb(245, 24, 24)">*</span>
                             <input type="text" id="birthdate" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate"
-                                value="{{ $profile->birthdate }}">
+                                value="{{ $profile->birthdate }}" autocomplete="off">
                             @error('birthdate')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -118,7 +118,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                            <label for="status">Staus</label>
+                            <label for="status">Staus</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <select name="status" id="status" class="form-control">
                                     <option value="">Select Status</option>
                                     <option value="Active" {{ ($profile->status) == 'Active' ? 'selected' : '' }}>Active
@@ -135,7 +135,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="address">Address</label>
+                                <label for="address">Address</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <textarea class="form-control @error('address') is-invalid @enderror" name="address">{{$profile->address}}</textarea>
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
@@ -144,7 +144,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="city">City</label>
+                                <label for="city">City</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('city') is-invalid @enderror" name="city"
                                     value="{{ $profile->city }}">
                                 @error('city')
@@ -157,7 +157,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="zipcode">Zip Code</label>
+                                    <label for="zipcode">Zip Code</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode"
                                         value="{{$profile->zipcode}}" placeholder="Enter Site Name">
                                     @error('zipcode')
@@ -167,7 +167,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="state">State</label>
+                                    <label for="state">State</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <select name="state" class="form-control">
                                         <option value="">Select State</option>
                                         <option value="Alberta" {{ ($profile->state) == 'Alberta' ? 'selected' : '' }}>Alberta
@@ -208,7 +208,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="country">Country</label>
+                                    <label for="country">Country</label><span style="color:rgb(245, 24, 24)">*</span>
                                     <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="Canada"
                                         readonly>
                                     @error('country')

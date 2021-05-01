@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
                         <li class="breadcrumb-item active">Payroll Report</li>
                     </ol>
                 </div>
@@ -38,9 +38,9 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="month">Select Month</label>
+                                <label for="month">Select Month</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="text" class="form-control @error('month') is-invalid @enderror" name="month" id="datepicker"
-                                    placeholder="Select Month" />
+                                    placeholder="Select Month" autocomplete="off" />
                                 @error('month')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

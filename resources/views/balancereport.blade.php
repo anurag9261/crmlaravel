@@ -28,17 +28,6 @@
             border-collapse: collapse;
         }
 
-        footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #1f1f1f;
-            color: white;
-            padding: 8px 0px;
-            text-align: center;
-        }
-
         .header img {
             float: left;
             width: 80px;
@@ -63,6 +52,7 @@
     <br>
     <hr>
     <br>
+    <h3>Balancesheet Report: {{ $pdfReviewMonth }}</h3>
     <h3>Paid Invoice</h3>
     <table class="table table-bordered">
         <tr class="tr-bg-color">
@@ -72,7 +62,6 @@
             <th>Due Date</th>
             <th>Total(CAD)</th>
         </tr>
-
         <?php
         $arrayInvoice = (array)$invoiceRecord; ?>
         @foreach ($arrayInvoice as $Invoice)
@@ -138,6 +127,5 @@
         <h3>Total expence amount(CAD): {{ $totalExpenceAmounts }}</h3>
         <h3>Available Balance(CAD): {{ $totalPaidAmounts-$totalExpenceAmounts }}</h3>
     </div>
-    <footer>CRM-Admin Panel</footer>
 </body>
 </html>

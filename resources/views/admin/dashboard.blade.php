@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div>
@@ -182,7 +182,7 @@
                             <th>Title</th>
                             <th>Bill To</th>
                             <th>Due Date</th>
-                            <th>Total</th>
+                            <th>Total(CAD)</th>
                         </tr>
                         @foreach($invoice as $data)
                         <tr>
@@ -190,7 +190,7 @@
                             <td>{{$data->title}}</td>
                             <td>{{$data->bill_to}}</td>
                             <td>{{$data->due_date}}</td>
-                            <td>{{$data->total_amount}}</td>
+                            <td style="text-align: right">{{$data->total_amount}}</td>
                         </tr>
                         @endforeach
                     </table>
