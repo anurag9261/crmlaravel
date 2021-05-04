@@ -2,42 +2,31 @@
 <html>
 <head>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            border:1px solid #525252;
-        }
+     table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th,td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid rgba(33, 33, 33, 0.1);
+    }
 
-        th,
-        td {
-            text-align: left;
-            padding: 8px;
-            border:1px solid #525252;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .tr-bg-color {
-            background-color:rgb(38, 146, 165);
-            color:white;
-        }
-        body{
-            border-collapse: collapse;
-        }
-        .header img {
+    body{
+        border-collapse: collapse;
+    }
+    .header img {
         float: left;
         width: 80px;
         height: auto;
         background: #555;
-        }
+    }
 
-        .header h2 {
+    .header h2 {
         position: relative;
         top: 18px;
         left: 28%;
-        }
+    }
     </style>
 </head>
 <body>
@@ -55,8 +44,8 @@
             <h3>Employee Name: {{ $employeData[0]->fname }} {{ $employeData[0]->lname }}</h3>
         </div>
     </div>
-    <table class="table table-bordered">
-        <tr class="tr-bg-color">
+    <table class="table">
+        <tr>
             <th>No</th>
             <th>Date</th>
             <th>Attendance</th>
@@ -74,7 +63,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$data->currentdate}}</td>
             <td>{{$data->attandance}}</td>
-            <td style="text-align: right">{{ $hours }}</td>
+            <td>{{ $hours }}</td>
         </tr>
         @endforeach
         <tr>
@@ -97,20 +86,20 @@
             <td></td>
             <td></td>
             <td>Total Hours:</td>
-            <td style="text-align: right"><b>{{ $totalHours }}</b></td>
+            <td><b>{{ $totalHours }}</b></td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>Total Present Days:</td>
-            <td style="text-align: right"><b>{{ $attandance }}</b></td>
+            <td><b>{{ $attandance }} - Days</b></td>
         </tr>
         @if($employeData[0]->salary_type == 2)
         <tr>
             <td></td>
             <td></td>
             <td>Total Salary:</td>
-            <td style="text-align: right"><b>{{ ($employeData[0]->salary_amount * $attandance)/30 }}</b></td>
+            <td><b>{{ ($employeData[0]->salary_amount * $attandance)/30 }}</b></td>
         </tr>
         @else
         <tr>
@@ -128,7 +117,7 @@
             <td></td>
             <td></td>
             <td>Total Salary(CAD):</td>
-            <td style="text-align: right"><b>{{ $totalAmount }}</b></td>
+            <td><b>{{ $totalAmount }}</b></td>
         </tr>
         @endif
     </table>

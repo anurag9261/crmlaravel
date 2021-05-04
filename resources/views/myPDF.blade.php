@@ -6,23 +6,11 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border:1px solid #525252;
         }
-
-        th,
-        td {
-            text-align: left;
+        th,td {
             padding: 8px;
-            border:1px solid #525252;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .tr-bg-color {
-            background-color:rgb(38, 146, 165);
-            color:white;
+            text-align: left;
+            border-bottom: 1px solid rgba(33, 33, 33, 0.1);
         }
         body{
             border-collapse: collapse;

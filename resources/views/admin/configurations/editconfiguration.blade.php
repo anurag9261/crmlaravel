@@ -115,10 +115,10 @@
                         <br>
                         <div class="row">
                             <div class="col-md-5">
-                                <img src="{{asset('images/profile/'. $profile->favicon_icon)}}" width="80px" , height="auto" ,>
+                                <img src="{{asset('images/profile/'. $profile->site_logo)}}" width="80px" , height="auto" ,>
                             </div>
                             <div class="col-md-5">
-                                <img src="{{asset('images/profile/'. $profile->site_logo)}}" width="80px" , height="auto" ,>
+                                <img src="{{asset('images/profile/'. $profile->favicon_icon)}}" width="80px" , height="auto" ,>
                             </div>
                         </div>
                         <br>

@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 col-6">
-                    <div class="small-box bg-info">
+                    <div class="small-box" style="background-color:#51CDA0; color:white">
                         <div class="inner">
                             <h3>{{$admin}}</h3>
 
@@ -37,7 +37,7 @@
                 <!-- ./col -->
                 <div class="col-lg-4 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-secondary">
+                    <div class="small-box" style="background-color:#AD6D78;color:white">
                         <div class="inner">
                             <h3>{{$employee}}</h3>
 
@@ -52,7 +52,7 @@
                 <!-- ./col -->
                 <div class="col-lg-4 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box" style="background-color:#6D78AD; color:white">
                         <div class="inner">
                             <h3>{{$customer}}</h3>
 
@@ -83,7 +83,7 @@
                             <div class="chart-container">
                                 <div id="chart1" style="height: 300px; width: 100%;"></div>
                             </div>
-                        </div><!-- /.card-body -->
+                        </div>
                     </div>
                     <!-- right col -->
                 </section>
@@ -108,8 +108,8 @@
             <div class="card">
                 <div class="card-body">
                 <h3>Employee Records</h3>
-                    <table id="data" class="table table-bordered table-striped">
-                        <tr class="">
+                    <table id="data" class="table table-hover">
+                        <thead>
                             <th>Id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -117,7 +117,7 @@
                             <th>Email</th>
                             <th>Image</th>
                             <th>Status</th>
-                        </tr>
+                        </thead>
                       @foreach($profile as $data)
                         <tr>
                             <td>{{$data->id}}</td>
@@ -127,9 +127,9 @@
                             <td>{{$data->email}}</td>
                             <td><img src="{{asset('images/'. $data->image)}}" width="60px" , height="60px" ,></td>
                             <td>@if($data->status == '1')
-                            <span class="badge badge-success">Active</span>
+                            <span class="badge badge-success" style="border-radius: 70px">Active</span>
                             @elseif($data->status == '0')
-                            <span class="badge badge-danger">InActive</span>
+                            <span class="badge badge-danger" style="border-radius: 70px">InActive</span>
                             @endif</td>
                         </tr>
                         @endforeach
@@ -141,8 +141,8 @@
             <div class="card">
                 <div class="card-body">
                 <h3>Customer Records</h3>
-                    <table id="data" class="table table-bordered table-striped">
-                        <tr class="">
+                    <table id="data" class="table table-hover">
+                        <thead>
                             <th>Id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -150,8 +150,7 @@
                             <th>Email</th>
                             <th>Image</th>
                             <th>Status</th>
-                        </tr>
-
+                        </thead>
                      @foreach($customers as $data)
                         <tr>
                             <td>{{$data->id}}</td>
@@ -162,9 +161,9 @@
                             <td><img src="{{asset('images/'. $data->image)}}" width="60px" , height="60px"></td>
                             <td>
                             @if($data->status == 'Active')
-                            <span class="badge badge-success">Active</span>
+                            <span class="badge badge-success" style="border-radius: 70px">Active</span>
                             @elseif($data->status == 'InActive')
-                            <span class="badge badge-danger">InActive</span>
+                            <span class="badge badge-danger" style="border-radius: 70px">InActive</span>
                             @endif
                         </tr>
                         @endforeach
@@ -176,14 +175,14 @@
             <div class="card">
                 <div class="card-body">
                 <h3>Invoice Records</h3>
-                    <table class="table table-bordered table-striped">
-                        <tr class="">
+                    <table class="table table-hover">
+                        <thead>
                             <th>Invoice No</th>
                             <th>Title</th>
                             <th>Bill To</th>
                             <th>Due Date</th>
                             <th>Total(CAD)</th>
-                        </tr>
+                        </thead>
                         @foreach($invoice as $data)
                         <tr>
                             <td>{{$data->id}}</td>
@@ -209,6 +208,7 @@ window.onload = function() {
 
     var chart1 = new CanvasJS.Chart("chart1", {
         animationEnabled: true,
+        theme: "light2", // "light2", "light2", "dark1", "dark2"
         data: [{
             type: "pie",
             startAngle: 240,
@@ -217,7 +217,7 @@ window.onload = function() {
             dataPoints: [
                 {y: {{ $paid_1 }}, label: "Paid Invoice"},
                 {y: {{ $pending_1 }}, label: "Pending Invoice"},
-            ]
+            ],
         }]
     });
     var chart2 = new CanvasJS.Chart("chart2", {
@@ -232,8 +232,8 @@ window.onload = function() {
             legendMarkerColor: "grey",
             legendText: "Salary per Hour",
             dataPoints: [
-                { y: {{ $Hourly }}, label: "Hourly Salary" },
-                { y: {{ $Monthly }}, label: "Monthly Salary" },
+                { y: {{ $Hourly }}, label: "Hourly Salary"},
+                { y: {{ $Monthly }}, label: "Monthly Salary"},
             ]
         }]
     });

@@ -4,33 +4,16 @@
 <head>
 
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            border: 1px solid #525252;
-        }
-
-        th,
-        td {
-            text-align: left;
-            padding: 8px;
-            border: 1px solid #525252;
-        }
-
-        tr{
-            text-align: center;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .tr-bg-color {
-            background-color: rgb(38, 146, 165);
-            color: white;
-        }
-
-        body {
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th,td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid rgba(33, 33, 33, 0.1);
+    }
+    body {
             border-collapse: collapse;
         }
 
@@ -46,6 +29,15 @@
             top: 18px;
             left: 28%;
         }
+        .row {
+        text-align:justify;
+        }
+        .row > div {
+        display:inline-block;
+        }
+        .fix {
+        width:100%;
+        }
     </style>
 </head>
 
@@ -58,6 +50,7 @@
     <br>
     <hr>
     <br>
+    <br>
     <div class="row">
         <div class="col-md-5">
             <b>Bill From:</b><br>{{ $config[0]->company_name }}, <br>
@@ -67,33 +60,48 @@
         <br>
         <div class="col-md-4 mt-3 mb-3">
             <b>Title:</b> {{ $invoice->title }}<br>
-            <p style="float: right">Current Date: {{ $invoice->current_date }}</p>
         </div>
         <br>
-      <div class="col-md-5">
-        <b>Bill To:</b> {{ $invoice->bill_to }}<br>
-        <p style="float: right">Due Date: {{ $invoice->due_date }}</p>
-      </div>
-      <br>
+        <br>
         <div class="col-md-5">
-            <b>Ship To:</b> {{ $invoice->ship_to }}
+            <div class="row">
+                <div style="float:left">
+                    <b>Bill To:</b> {{ $invoice->bill_to }}
+                </div>
+                <div style="float:right">
+                    <b>Current Date:</b> {{ $invoice->current_date }}
+                </div>
+            </div>
+        </div>
+      <br>
+      <br>
+        <div class="col-md-10">
+            <div class="row">
+                <div style="float: left">
+                    <b>Ship To:</b> {{ $invoice->ship_to }}
+                </div>
+                <div style="float:right">
+                    <b>Due Date:</b> {{ $invoice->due_date }}
+                </div>
+            </div>
         </div>
     </div>
     <br>
     <br>
+    <br>
     <div>
-        <table class="table table-bordered">
+        <table class="table">
             <tr class="tr-bg-color">
                 <th style="text-align: center">Product</th>
                 <th style="text-align: center">Quantity</th>
                 <th style="text-align: center">Price(CAD)</th>
-                <th style="text-align: center">Total(CAD)</th>
+                <th style="text-align: right">Total(CAD)</th>
             </tr>
             @foreach ($productData as $product)
                 <tr>
-                    <td>{{ $product->product }}</td>
-                    <td>{{ $product->qty }}</td>
-                    <td style="text-align: right">{{ $product->price }}</td>
+                    <td style="text-align: center">{{ $product->product }}</td>
+                    <td style="text-align: center">{{ $product->qty }}</td>
+                    <td style="text-align: center">{{ $product->price }}</td>
                     <td style="text-align: right">{{ $product->total }}</td>
                 </tr>
             @endforeach

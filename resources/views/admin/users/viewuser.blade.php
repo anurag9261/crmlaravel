@@ -89,7 +89,7 @@
                             @endif
                         </tr>
                         <tr>
-                            <th>Salary Amount</th>
+                            <th>Salary Amount(CAD)</th>
                             <td>{{ $profile->salary_amount }}</td>
                         </tr>
                         <tr>

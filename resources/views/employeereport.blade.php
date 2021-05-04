@@ -2,30 +2,16 @@
 <html>
 
 <head>
-
     <style>
         table {
             border-collapse: collapse;
             width: 100%;
-            border: 1px solid #525252;
         }
-
-        th,
-        td {
-            text-align: left;
+        th,td {
             padding: 8px;
-            border: 1px solid #525252;
+            text-align: left;
+            border-bottom: 1px solid rgba(33, 33, 33, 0.1);
         }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .tr-bg-color {
-            background-color: rgb(38, 146, 165);
-            color: white;
-        }
-
         body {
             border-collapse: collapse;
         }
@@ -55,8 +41,8 @@
     <hr>
     <br>
     <h3>Employee Report: {{ $pdfReviewMonth }}</h3>
-    <table class="table table-bordered">
-        <tr class="tr-bg-color">
+    <table class="table">
+        <tr>
             <th>No</th>
             <th>First Name</th>
             <th>Last Name</th>

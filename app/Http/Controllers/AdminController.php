@@ -36,16 +36,17 @@ class AdminController extends Controller
         $admins = Admin::all();
         return datatables()->of($admins)
                 ->addColumn('status',function ($admins) {
-                    if ($admins->status == 1) {
+                    if ($admins->status == '1') {
                         return "Active";
                     } else {
-                        return "In Active";
+                        return "InActive";
                     }
+                    return $admins;
                 })->addColumn('action', function ($row) {
 
-                $html = '<a href="viewuser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-eye"></i></a> ';
-                $html .= '<a href="edituser' . $row->id . '" class="btn btn-sm btn-secondary"><i class="far fa-edit"></i></a> ';
-                $html .= '<a href="deleteuser' . $row->id . '" class="btn btn-sm btn-secondary" onclick="myFunction()"><i class="far fa-trash-alt"></i></a>';
+                $html = '<a href="viewuser' . $row->id . '" class="btn"><i class="far fa-eye"></i></a> ';
+                $html .= '<a href="edituser' . $row->id . '" class="btn"><i class="fas fa-pencil-alt"></i></a> ';
+                $html .= '<a href="deleteuser' . $row->id . '" class="btn" onclick="myFunction()"><i class="far fa-trash-alt"></i></a>';
                 return $html;
             })->toJson();
 

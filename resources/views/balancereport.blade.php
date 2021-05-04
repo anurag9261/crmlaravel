@@ -5,25 +5,16 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: 1px solid #525252;
         }
-
-        th,
-        td {
-            text-align: center;
+        th,td {
             padding: 8px;
-            border: 1px solid #525252;
+            text-align: left;
+            border-bottom: 1px solid rgba(33, 33, 33, 0.1);
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        tr:hover {
+        background-color: #f5f5f5;
         }
-
-        .tr-bg-color {
-            background-color: rgb(38, 146, 165);
-            color: white;
-        }
-
         body {
             border-collapse: collapse;
         }
@@ -40,6 +31,7 @@
             top: 18px;
             left: 28%;
         }
+
     </style>
 </head>
 
@@ -54,13 +46,13 @@
     <br>
     <h3>Balancesheet Report: {{ $pdfReviewMonth }}</h3>
     <h3>Paid Invoice</h3>
-    <table class="table table-bordered">
-        <tr class="tr-bg-color">
+    <table class="table">
+        <tr>
             <th>No</th>
             <th>Title</th>
             <th>Bill To</th>
             <th>Due Date</th>
-            <th>Total(CAD)</th>
+            <th style="text-align: right">Total(CAD)</th>
         </tr>
         <?php
         $arrayInvoice = (array)$invoiceRecord; ?>
@@ -80,7 +72,7 @@
         @endforeach
         @else
             <tr>
-                <td colspan="5">No record found!</td>
+                <td colspan="5" style="text-align: center">No record found!</td>
             </tr>
             <?php $totalPaidAmount[] = '0'; ?>
         @endif
@@ -88,12 +80,12 @@
     </table>
     <br>
     <h3>Expense</h3>
-    <table class="table table-bordered">
-        <tr class="tr-bg-color">
+    <table class="table">
+        <tr>
             <th>No</th>
             <th>Category Name</th>
             <th>Entry Date</th>
-            <th>Amount(CAD)</th>
+            <th style="text-align: right">Amount(CAD)</th>
         </tr>
 
         <?php $arrayEmp = (array)$expenseRecord;
@@ -113,7 +105,7 @@
         @endforeach
         @else
             <tr>
-                <td colspan="4">No record found!</td>
+                <td colspan="4" style="text-align: center">No record found!</td>
             </tr>
             <?php $totalExpences[] = '0'; ?>
         @endif
@@ -128,4 +120,5 @@
         <h3>Available Balance(CAD): {{ $totalPaidAmounts-$totalExpenceAmounts }}</h3>
     </div>
 </body>
+<?php //echo"<pre>"; print_r('Hello'); die; ?>
 </html>
