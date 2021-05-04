@@ -153,7 +153,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="amount">Salary Amount</label><span style="color:rgb(245, 24, 24)">*</span>
+                                <label for="amount">Salary Amount(CAD)</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="number" class="form-control @error('salary_amount') is-invalid @enderror" name="salary_amount" value="{{ $profile->salary_amount }}"
                                     step="any">
                                 @error('salary_amount')
@@ -392,7 +392,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label for="amount">Salary Amount</label><span style="color:rgb(245, 24, 24)">*</span>
+                                <label for="amount">Salary Amount(CAD)</label><span style="color:rgb(245, 24, 24)">*</span>
                                 <input type="number" class="form-control @error('salary_amount') is-invalid @enderror" name="salary_amount"
                                     value="{{ $profile->salary_amount }}" step="any" readonly>
                                 @error('salary_amount')

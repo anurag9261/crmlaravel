@@ -3,13 +3,23 @@
 <head>
     <style>
     * {
-        font-family: Verdana, Arial, Tahoma, Serif;
+        font-family: "Roboto", sans-serif;
 
     }
 
     .layout-fixed .main-sidebar {
     font-size: 15px;
     }
+    </style>
+    <style>
+        .dropdown{
+            margin-right: 50px;
+        }
+
+        .dropdown-menu.show {
+        left: -28px;
+        width: 190px;
+        }
     </style>
     <link href="{{ asset('Datatables/datatables.min.css') }}" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
@@ -39,18 +49,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
-
     <link rel="icon" href="{{ URL::asset('/images/profile/'.$config[0]->favicon_icon) }}" type="image/x-icon" />
-    <style>
-    .btn-outline-success {
-        cursor: pointer;
-    }
-    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -62,21 +65,30 @@
                     <a href="{{route('admin.dashboard')}}" class="nav-link">Home</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
-                <li style="float:left">
-                   Company Name- <b>{{ $config[0]->company_name }}</b>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-            <li style="float:right">
-                Vat No- <b>{{ $config[0]->vat_number }}</b>
-            </li>
-            </ul>
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto mr-2">
-                <li>
-                    Welcome {{Auth::user()->fname}}
-                    <a href="{{route('logout')}}">Logout</a>
+            <ul class="navbar-nav dropdown ml-auto">
+                <img src="{{ asset('/images/'.Auth::user()->image)}}" class="img-circle elevation-2" alt="User Image"
+                    style="width:40px">
+                <li class="nav-item nav-dropdown">
+                    <a class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">{{ Auth::user()->fname }}</a>
+                    <ul class="nav-item dropdown-menu">
+                        <li>
+                        <a href="{{URL::asset('edituser').Auth::user()->id}}" class="nav-link">
+                            <i class="nav-icon fas fa-user-edit"></i> My Profile
+                        </a>
+                        </li>
+                        <li>
+                            <a href="editPassword{{Auth::user()->id }}" class="nav-link">
+                                <i class="nav-icon fas fa-key"></i> Change Password
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/logout')}}" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -86,24 +98,24 @@
             <!-- Brand Logo -->
             <a href="{{route('admin.dashboard')}}" class="brand-link">
                 <img src="{{ asset('/images/profile/'. $config[0]->site_logo)}}" alt="" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                    style="opacity: .8;">
                 <span class="brand-text font-weight-light">{{ $config[0]->site_title }}</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="{{ asset('/images/'.Auth::user()->image)}}" class="img-circle elevation-2"
                             alt="User Image" style="width:60px">
                     </div>
-                </div>
+                </div> --}}
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+                <nav class="mt-3">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item has-treeview">
+                        {{--  <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
@@ -131,8 +143,8 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item has-treeview menu-open">
+                        </li>  --}}
+                        <li class="nav-item has-treeview">
                             <a href="{{url('/admin')}}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>

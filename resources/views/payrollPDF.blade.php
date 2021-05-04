@@ -5,25 +5,13 @@
 
     <style>
         table {
-            border-collapse: collapse;
-            width: 100%;
-            border:1px solid #525252;
+        border-collapse: collapse;
+        width: 100%;
         }
-
-        th,
-        td {
-            text-align: left;
-            padding: 8px;
-            border:1px solid #525252;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .tr-bg-color {
-            background-color:rgb(38, 146, 165);
-            color:white;
+        th,td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid rgba(33, 33, 33, 0.1);
         }
         body{
             border-collapse: collapse;
@@ -52,8 +40,8 @@
     <hr>
     <br>
     <h3>Payroll Report: {{ $pdfReviewMonth }}</h3>
-    <table class="table table-bordered">
-        <tr class="tr-bg-color">
+    <table class="table">
+        <tr>
             <th>No</th>
             <th>Name</th>
             <th>Present Days</th>

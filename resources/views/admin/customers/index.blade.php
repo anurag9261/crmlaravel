@@ -1,4 +1,18 @@
 @extends('admin.master')
+@push('styles')
+<style>
+    table.dataTable thead th,
+    table.dataTable thead td {
+        padding: 10px 18px;
+        border-top: none;
+        border-bottom: 1px solid rgba(33, 33, 33, 0.1);
+    }
+
+    table.dataTable.no-footer {
+        border-bottom: none;
+    }
+</style>
+@endpush
 @section('content')
 <div class="content-wrapper">
     <div class="content-header">
@@ -37,9 +51,9 @@
                         {{ session()->get('message') }}
                     </div>
                     @endif
-                    <table id="empTable" class="table table-bordered table-striped">
+                    <table id="empTable" class="table table-hover">
                         <thead>
-                        <tr class="" style="background: #6c757d; color: #fff; border-color: #6c757d;">
+                        <tr>
                             <th>No</td>
                             <th>Image</th>
                             <th>First Name</th>
